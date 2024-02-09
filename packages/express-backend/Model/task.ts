@@ -9,6 +9,7 @@ export type ITask = {
   priority?: string;
   datesUpdated: IDateEntry[];
   done: boolean;
+  deadline?: Date;
 };
 
 export type IDateEntry = {
@@ -30,6 +31,7 @@ const TaskSchema = new Schema<ITask>({
     },
   ], // list of dates for task
   done: { type: Boolean, required: true }, // if task completed
+  deadline: { type: Date, required: false }, // when you'd like to finish it by
 });
 
 const Task = mongoose.model("Task", TaskSchema);
