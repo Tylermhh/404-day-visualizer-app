@@ -1,7 +1,18 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
+
+export type IUser = {
+  username: string;
+  password: string;
+  categories: ICategory[];
+};
+
+export type ICategory = {
+  name: string;
+  color: string;
+};
 
 // Schema for entry into User database
-const UserSchema = new mongoose.Schema({
+const UserSchema = new Schema({
   username: { type: String, required: true },
   password: { type: String, required: true },
   categories: [
