@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+// Schema for Task entries into the database
 const TaskSchema = new mongoose.Schema({
   name: { type: String, required: true },
   userID: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
