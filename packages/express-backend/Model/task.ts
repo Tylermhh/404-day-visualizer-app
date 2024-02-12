@@ -7,6 +7,7 @@ export type ITask = {
   description?: string;
   category: string;
   priority?: string;
+  createdAt: Date;
   datesUpdated: IDateEntry[];
   done: boolean;
   deadline?: Date;
@@ -24,6 +25,7 @@ const TaskSchema = new Schema<ITask>({
   description: { type: String, required: false }, // description of task
   category: { type: String, required: true }, // task category
   priority: { type: String, required: false }, // priority of task
+  createdAt: { type: Date, required: true, default: Date.now() },
   datesUpdated: [
     {
       date: { type: Date, required: true }, // day of entries of time
