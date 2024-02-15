@@ -9,5 +9,12 @@ const container = document.getElementById("root");
 // Create a root
 const root = ReactDOMClient.createRoot(container);
 
+// ReactDOM.render(
+//     <Router>
+//       <App />
+//     </Router>,
+//     document.getElementById('root')
+//   );
+
 // Initial render: Render an element to the Root
 root.render(<MyApp />);

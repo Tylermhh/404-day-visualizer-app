@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Table from "./Table";
 import Form from "./Form";
-import Header from "./Header"
+import Header from "./Header";
+import HomePage from "./HomePage";
+import TasksPage from "./TasksPage";
+import VisualizerPage from "./VisualizerPage";
 
 const tempTasks = [
     {
@@ -17,6 +20,14 @@ const tempTasks = [
 ];
 
 function MyApp() {
+
+    // return (
+    //     <div>
+    //       <Route path="/" exact component={HomePage} />
+    //       <Route path="/tasks" component={TasksPage} />
+    //       <Route path="/visualizer" component={VisualizerPage} />
+    //     </div>
+    //   );
 
     const [tasks, setTasks] = useState([]);
 
