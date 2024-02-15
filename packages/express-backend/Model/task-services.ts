@@ -23,7 +23,13 @@ export const findTaskByUserId = async (userId: string) => {
   return await taskModel.find({userId: userId});
 }
 
-export const getTasks(userId: string, date: Date) {
+export const createTask = async (task: ITask) => {
+  const newTask: mongoose.Document = new taskModel(task);
+  const promise = newTask.save();
+  return promise;
+}
+
+export const getTasks = async(userId: string, date: Date) => {
   let promise;
 
   // Today
@@ -49,4 +55,12 @@ export const getTasks(userId: string, date: Date) {
   }
 
   return promise;
+}
+
+export const updateTaskById = async (id: string, updated: ITask) => {
+  return taskModel.updateOne({id: id}, updated)
+}
+
+export const deleteTaskById = async (id: string) => {
+  return taskModel.findByIdAndDelete(id);
 }
