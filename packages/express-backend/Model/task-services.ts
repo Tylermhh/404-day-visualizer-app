@@ -1,35 +1,29 @@
 import * as mongoose from "mongoose";
 import { Schema, model, connect, ConnectOptions } from "mongoose";
-import taskModel from "./task";
-import type {ITask} from "./task";
-
 import { startOfDay, endOfDay } from "date-fns";
-
-const dbUri: string = "mongodb://localhost:27017/tasks";
-
-mongoose.set("debug", true);
-
-mongoose.connect(dbUri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-} as ConnectOptions)
-  .catch((error) => console.log(error));
+import connectDB from "../db.js";
+import taskModel from "./task.js";
+import type {ITask} from "./task.js";
 
 export const findTaskById = async (id: string) => {
+  await connectDB();
   return await taskModel.findById(id);
 }
 
 export const findTaskByUserId = async (userId: string) => {
+  await connectDB();
   return await taskModel.find({userId: userId});
 }
 
 export const createTask = async (task: ITask) => {
+  await connectDB();
   const newTask: mongoose.Document = new taskModel(task);
   const promise = newTask.save();
   return promise;
 }
 
-export const getTasks = async(userId: string, date: Date) => {
+export const getTasks = async(userId: string, date: Date | undefined) => {
+  await connectDB();
   let promise;
 
   // Today
@@ -58,9 +52,11 @@ export const getTasks = async(userId: string, date: Date) => {
 }
 
 export const updateTaskById = async (id: string, updated: ITask) => {
+  await connectDB();
   return taskModel.updateOne({id: id}, updated)
 }
 
 export const deleteTaskById = async (id: string) => {
+  await connectDB();
   return taskModel.findByIdAndDelete(id);
 }
