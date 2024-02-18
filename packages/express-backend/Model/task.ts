@@ -32,7 +32,7 @@ const TaskSchema = new Schema<ITask>({
       hours: { type: Number, required: true, default: 0 }, // hours worked reported
     },
   ], // list of dates for task
-  done: { type: Boolean, required: true }, // if task completed
+  done: { type: Boolean, required: true, default: false }, // if task completed
   deadline: { type: Date, required: false }, // when you'd like to finish it by
 });
 
