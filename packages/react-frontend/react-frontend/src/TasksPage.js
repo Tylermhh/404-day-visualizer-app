@@ -64,8 +64,9 @@ function TasksPage() {
     //     return promise;
     // }
 
+    //change this to the useState var tasks after back implemented
     function getCompleted(){
-        return tempTasks.filter((task) => task["completed"] === true);
+        return tempTasks.filter((task) => user["completed"] === true);
     }
 
     function postTask(newTask) {
@@ -110,8 +111,8 @@ function TasksPage() {
 
             <Table 
                 //taskData={tasks}
-                taskData={tempTasks}
-                removeTask={getCompleted()}
+                taskData={getCompleted()}
+                removeTask={removeTask}
             />
         </div>
     );
