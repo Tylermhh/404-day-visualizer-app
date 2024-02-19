@@ -39,7 +39,7 @@ function TableBody(props) {
     );
 }
 
-function Table(props) {
+function CompletedTable(props) {
 
     return (
         <table>
@@ -52,4 +52,4 @@ function Table(props) {
     );
 }
 
-export default Table;
+export default CompletedTable;

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Table from "./Table";
+import CompletedTable from "./CompletedTable";
 import Form from "./Form";
 import Header from "./Header"
 
@@ -109,7 +110,7 @@ function TasksPage() {
             />
             <Form handleSubmit={updateList} />
 
-            <Table 
+            <CompletedTable 
                 //taskData={tasks}
                 taskData={getCompleted()}
                 removeTask={removeTask}
