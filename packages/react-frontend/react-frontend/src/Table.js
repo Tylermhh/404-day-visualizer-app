@@ -1,5 +1,14 @@
 import React from "react";
-import ToggleSwitch from "react-toggle-switch";
+
+function TableTitle() {
+  return (
+    <thead>
+      <tr>
+        <h2>Todo List (Coming Up)</h2>
+      </tr>
+    </thead>
+  );
+}
 
 function TableHeader() {
     return (
@@ -24,15 +33,12 @@ function TableBody(props) {
             <tr key = {index}>
                 <td>{row.name}</td>
                 <td>{row.category}</td>
-                <td>
-                    <ToggleSwitch
-                      onClick={() => handleToggle(index)}
-                      on={row.completed}
-                    />
+                <td> 
+                  <input type="checkbox" id="completed" />
                 </td>
                 <td>
-                    <button onClick={() => props.removeTask(index)}>
-                        Delete
+                  <button onClick={() => props.removeTask(index)}>
+                    Delete
                     </button>
                 </td>
             </tr>
@@ -49,6 +55,7 @@ function Table(props) {
 
     return (
         <table>
+        <TableTitle />
         <TableHeader />
         <TableBody 
             taskData = {props.taskData}

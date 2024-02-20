@@ -67,7 +67,7 @@ function TasksPage() {
 
     //change this to the useState var tasks after back implemented
     function getCompleted(){
-        return tempTasks.filter((task) => user["completed"] === true);
+        return tempTasks.filter((task) => task["completed"] === true);
     }
 
     function postTask(newTask) {

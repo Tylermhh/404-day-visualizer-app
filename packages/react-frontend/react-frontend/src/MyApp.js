@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Table from "./Table";
 import Form from "./Form";
-import Header from "./Header";
+import Header from "./Header"
 import HomePage from "./HomePage";
 import TasksPage from "./TasksPage";
 import VisualizerPage from "./VisualizerPage";
@@ -20,7 +20,6 @@ const tempTasks = [
 ];
 
 function MyApp() {
-
     // return (
     //     <div>
     //       <Route path="/" exact component={HomePage} />
@@ -102,13 +101,12 @@ function MyApp() {
 
     return (
         <div className="container">
-            <Header />
+            <Header/>
             <Table 
                 //taskData={tasks}
                 taskData={tempTasks}
                 removeTask={removeTask}
             />
-            <Form handleSubmit={updateList} />
         </div>
     );
 }

@@ -97,7 +97,9 @@ function HomePage() {
                 taskData={tempTasks}
                 removeTask={removeTask}
             />
-            <Form handleSubmit={updateList} />
+            <Form 
+                //handleSubmit={updateList} 
+            />
         </div>
     );
 }
