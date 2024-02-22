@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Nav from "./Nav/Nav";
-import { Flex, Text, Button, Box, Grid, ScrollArea, Heading } from '@radix-ui/themes';
+import Table from "./Table/HomeTable"
  
 const tempTasks = [
   {
@@ -16,23 +16,16 @@ const tempTasks = [
   }
 ];
 
-function Home() {
-
-  const [tasks, setTasks] = useState([]);
-
+const HomePage: React.FC<{}> = () => {
   return (
     <div>
       <Nav />
       <h1>
         Home Page
       </h1>
-      <Grid columns="2" gap="3" width="auto">
-        <ScrollArea type="always" scrollbars="vertical" style={{ height: 300 }}>
 
-        </ScrollArea>
-      </Grid>
     </div>
-  );
+  )
 }
- 
-export default Home;
+
+export default HomePage
