@@ -11,6 +11,10 @@
         {
             "label": "Auth",
             "href": "/auth"
+        },
+        {
+            "label": "Visualize",
+            "href": "/visualize"
         }
     ]
 }

@@ -16,6 +16,10 @@ function Main() {
     const goToTaskPageComp = () => {
         navigate('/task');
     };
+
+    const goToVisualizePageComp = () => {
+        navigate('/visualize');
+    }
     
     return (
         <div className="App">
