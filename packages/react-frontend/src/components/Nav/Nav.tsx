@@ -1,5 +1,4 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom';
 import styles from './Nav.module.css';
 import * as data from './links.json'
 
@@ -11,7 +10,7 @@ type Link = {
     href: string
 }
 
-const Links: React.FC<{links:Link[]}> =({ links }) => {
+const Links: React.FC<{ links : Link[] }> =({ links }) => {
     return (
         <div className = {styles['links-container']}>
             {links.map((link : Link) => {

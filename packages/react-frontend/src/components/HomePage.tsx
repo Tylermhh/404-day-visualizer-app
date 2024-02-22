@@ -17,13 +17,18 @@ const tempTasks = [
 ];
 
 const HomePage: React.FC<{}> = () => {
+
+  const [tasks, setTasks] = useState([]);
+
   return (
     <div>
       <Nav />
       <h1>
         Home Page
       </h1>
-
+      <Table 
+        // taskData={tempTasks}
+      />
     </div>
   )
 }

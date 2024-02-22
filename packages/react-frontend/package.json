@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material/web": "^1.2.0",
     "@radix-ui/react-popover": "1.0.7",
     "@radix-ui/themes": "^2.0.3",
     "@testing-library/jest-dom": "^5.17.0",

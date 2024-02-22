@@ -1,19 +1,28 @@
 import React from 'react'
-import { Flex, Text, Button, Box, Grid, ScrollArea, Table } from '@radix-ui/themes';
+import styles from "./Table.module.css"
+
+type Task = {
+  item_name: string;
+  category: string;
+  completed: boolean;
+}
 
 const TableTitle: React.FC<{}> = () => {
   return (
-    <thead>
-      <tr>
-        <h2>Todo List (Coming Up)</h2>
-      </tr>
-    </thead>
+    <div>
+      <thead>
+        <h1>
+          Todo
+          </h1>
+        </thead>
+    </div>
   )
 }
 
 const TableHeader: React.FC<{}> = () => {
   return (
-    <thead>
+    <div>
+      <thead>
         <tr>
           <th>Item Name</th>
           <th>Category</th>
@@ -21,6 +30,7 @@ const TableHeader: React.FC<{}> = () => {
           <th>Remove</th>
         </tr>
       </thead>
+    </div>
   )
 }
 
@@ -45,6 +55,7 @@ const TableBody: React.FC<{props: any}> = ({props}) => {
           </tr>
       );
   });
+  
   return (
     <tbody>
       {rows}
@@ -54,8 +65,9 @@ const TableBody: React.FC<{props: any}> = ({props}) => {
 
 const HomeTable: React.FC<{}> = () => {
   return (
-    <table>
+    <table className = {styles.table}>
       <TableTitle />
+      <TableHeader />
     </table>
   )
 }

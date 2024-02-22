@@ -1,17 +1,19 @@
 .navbar {
     width: 100%;
-    height: 50px;
-    background: #f7f7f7;
+    height: 75px;
+    background: #5F6E96;
     border-bottom: 1px solid #555;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 80px;
 }
 
 .logo-container span {
     font-weight: 500;
+    font-size: x-large;
+    color: black;
     cursor: pointer;
+    margin-left: 80px;
 }
 
 .links-container {
@@ -22,10 +24,10 @@
 
 .links a {
     text-decoration: none;
-    color: rgb(14, 34, 14);
+    color: rgb(202, 199, 39);
 }
 
 .links a:hover {
     text-decoration: none;
-    color:rgba(14, 34, 14, 0.8);
+    color:rgba(202, 199, 39, 0.8);
 }
