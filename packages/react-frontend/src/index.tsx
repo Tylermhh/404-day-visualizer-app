@@ -1,16 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import '@radix-ui/themes/styles.css';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { Theme } from '@radix-ui/themes';
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+const container = document.getElementById("root");
+
+const root = ReactDOM.createRoot(container as HTMLElement);
+
+// root.render(
+//   <React.StrictMode>
+//     <MyApp />
+//   </React.StrictMode>
+// );
+
+root.render(    
+    <Theme>
+      <App />
+    </Theme>
 );
 
 // If you want to start measuring performance in your app, pass a function
