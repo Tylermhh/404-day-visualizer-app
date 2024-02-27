@@ -30,6 +30,17 @@
 }
 
 .table-responsive {
-    max-height: 500px;
+    max-height: 550px;
     overflow-y: auto;
+}
+
+.table-responsive th {
+    text-align: center;
+    font-size: large;
+    position: sticky; 
+    top: 0; 
+}
+
+.table-responsive td {
+    text-align: center;
 }

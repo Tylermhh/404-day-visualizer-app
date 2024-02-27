@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import Nav from "./Nav/Nav";
+import Navbar from "./Nav/Nav";
 
 function Main() {
     const navigate = useNavigate();
@@ -23,7 +23,7 @@ function Main() {
     
     return (
         <div className="App">
-            <Nav />
+            <Navbar />
             <h1>
                 Landing Page
             </h1>
