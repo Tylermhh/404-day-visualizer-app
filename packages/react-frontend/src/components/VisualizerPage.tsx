@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Nav from "./Nav/Nav";
+import Navbar from "./Nav/Nav";
  
 function Visualizer() {
   return (
     <div className="App">
-      <Nav />
+      <Navbar />
       <header className="App-header">
         <p>Visualizer Page</p>
  

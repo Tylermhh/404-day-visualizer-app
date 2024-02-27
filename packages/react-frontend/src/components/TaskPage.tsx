@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Nav from "./Nav/Nav";
+import Navbar from "./Nav/Nav";
  
 function Task() {
   return (
     <div className="App">
-      <Nav />
+      <Navbar />
       <header className="App-header">
         <p>Task Page</p>
  
