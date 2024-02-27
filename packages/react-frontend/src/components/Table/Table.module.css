@@ -19,3 +19,8 @@
     border-bottom: 2px solid #dedede;
 }
 
+.horizontal-line {
+    background: "#47B5FF";
+    height: "2px";
+    border: "none";
+}

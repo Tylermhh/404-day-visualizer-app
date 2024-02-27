@@ -1,4 +1,4 @@
-type Task = {
+interface Task {
     item_name: string;
     category: string;
     completed: boolean;
