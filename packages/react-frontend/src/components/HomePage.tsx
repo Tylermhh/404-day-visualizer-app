@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Nav from "./Nav/Nav";
 import Table from "./Table/HomeTable"
+import HomePieChart from "./Chart/HomePieChart"
 import Task from "./../types/types";
 import { Container, Col, Row, Stack } from 'react-bootstrap';
 
@@ -87,7 +88,7 @@ const HomePage: React.FC<{}> = () => {
             <Col sm={3}>
               <Stack gap = {5}>
               <Container>
-                Pie Chart
+                <HomePieChart />
                 </Container>
               <Container>
                 Progress Bar
