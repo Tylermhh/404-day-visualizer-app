@@ -85,7 +85,14 @@ const HomePage: React.FC<{}> = () => {
               />
             </Col>
             <Col sm={3}>
-              Side Graph
+              <Stack gap = {5}>
+              <Container>
+                Pie Chart
+                </Container>
+              <Container>
+                Progress Bar
+                </Container>
+              </Stack>
             </Col>
           </Row>
         </Container>
