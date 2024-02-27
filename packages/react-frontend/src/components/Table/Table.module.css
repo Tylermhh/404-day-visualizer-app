@@ -24,3 +24,12 @@
     height: "2px";
     border: "none";
 }
+
+.table-item td {
+    text-align: center;
+}
+
+.table-responsive {
+    max-height: 500px;
+    overflow-y: auto;
+}

@@ -65,8 +65,9 @@ const TableBody: React.FC<{taskData : Task[]}> = ({taskData}) => {
   });
   
   return (
-    <Table striped>
-      <thead>
+    <div className = {styles['table-responsive']}>
+      <Table striped hover>
+        <thead>
           <tr>
             <th>Item Name</th>
             <th>Category</th>
@@ -74,10 +75,11 @@ const TableBody: React.FC<{taskData : Task[]}> = ({taskData}) => {
             <th>Remove</th>
           </tr>
         </thead>
-      <tbody>
-        {rows}
-      </tbody>
-    </Table>
+        <tbody>
+          { rows }
+        </tbody>
+      </Table>
+    </div>
   );
 }
 
@@ -88,24 +90,6 @@ const HomeTable: React.FC<{taskData : Task[]}> = (input) => {
       <TableBody
         taskData = {input.taskData}
       />
-      {/* <Table striped>
-        <thead>
-          <tr>
-            <th>Item Name</th>
-            <th>Category</th>
-            <th>Completed</th>
-            <th>Remove</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-        </tbody>
-      </Table> */}
     </div>
   )
 }
