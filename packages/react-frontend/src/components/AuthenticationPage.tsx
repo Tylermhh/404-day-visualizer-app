@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-import { Flex, Text, Button } from '@radix-ui/themes';
 import Nav from "./Nav/Nav";
 
 function Main() {

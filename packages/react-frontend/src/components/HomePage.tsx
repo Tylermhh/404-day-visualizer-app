@@ -2,19 +2,26 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Nav from "./Nav/Nav";
 import Table from "./Table/HomeTable"
- 
-const tempTasks = [
-  {
-      name: "Make Frontend",
-      category: "CSC 307",
-      completed: false
-  },
-  {
-      name: "Make Backend",
-      category: "CSC 307",
-      completed: true
-  }
-];
+
+import Task from "./../types/types";
+
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
+let tempTasks: Task[];
+// const tempTasks = [
+//   {
+//     name: "Make Frontend",
+//     category: "CSC 307",
+//     completed: false
+//   },
+//   {
+//     name: "Make Backend",
+//     category: "CSC 307",
+//     completed: true
+//   }
+// ];
 
 const HomePage: React.FC<{}> = () => {
 
@@ -23,12 +30,23 @@ const HomePage: React.FC<{}> = () => {
   return (
     <div>
       <Nav />
-      <h1>
-        Home Page
-      </h1>
-      <Table 
-        // taskData={tempTasks}
-      />
+      {/* <div className = "container">
+        <div className = "flex-row">
+          <div className = "flex-small">
+            <Table />
+          </div>
+        </div>
+      </div> */}
+      <Container>
+        <Row>
+          <Col sm={8}>
+            <Table />
+          </Col>
+          <Col sm={4}>
+            sm=4
+          </Col>
+        </Row>
+      </Container>
     </div>
   )
 }
