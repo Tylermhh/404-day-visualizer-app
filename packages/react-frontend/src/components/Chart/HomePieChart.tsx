@@ -1,14 +1,6 @@
 import React from 'react'
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
-
-const data = [
-  { name: 'Group A', hours: 5, color: '#0088FE'},
-  { name: 'Group C', hours: 2, color: '#00C49F'},
-  { name: 'Group C', hours: 3, color: '#FFBB28'},
-  { name: 'Group D', hours: 4, color: '#FF8042'},
-  { name: 'Group E', hours: 1, color: '#a9119c'},
-  { name: 'Group F', hours: 2, color: '#5ec1dd'}
-];
+import { CategoryProgress } from '../../types/types';
 
 const RADIAN = Math.PI / 180;
 const renderCustomizedLabel: React.FC<{cx: number , cy: number, midAngle: number, innerRadius: number, outerRadius: number, category: string, hours: number}> 
@@ -25,13 +17,12 @@ const renderCustomizedLabel: React.FC<{cx: number , cy: number, midAngle: number
     )
 }
 
-const HomePieChart: React.FC<{}> = () => {
-
+const HomePieChart: React.FC<{category_progress : CategoryProgress[]}> = (input) => {
     return (
-        <PieChart width={300} height={400}>
-            <Pie data={data} cx="50%" cy="50%" labelLine={false} label={renderCustomizedLabel}
+        <PieChart width={300} height={350}>
+            <Pie data={input.category_progress} cx="50%" cy="50%" labelLine={false} label={renderCustomizedLabel}
                 outerRadius={150} fill="#8884d8" dataKey="hours">
-                {data.map((entry, index) => 
+                {input.category_progress.map((entry, index) => 
                     (<Cell key={`cell-${index}`} fill={entry.color} />))}
             </Pie>
         </PieChart>

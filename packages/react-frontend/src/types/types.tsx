@@ -1,7 +1,11 @@
-interface Task {
+export interface Task {
     item_name: string;
     category: string;
     completed: boolean;
 }
 
-export default Task
+export interface CategoryProgress {
+    category_name: string;
+    hours: number;
+    color: string;
+}

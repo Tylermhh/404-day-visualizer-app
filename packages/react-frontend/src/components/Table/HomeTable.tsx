@@ -1,15 +1,11 @@
 import React from 'react';
 import styles from "./Table.module.css";
 import { Button, Col, Form, Row, Table} from 'react-bootstrap';
-import Task from "./../../types/types";
+import {Task} from "./../../types/types";
 
 const TableTitle: React.FC<{}> = () => {
   return (
     <div>
-      {/* <h2>
-        Todo List (Coming Up)
-      </h2>
-      <hr /> */}
       <Row>
         <Col sm={11}>
           <h2>
