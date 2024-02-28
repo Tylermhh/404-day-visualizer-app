@@ -46,6 +46,8 @@ const TableBody: React.FC<{taskData : Task[]}> = ({taskData}) => {
         return (
           <tr>
             <td>{row.item_name}</td>
+            <td>{row.description}</td>
+            <td>{row.priority}</td>
             <td>{row.category}</td>
             <td>
               <Form>
@@ -55,6 +57,7 @@ const TableBody: React.FC<{taskData : Task[]}> = ({taskData}) => {
                 />
               </Form>
             </td>
+            <td>{row.deadline}</td>
             <td>
             <Button>
               Delete
