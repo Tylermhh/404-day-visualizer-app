@@ -16,7 +16,7 @@ const ProgressMade: React.FC<{taskData : Task[]}> = (input) => {
     )
 }
 
-const HomeProgressBar: React.FC<{}> = () => {
+const HomeProgressBar: React.FC<{taskData : Task[]}> = (input) => {
     return (
         <div>
             <h5>

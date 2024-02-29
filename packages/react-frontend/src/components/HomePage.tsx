@@ -61,8 +61,7 @@ const HomePage: React.FC<{}> = () => {
                   </Container>
                 <Container>
                   <HomeProgressBar 
-                    taskData = {tempTasks}/>
-                  <HomeProgressBar />                
+                    taskData = {tempTasks}/>     
                 </Container>
               </Stack>
             </Col>
