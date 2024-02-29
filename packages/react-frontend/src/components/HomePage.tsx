@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import "./Page.module.css"
 import { Link } from 'react-router-dom';
 import Nav from "./Nav/Nav";
 import Table from "./Table/HomeTable"
@@ -40,11 +41,6 @@ let progressData: CategoryProgress[] = [
 const HomePage: React.FC<{}> = () => {
 
   const [tasks, setTasks] = useState([]);
-  // const [isModalVisible, setIsModalVisible] = useState(false);
-
-  // const toggleModal = () => {
-  //   setIsModalVisible(wasModal)
-  // }
 
   return (
     <div>
