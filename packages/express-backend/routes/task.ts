@@ -25,9 +25,14 @@ router.get("/:userId", async (req: Request, res: Response) => {
   const id: string = req.params["userId"];
   const startDate: Date = new Date(req.query["startDate"] as string);
   const endDate: Date = new Date(req.query["endDate"] as string);
+  let category: string | undefined = undefined;
 
-  const doneResult = await getTasks(id, startDate, endDate, true);
-  const notDoneResult = await getTasks(id, startDate, endDate, false);
+  if (req.query["category"]) {
+    category = req.query["category"] as string;
+  }
+
+  const doneResult = await getTasks(id, startDate, endDate, category, true);
+  const notDoneResult = await getTasks(id, startDate, endDate, category, false);
 
   if (doneResult === undefined || doneResult === null 
       || notDoneResult === undefined || notDoneResult === null) {
