@@ -41,9 +41,14 @@ const LandingNav: React.FC<{}> = () => {
                 <Nav fill>
                     <Links links = {links}/>
                 </Nav>
-                <Button variant="light">
-                    Login
-                </Button>
+                <div>
+                    <Button variant="light">
+                        Sign Up
+                    </Button>
+                    <Button variant="light">
+                        Login
+                    </Button>
+                </div>
             </Container>
         </Navbar>
     )
