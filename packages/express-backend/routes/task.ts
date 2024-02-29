@@ -40,6 +40,17 @@ router.get("/:userId", async (req: Request, res: Response) => {
   }
 });
 
+router.put("/:taskId", async (req: Request, res: Response) => {
+  const taskId: string = req.params["taskId"];
+  const updatedTask = req.body;
+
+  const mongoUpdated = await updateTaskById(taskId, updatedTask);
+  if (!mongoUpdated) {
+    return res.status(400).send();
+  }
+  res.status(200).send(mongoUpdated);
+});
+
 router.delete("/:id", async (req: Request, res: Response) => {
   const id = req.params["id"];
   const task = await findTaskById(id);
