@@ -17,13 +17,11 @@ const Links: React.FC<{ links : Link[] }> =({ links }) => {
             {links.map((link : Link) => {
                 return (
                     <div className = {styles['links']}>
-                        <Nav>
-                            <Nav.Item>
-                                <Nav.Link href={link.href}>
-                                    {link.label}
-                                </Nav.Link>
-                            </Nav.Item>
-                        </Nav>
+                        <Nav.Item>
+                            <Nav.Link href={link.href}>
+                                {link.label}
+                            </Nav.Link>
+                        </Nav.Item>
                     </div>
                 )
             })}
@@ -35,9 +33,15 @@ const LandingNav: React.FC<{}> = () => {
     return (
         <Navbar expand="lg" className = {styles.navbar}>
             <Container>
-                <Navbar.Brand href="">TaskCraft</Navbar.Brand>
-                <Links links = {links}/>
-                <Button>
+                <div className = {styles['logo-container']}>
+                    <a className="navbar-brand" href="">
+                        TaskCraft
+                    </a>
+                </div>
+                <Nav fill>
+                    <Links links = {links}/>
+                </Nav>
+                <Button variant="light">
                     Login
                 </Button>
             </Container>

@@ -16,6 +16,13 @@
     margin-left: 80px;
 }
 
+.logo-container a {
+    font-weight: 500;
+    font-size: x-large;
+    color: black;
+    cursor: pointer;
+}
+
 .links-container {
     width: 300px;
     display:flex;
