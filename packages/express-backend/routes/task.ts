@@ -22,24 +22,21 @@ router.post("/", async (req: Request, res: Response) => {
 });
 
 router.get("/:userId", async (req: Request, res: Response) => {
-  const userId: string = req.params["userId"];
-  try {
-    const result = await getTasks(userId, undefined);
-    res.send({ tasks: result });
-  } catch (error) {
-    console.log(error);
-    res.status(500).send("An error ocurred in the server.");
-  }
-});
-
-router.get("/:id/:date", async (req: Request, res: Response) => {
   const id: string = req.params["userId"];
-  const date: Date = new Date(req.params["date"]);
-  const result = await getTasks(id, date);
-  if (result === undefined || result === null)
+  const startDate: Date = new Date(req.query["startDate"] as string);
+  const endDate: Date = new Date(req.query["endDate"] as string);
+
+  const doneResult = await getTasks(id, startDate, endDate, true);
+  const notDoneResult = await getTasks(id, startDate, endDate, false);
+
+  if (doneResult === undefined || doneResult === null 
+      || notDoneResult === undefined || notDoneResult === null) {
     res.status(404).send("Resource not found.");
-  else {
-    res.send({ tasks: result });
+  } else {
+    res.send({ 
+      done: doneResult,
+      notDone: notDoneResult
+    });
   }
 });
 

@@ -22,31 +22,26 @@ export const createTask = async (task: ITask) => {
   return promise;
 }
 
-export const getTasks = async(userId: string, date: Date | undefined) => {
+
+
+// no date -> All user's tasks
+// date -> Always passed to view day's tasks
+// stretch -> Date Range
+
+export const getTasks = async (userId: string, startDate: Date,
+                               endDate: Date, done: Boolean) => {
   await connectDB();
   let promise;
 
-  // Today
-  if (date === undefined) {
-    promise = taskModel.find({
-      userID: userId,
-      createdAt: {
-        $gte: startOfDay(new Date()),
-        $lte: endOfDay(new Date())
-      },
-      done: false,
-    })
-  } else {
   // Specific Day
-    promise = taskModel.find({
-      userID: userId,
-      createdAt: {
-        $gte: startOfDay(date),
-        $lte: endOfDay(date)
-      },
-      done: false,
-    })
-  }
+  promise = taskModel.find({
+    userID: userId,
+    createdAt: {
+      $gte: startOfDay(startDate),
+      $lte: endOfDay(endDate)
+    },
+    done: done
+  })
 
   return promise;
 }
