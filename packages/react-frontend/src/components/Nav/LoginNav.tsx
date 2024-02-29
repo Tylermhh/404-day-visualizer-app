@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './Nav.module.css';
-import { Button, Container, Nav, Navbar} from 'react-bootstrap';
+import { Button, Container, Nav, Navbar, Modal} from 'react-bootstrap';
 import * as data from './links.json'
 
 const linksString = JSON.stringify(data)
@@ -29,7 +29,7 @@ const Links: React.FC<{ links : Link[] }> =({ links }) => {
     )
 }
 
-const LandingNav: React.FC<{}> = () => {
+const LandingNav: React.FC<{}> = () => {    
     return (
         <Navbar expand="lg" className = {styles.navbar}>
             <Container>
