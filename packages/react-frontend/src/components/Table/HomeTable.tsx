@@ -48,7 +48,6 @@ const TableBody: React.FC<{taskData : Task[]}> = ({taskData}) => {
               <Form.Check
                 type={'checkbox'}
                 id={'compelted'}
-                defaultValue={row.compelted}
               />
             </Form>
           </td>

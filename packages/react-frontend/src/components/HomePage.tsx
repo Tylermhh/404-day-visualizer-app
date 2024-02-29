@@ -55,13 +55,14 @@ const HomePage: React.FC<{}> = () => {
             </Col>
             <Col sm={3}>
               <Stack gap = {4}>
-              <Container>
-                <HomePieChart 
-                  category_progress={progressData}/>
-                </Container>
-              <Container>
-                <HomeProgressBar 
-                  taskData = {tempTasks}/>
+                <Container>
+                  <HomePieChart 
+                    category_progress={progressData}/>
+                  </Container>
+                <Container>
+                  <HomeProgressBar 
+                    taskData = {tempTasks}/>
+                  <HomeProgressBar />                
                 </Container>
               </Stack>
             </Col>
