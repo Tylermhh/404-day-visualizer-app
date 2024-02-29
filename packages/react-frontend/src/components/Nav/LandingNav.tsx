@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './Nav.module.css';
-import {Container, Nav, Navbar, NavDropdown} from 'react-bootstrap';
+import { Button, Container, Nav, Navbar} from 'react-bootstrap';
 import * as data from './links.json'
 
 const linksString = JSON.stringify(data)
@@ -37,6 +37,9 @@ const LandingNav: React.FC<{}> = () => {
             <Container>
                 <Navbar.Brand href="">TaskCraft</Navbar.Brand>
                 <Links links = {links}/>
+                <Button>
+                    Login
+                </Button>
             </Container>
         </Navbar>
     )

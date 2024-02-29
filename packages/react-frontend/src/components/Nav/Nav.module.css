@@ -1,6 +1,6 @@
 .navbar {
     width: 100%;
-    /*height: 70px;*/
+    height: 70px;
     background: #5F6E96;
     /* border-bottom: 1px solid #555; */
     display: flex;
@@ -13,7 +13,7 @@
     font-size: x-large;
     color: black;
     cursor: pointer;
-    /*margin-left: 80px;*/
+    margin-left: 80px;
 }
 
 .links-container {
