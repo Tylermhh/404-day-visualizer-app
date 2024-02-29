@@ -8,20 +8,24 @@ import { Task, CategoryProgress } from "./../types/types";
 import { Container, Col, Row, Stack } from 'react-bootstrap';
 
 let tempTasks: Task[] = [
-  { item_name: "Make Frontend", category: "CSC 307", completed: false },
-  { item_name: "Make Backend", category: "CSC 307", completed: true},
-  { item_name: "Make Frontend", category: "CSC 307", completed: false },
-  { item_name: "Make Backend", category: "CSC 307", completed: true},
-  { item_name: "Make Frontend", category: "CSC 307", completed: false },
-  { item_name: "Make Backend", category: "CSC 307", completed: true},
-  { item_name: "Make Frontend", category: "CSC 307", completed: false },
-  { item_name: "Make Backend", category: "CSC 307", completed: true},
-  { item_name: "Make Frontend", category: "CSC 307", completed: false },
-  { item_name: "Make Backend", category: "CSC 307", completed: true},
-  { item_name: "Make Frontend", category: "CSC 307", completed: false },
-  { item_name: "Make Backend", category: "CSC 307", completed: true},
-  { item_name: "Make Frontend", category: "CSC 307", completed: false },
-  { item_name: "Make Backend", category: "CSC 307", completed: true},
+  { item_name: "Make Frontend", category: "Frontend", completed: false },
+  { item_name: "Make Backend", category: "Backend", completed: false},
+  { item_name: "Make Frontend", category: "Frontend", completed: false },
+  { item_name: "Make Backend", category: "Backend", completed: true},
+  { item_name: "Make Frontend", category: "Frontend", completed: false },
+  { item_name: "Make Backend", category: "Backend", completed: true},
+  { item_name: "Make Frontend", category: "Frontend", completed: false },
+  { item_name: "Make Backend", category: "Backend", completed: true},
+  { item_name: "Make Frontend", category: "Frontend", completed: false },
+  { item_name: "Make Backend", category: "Backend", completed: true},
+  { item_name: "Make Frontend", category: "Frontend", completed: false },
+  { item_name: "Make Backend", category: "Backend", completed: true},
+  { item_name: "Make Frontend", category: "Frontend", completed: false },
+  { item_name: "Make Backend", category: "Backend", completed: true},
+  { item_name: "Make Frontend", category: "Frontend", completed: false },
+  { item_name: "Make Backend", category: "Backend", completed: true},
+  { item_name: "Make Frontend", category: "Frontend", completed: false },
+  { item_name: "Make Backend", category: "Backend", completed: true},
 ];
 
 let progressData: CategoryProgress[] = [
@@ -56,7 +60,8 @@ const HomePage: React.FC<{}> = () => {
                   category_progress={progressData}/>
                 </Container>
               <Container>
-                <HomeProgressBar />
+                <HomeProgressBar 
+                  taskData = {tempTasks}/>
                 </Container>
               </Stack>
             </Col>
