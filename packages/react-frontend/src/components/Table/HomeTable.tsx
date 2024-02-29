@@ -2,13 +2,10 @@ import React, { useState } from 'react';
 import styles from "./Table.module.css";
 import { Button, Col, Form, Row, Table} from 'react-bootstrap';
 import {Task} from "./../../types/types";
-// import BaseModalWrapper from "../Modals/BaseModalWrapper";
-import OwnModal from '../Modals/OwnModal';
 import Modal from 'react-bootstrap/Modal';
-import ModalComponent from '../Modals/ModalComponent';
-import { isVisible } from '@testing-library/user-event/dist/utils';
+import NewTaskModal from '../Modals/NewTaskModal';
 
-const TableTitle: React.FC<{toggleMod : () => void}> = ({toggleMod}) => {
+const TableTitle: React.FC<{}> = () => {
   return (
     <div>
       <Row>
@@ -18,9 +15,7 @@ const TableTitle: React.FC<{toggleMod : () => void}> = ({toggleMod}) => {
           </h2>
         </Col>
         <Col sm={1}>
-          <Button variant="outline-primary" onClick={toggleMod}>
-            +
-          </Button>
+          <NewTaskModal/>
         </Col>
       </Row>
     </div>
@@ -86,15 +81,15 @@ const TableBody: React.FC<{taskData : Task[]}> = ({taskData}) => {
 
 const HomeTable: React.FC<{taskData : Task[]}> = (input) => {
 
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  // const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const toggleModal = () => {
-    setIsModalVisible(!isModalVisible);
-  }
+  // const toggleModal = () => {
+  //   setIsModalVisible(!isModalVisible);
+  // }
   
   return (
     <div>
-      <TableTitle toggleMod={toggleModal}/>
+      <TableTitle/>
       <TableBody
         taskData = {input.taskData}
       />
@@ -103,21 +98,6 @@ const HomeTable: React.FC<{taskData : Task[]}> = (input) => {
       {/* <OwnModal isOpen={isModalVisible} toggle={toggleModal}>
         <div>Yaay!!! Our Modal is rendered Properly.</div>
       </OwnModal> */}
-
-      <Modal show={isModalVisible} onHide={toggleModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={toggleModal}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={toggleModal}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
 
       {/* <ModalComponent isVisible={isModalVisible} toggleModal={toggleModal}></ModalComponent> */}
 
