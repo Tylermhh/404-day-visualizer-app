@@ -40,6 +40,11 @@ let progressData: CategoryProgress[] = [
 const HomePage: React.FC<{}> = () => {
 
   const [tasks, setTasks] = useState([]);
+  // const [isModalVisible, setIsModalVisible] = useState(false);
+
+  // const toggleModal = () => {
+  //   setIsModalVisible(wasModal)
+  // }
 
   return (
     <div>

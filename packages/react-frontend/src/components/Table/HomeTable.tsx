@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from "./Table.module.css";
 import { Button, Col, Form, Row, Table} from 'react-bootstrap';
 import {Task} from "./../../types/types";
+import BaseModalWrapper from "../Modals/BaseModalWrapper";
 
 const TableTitle: React.FC<{}> = () => {
   return (
@@ -80,12 +81,22 @@ const TableBody: React.FC<{taskData : Task[]}> = ({taskData}) => {
 }
 
 const HomeTable: React.FC<{taskData : Task[]}> = (input) => {
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const toggleModal = () => {
+    setIsModalVisible(!isModalVisible);
+  }
+  
   return (
     <div>
       <TableTitle />
       <TableBody
         taskData = {input.taskData}
       />
+      <button onClick={toggleModal}></button>
+      <BaseModalWrapper isModalVisible={isModalVisible} onBackdropClick={toggleModal}/>
+
     </div>
   )
 }
