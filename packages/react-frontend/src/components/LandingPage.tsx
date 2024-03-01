@@ -6,7 +6,7 @@ import LandingNav from "./Nav/LoginNav";
 import { Container, Col, Row, Stack } from 'react-bootstrap';
 
 function Main() {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     // const goToAuthenticationPageComp = () => {
     //     navigate('/auth');
