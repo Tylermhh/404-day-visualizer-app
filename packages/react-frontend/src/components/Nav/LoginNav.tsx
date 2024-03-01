@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react';
 import styles from './Nav.module.css';
 import { Button, Container, Nav, Navbar, Modal} from 'react-bootstrap';
 import * as data from './links.json'
+import SignUpModal from '../Modals/SignUpModal';
+import LoginModal from '../Modals/LoginModal';
 
 const linksString = JSON.stringify(data)
 const links = JSON.parse(linksString).links;
@@ -30,6 +32,11 @@ const Links: React.FC<{ links : Link[] }> =({ links }) => {
 }
 
 const LandingNav: React.FC<{}> = () => {    
+    
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
     return (
         <Navbar expand="lg" className = {styles.navbar}>
             <Container>
@@ -42,12 +49,8 @@ const LandingNav: React.FC<{}> = () => {
                     <Links links = {links}/>
                 </Nav>
                 <div>
-                    <Button variant="light">
-                        Sign Up
-                    </Button>
-                    <Button variant="light">
-                        Login
-                    </Button>
+                    <SignUpModal />
+                    <LoginModal />
                 </div>
             </Container>
         </Navbar>
