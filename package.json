@@ -4,8 +4,9 @@
   "description": "todo/day-analyzer app",
   "main": "index.js",
   "scripts": {
+    "lint": "npx eslint . && npx prettier --check .",
     "start": "npm -w ./packages/react-frontend start",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npx jest",
     "dev": "tsc && node dist/express-backend/server.js && node dist/react-frontend/"
   },
   "keywords": [],
