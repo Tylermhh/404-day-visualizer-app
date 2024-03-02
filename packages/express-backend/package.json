@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "tsc ./server.ts && node ./server.js",
-    "test": "echo \"Error: no test specified\""
+    "test": "echo \"Error: no test specified\"",
+    "lint": "eslint --ext=.jsx,.js,.tsx,.ts"
   },
   "author": "",
   "license": "ISC",
