@@ -18,7 +18,7 @@ const Links: React.FC<{ links : Link[] }> =({ links }) => {
                 return (
                     <div className = {styles['links']}>
                         <Nav.Item>
-                            <Nav.Link href={"https://thankful-dune-0d41a831e.5.azurestaticapps.net/" + link.href}>
+                            <Nav.Link href={link.href}>
                                 {link.label}
                             </Nav.Link>
                         </Nav.Item>
