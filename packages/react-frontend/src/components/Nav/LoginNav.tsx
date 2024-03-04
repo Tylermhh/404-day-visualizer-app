@@ -34,7 +34,7 @@ const LandingNav: React.FC<{}> = () => {
         <Navbar expand="lg" className = {styles.navbar}>
             <Container>
                 <div className = {styles['logo-container']}>
-                    <a className="navbar-brand" href="https://www.google.com/">
+                    <a className="navbar-brand" href="">
                         TaskCraft
                     </a>
                 </div>
