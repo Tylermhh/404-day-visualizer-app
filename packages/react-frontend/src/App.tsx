@@ -11,10 +11,10 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/auth" element={<Auth />} /> 
-        <Route path="/home" element={<Home />} />
-        <Route path="/task" element={<Task />} />
-        <Route path="/visualize" element={<Viz />} /> 
+        <Route path="https://thankful-dune-0d41a831e.5.azurestaticapps.net/auth" element={<Auth />} /> 
+        <Route path="https://thankful-dune-0d41a831e.5.azurestaticapps.net/home" element={<Home />} />
+        <Route path="https://thankful-dune-0d41a831e.5.azurestaticapps.net/task" element={<Task />} />
+        <Route path="https://thankful-dune-0d41a831e.5.azurestaticapps.net/visualize" element={<Viz />} /> 
       </Routes>
     </Router>
   );
