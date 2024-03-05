@@ -1,8 +1,8 @@
 import React from 'react'
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import styles from './Nav.module.css';
 import { Container, Nav, Navbar } from 'react-bootstrap';
-import * as data from './links.json'
+// import * as data from './links.json'
 import SignUpModal from '../Modals/SignUpModal';
 import LoginModal from '../Modals/LoginModal';
 
