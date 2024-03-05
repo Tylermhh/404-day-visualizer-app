@@ -1,7 +1,7 @@
 import React from 'react';
 import "./Page.module.css"
 // import { Link } from 'react-router-dom';
-import Nav from "./Nav/Nav";
+import LandingNav from "./Nav/LoginNav";
 import Table from "./Table/HomeTable"
 import HomePieChart from "./Chart/HomePieChart"
 import HomeProgressBar from "./ProgressBar/HomeProgressBar"
@@ -44,7 +44,7 @@ const HomePage: React.FC<{}> = () => {
 
   return (
     <div>
-      <Nav />
+      <LandingNav />
       <Stack gap = {4}>
         <Container />
         <Container>
