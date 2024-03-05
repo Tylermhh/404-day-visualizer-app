@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './Nav.module.css';
-import { Button, Container, Nav, Navbar, Modal} from 'react-bootstrap';
+import { Container, Nav, Navbar } from 'react-bootstrap';
 import * as data from './links.json'
 import SignUpModal from '../Modals/SignUpModal';
 import LoginModal from '../Modals/LoginModal';
@@ -32,10 +32,6 @@ const Links: React.FC<{ links : Link[] }> =({ links }) => {
 }
 
 const LandingNav: React.FC<{}> = () => {    
-    
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
 
     return (
         <Navbar expand="lg" className = {styles.navbar}>
