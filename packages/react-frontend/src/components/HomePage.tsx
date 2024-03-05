@@ -4,9 +4,10 @@ import Nav from "./Nav/Nav";
 import Table from "./Table/HomeTable";
 import HomePieChart from "./Chart/HomePieChart";
 import HomeProgressBar from "./ProgressBar/HomeProgressBar";
-import { ITask, CategoryProgress } from "./../types/types";
+import { ITask, CategoryProgress, Category } from "./../types/types";
 import { Container, Col, Row, Stack } from "react-bootstrap";
 import TaskTable from "./Table/TaskTable";
+import LandingNav from "./Nav/LoginNav";
 
 let tempTasks: ITask[] = [
   {
@@ -68,14 +69,14 @@ let tempTasks: ITask[] = [
   },
 ];
 
-let progressData: CategoryProgress[] = [
-  { category_name: "Group A", hours: 5, color: "#0088FE" },
-  { category_name: "Group C", hours: 2, color: "#00C49F" },
-  { category_name: "Group C", hours: 3, color: "#FFBB28" },
-  { category_name: "Group D", hours: 4, color: "#FF8042" },
-  { category_name: "Group E", hours: 1, color: "#a9119c" },
-  { category_name: "Group F", hours: 2, color: "#5ec1dd" },
-];
+// let progressData: CategoryProgress[] = [
+//   { name: "Group A", hours: 5, color: "#0088FE" },
+//   { name: "Group C", hours: 2, color: "#00C49F" },
+//   { name: "Group C", hours: 3, color: "#FFBB28" },
+//   { name: "Group D", hours: 4, color: "#FF8042" },
+//   { name: "Group E", hours: 1, color: "#a9119c" },
+//   { name: "Group F", hours: 2, color: "#5ec1dd" },
+// ];
 
 const HomePage: React.FC<{}> = () => {
   const [tasks, setTasks] = useState([]);
@@ -174,13 +175,13 @@ const HomePage: React.FC<{}> = () => {
 //   }
 // ];
 
-// let userCategories: Category[] = [
-//   { name: "Frontend", color: '#0088FE'},
-//   { name: "Backend", color: '#F098FE'},
-//   { name: 'Other', color: '#FFBB28'},
-//   { name: 'CSC 430', color: '#2BA428'},
-//   { name: 'Physics', color: '#123456'}
-// ];
+let userCategories: Category[] = [
+  { name: "Frontend", color: '#0088FE'},
+  { name: "Backend", color: '#F098FE'},
+  { name: 'Other', color: '#FFBB28'},
+  { name: 'CSC 430', color: '#2BA428'},
+  { name: 'Physics', color: '#123456'}
+];
 
 // const HomePage: React.FC<{}> = () => {
 

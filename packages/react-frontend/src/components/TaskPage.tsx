@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "./Nav/Nav";
+import LandingNav from "./Nav/LoginNav";
 import TaskTable from "./Table/TaskTable";
 import { ITask } from "./../types/types";
 import styles from "./Page.module.css";
@@ -73,11 +73,11 @@ function Task() {
     } else {
       toDoTasks.push(tempTasks[i]);
     }
-  } 
+  }
 
   return (
     <div className="App">
-      <Navbar />
+      <LandingNav />
       <header className={styles.pageTitle}>Task Page</header>
       <TaskTable
         name="Tasks To Do"
