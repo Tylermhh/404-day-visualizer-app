@@ -1,6 +1,7 @@
 import express from "express";
 import type { Express, Request, Response } from "express";
 import { createTask, getTasks, updateTaskById, deleteTaskById, findTaskById } from "./Model/task-services.js";
+import { addUser, getUsers, findUserById } from "./Model/user-services.js";
 
 const port: number = 8000;
 const app: Express = express();
@@ -66,4 +67,49 @@ app.delete("/task/:id", async (req: Request, res: Response) => {
   }
   await deleteTaskById(id);
   res.status(204).send();
+});
+
+app.post("/user", async (req: Request, res: Response) => {
+  try {
+    const user = req.body;
+    const savedUser = await addUser(user);
+
+    if (savedUser) {
+      res.status(201).send(savedUser);
+    } else {
+      res.status(500).send("Error saving the user.");
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(400).send("Error processing request.");
+  }
+});
+
+app.get("/users", async (req: Request, res: Response) => {
+  const { name, job } = req.query;
+
+  try {
+    const users = await getUsers(name as string, job as string);
+    res.status(200).send(users);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error fetching users.");
+  }
+});
+
+app.get("/user/:id", async (req: Request, res: Response) => {
+  const id: string = req.params["id"];
+
+  try {
+    const user = await findUserById(id);
+
+    if (user) {
+      res.status(200).send(user);
+    } else {
+      res.status(404).send("User not found.");
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error fetching user.");
+  }
 });
