@@ -2,6 +2,8 @@ import express from "express";
 import type { Express, Request, Response } from "express";
 import { createTask, getTasks, updateTaskById, deleteTaskById, findTaskById } from "./Model/task-services.js";
 import { addUser, getUsers, findUserById } from "./Model/user-services.js";
+import { registerUser } from "./Model/auth.js";
+import { authenticateUser, loginUser } from "./Model/auth.js";
 
 const port: number = 8000;
 const app: Express = express();
@@ -113,3 +115,6 @@ app.get("/user/:id", async (req: Request, res: Response) => {
     res.status(500).send("Error fetching user.");
   }
 });
+
+app.post("/signup", registerUser);
+app.post("/login", registerUser);
