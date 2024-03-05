@@ -2,8 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Navbar from "./Nav/Nav";
 import TaskTable from "./Table/TaskTable";
-
-import { ITask, IDateEntry } from "./../types/types";
+import { ITask } from "./../types/types";
 
 let tempTasks: ITask[] = [
   {

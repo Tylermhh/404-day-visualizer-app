@@ -5,7 +5,6 @@ import styles from "../Page.module.css";
 
 function TaskTable(params: { name: String; todo: Boolean; tasks: ITask[] }) {
   let tasks = params.tasks;
-  let todo = params.todo;
   const TableTitle: React.FC<{}> = () => {
     return (
       <div>
