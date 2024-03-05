@@ -21,7 +21,7 @@ const TableTitle: React.FC<{}> = () => {
   )
 }
 
-const TableBody: React.FC<{taskData : Task[]}> = ({taskData}) => {
+const TableBody: React.FC<{taskData : Task[], removeTask: (index: number) => void}> = ({taskData, removeTask}) => {
   const rows = taskData.map((row: any, index: any) => {
       return (
         <tr>
@@ -31,12 +31,12 @@ const TableBody: React.FC<{taskData : Task[]}> = ({taskData}) => {
             <Form>
               <Form.Check
                 type={'checkbox'}
-                id={'compelted'}
+                id={'completed'}
               />
             </Form>
           </td>
           <td>
-          <Button>
+          <Button onClick={() => removeTask(index)}>
             Delete
           </Button>
           </td>
@@ -63,13 +63,13 @@ const TableBody: React.FC<{taskData : Task[]}> = ({taskData}) => {
   );
 }
 
-const HomeTable: React.FC<{taskData : Task[]}> = (input) => {
-  
+const HomeTable: React.FC<{taskData : Task[], removeTask: (index: number) => void}> = (input) => {
   return (
     <div>
       <TableTitle/>
       <TableBody
         taskData = {input.taskData}
+        removeTask={input.removeTask}
       />
     </div>
   )

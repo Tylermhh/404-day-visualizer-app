@@ -103,9 +103,9 @@ let userCategories: Category[] = [
 
 const HomePage: React.FC<{}> = () => {
 
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(tempTasks);
 
-  function removeOneCharacter(index : any) {
+  function removeTask(index : number) {
     const updated = tempTasks.filter((character, i) => {
         return i !== index;
     });
@@ -123,6 +123,7 @@ const HomePage: React.FC<{}> = () => {
             <Col sm={9}>
               <Table 
                 taskData = {tempTasks}
+                removeTask={removeTask}
               />
             </Col>
             <Col sm={3}>
