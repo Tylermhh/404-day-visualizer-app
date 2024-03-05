@@ -1,5 +1,5 @@
 import React from 'react'
-import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
+import { PieChart, Pie, Cell } from 'recharts';
 import { CategoryProgress } from '../../types/types';
 
 const RADIAN = Math.PI / 180;
