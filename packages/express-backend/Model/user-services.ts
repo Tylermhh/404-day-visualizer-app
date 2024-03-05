@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import * as mongoose from "mongoose";
 import connectDB from "../db.js";
 import userModel from "./user.js";
 import type {IUser} from "./user.js";
@@ -17,35 +17,27 @@ export const getUsers = async (name: string, job: string) => {
   }
 };
 
-const findUserById = async (id: string) => {
+export const findUserById = async (id: string) => {
   await connectDB();
   const user = await userModel.findById(id);
   return user;
 };
 
-const addUser = async (user: IUser) => {
+export const addUser = async (user: IUser) => {
   await connectDB();
   const userToAdd = new userModel(user);
   const savedUser = await userToAdd.save();
   return savedUser;
 };
 
-const findUserByName = async (name: string) => {
+export const findUserByName = async (name: string) => {
   await connectDB();
   const users = await userModel.find({ name });
   return users;
 };
 
-const findUserByJob = async (job: string) => {
+export const findUserByJob = async (job: string) => {
   await connectDB();
   const users = await userModel.find({ job });
   return users;
-};
-
-export default {
-  addUser,
-  getUsers,
-  findUserById,
-  findUserByName,
-  findUserByJob,
 };
