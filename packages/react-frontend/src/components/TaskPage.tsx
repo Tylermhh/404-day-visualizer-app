@@ -73,14 +73,24 @@ function Task() {
     } else {
       toDoTasks.push(tempTasks[i]);
     }
-  }
+  } 
 
   return (
     <div className="App">
       <Navbar />
       <header className={styles.pageTitle}>Task Page</header>
-      <TaskTable name="Tasks To Do" todo={true} tasks={toDoTasks} />
-      <TaskTable name="Tasks Completed" todo={false} tasks={completedTasks} />
+      <TaskTable
+        name="Tasks To Do"
+        todo={true}
+        page="TaskPage"
+        tasks={toDoTasks}
+      />
+      <TaskTable
+        name="Tasks Completed"
+        todo={false}
+        page="TaskPage"
+        tasks={completedTasks}
+      />
     </div>
   );
 }

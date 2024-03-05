@@ -3,18 +3,36 @@ import { Button, Col, Row, Table, Container } from "react-bootstrap";
 import { ITask } from "./../../types/types";
 import styles from "../Page.module.css";
 import moment from "moment";
+import { stat } from "fs";
 
-function TaskTable(params: { name: String; todo: Boolean; tasks: ITask[] }) {
+function TaskTable(params: {
+  name: String;
+  todo: Boolean;
+  page: String;
+  tasks: ITask[];
+}) {
   let tasks = params.tasks;
+
   const TableTitle: React.FC<{}> = () => {
+    if (params.todo) {
+      return (
+        <div>
+          <Row>
+            <Col sm={11}>
+              <h2>{params.name}</h2>
+            </Col>
+            <Col sm={1}>
+              <Button variant="outline-primary">+</Button>
+            </Col>
+          </Row>
+        </div>
+      );
+    }
     return (
       <div>
         <Row>
           <Col sm={11}>
             <h2>{params.name}</h2>
-          </Col>
-          <Col sm={1}>
-            <Button variant="outline-primary">+</Button>
           </Col>
         </Row>
       </div>
@@ -54,6 +72,12 @@ function TaskTable(params: { name: String; todo: Boolean; tasks: ITask[] }) {
         </tr>
       );
     });
+
+    let statusName = "Completed";
+    if (params.page === "HomePage") {
+      statusName = "Last Updated";
+    }
+
     if (todo) {
       return (
         <div className={styles["table-responsive"]}>
@@ -80,7 +104,7 @@ function TaskTable(params: { name: String; todo: Boolean; tasks: ITask[] }) {
               <th>Item Name</th>
               <th>Description</th>
               <th>Category</th>
-              <th>Last Updated</th>
+              <th>{statusName}</th>
             </tr>
           </thead>
           <tbody>{rows}</tbody>
