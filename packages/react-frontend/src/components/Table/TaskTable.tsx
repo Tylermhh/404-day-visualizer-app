@@ -1,7 +1,8 @@
 import React from "react";
-import { Button, Col, Form, Row, Table, Container } from "react-bootstrap";
+import { Button, Col, Row, Table, Container } from "react-bootstrap";
 import { ITask } from "./../../types/types";
 import styles from "../Page.module.css";
+import moment from "moment";
 
 function TaskTable(params: { name: String; todo: Boolean; tasks: ITask[] }) {
   let tasks = params.tasks;
@@ -20,10 +21,10 @@ function TaskTable(params: { name: String; todo: Boolean; tasks: ITask[] }) {
     );
   };
 
-  const TableBody: React.FC<{ tasks: ITask[]; todo: Boolean }> = ({
-    tasks,
-    todo,
-  }) => {
+  const TableBody: React.FC<{
+    tasks: ITask[];
+    todo: Boolean;
+  }> = ({ tasks, todo }) => {
     const rows = tasks.map((task: any, index: any) => {
       if (todo) {
         return (
@@ -31,6 +32,9 @@ function TaskTable(params: { name: String; todo: Boolean; tasks: ITask[] }) {
             <td>{task.name}</td>
             <td>{task.description}</td>
             <td>{task.category}</td>
+            <td>
+              <Button>Update</Button>
+            </td>
             <td>
               <Button>Complete</Button>
             </td>
@@ -42,6 +46,11 @@ function TaskTable(params: { name: String; todo: Boolean; tasks: ITask[] }) {
           <td>{task.name}</td>
           <td>{task.description}</td>
           <td>{task.category}</td>
+          <td>
+            {moment(
+              task.datesUpdated[task.datesUpdated.length - 1].date,
+            ).format("MM/DD/YYYY")}
+          </td>
         </tr>
       );
     });
@@ -54,6 +63,7 @@ function TaskTable(params: { name: String; todo: Boolean; tasks: ITask[] }) {
                 <th>Item Name</th>
                 <th>Description</th>
                 <th>Category</th>
+                <th>Update</th>
                 <th>Complete</th>
               </tr>
             </thead>
@@ -70,6 +80,7 @@ function TaskTable(params: { name: String; todo: Boolean; tasks: ITask[] }) {
               <th>Item Name</th>
               <th>Description</th>
               <th>Category</th>
+              <th>Last Updated</th>
             </tr>
           </thead>
           <tbody>{rows}</tbody>

@@ -1,8 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import Navbar from "./Nav/Nav";
 import TaskTable from "./Table/TaskTable";
 import { ITask } from "./../types/types";
+import styles from "./Page.module.css";
 
 let tempTasks: ITask[] = [
   {
@@ -26,7 +26,7 @@ let tempTasks: ITask[] = [
       },
     ],
     category: "Academics",
-    done: false,
+    done: true,
   },
   {
     _id: "tempID200",
@@ -78,8 +78,7 @@ function Task() {
   return (
     <div className="App">
       <Navbar />
-      <header className="App-header">Task Page</header>
-      <Link to="/">go back</Link>
+      <header className={styles.pageTitle}>Task Page</header>
       <TaskTable name="Tasks To Do" todo={true} tasks={toDoTasks} />
       <TaskTable name="Tasks Completed" todo={false} tasks={completedTasks} />
     </div>
