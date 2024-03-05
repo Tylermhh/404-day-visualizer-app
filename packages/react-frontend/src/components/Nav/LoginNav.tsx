@@ -1,8 +1,10 @@
 import React from 'react'
 import { Link } from "react-router-dom";
 import styles from './Nav.module.css';
-import { Button, Container, Nav, Navbar} from 'react-bootstrap';
+import { Container, Nav, Navbar } from 'react-bootstrap';
 import * as data from './links.json'
+import SignUpModal from '../Modals/SignUpModal';
+import LoginModal from '../Modals/LoginModal';
 
 const linksString = JSON.stringify(data)
 const links = JSON.parse(linksString).links;
@@ -31,6 +33,7 @@ const links = JSON.parse(linksString).links;
 // }
 
 const LandingNav: React.FC<{}> = () => {    
+
     return (
         <Navbar expand="lg" className = {styles.navbar}>
             <Container>
@@ -54,12 +57,8 @@ const LandingNav: React.FC<{}> = () => {
                     </Nav.Item>
                 </Nav>
                 <div>
-                    <Button variant="light">
-                        Sign Up
-                    </Button>
-                    <Button variant="light">
-                        Login
-                    </Button>
+                    <SignUpModal />
+                    <LoginModal />
                 </div>
             </Container>
         </Navbar>
