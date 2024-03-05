@@ -21,37 +21,22 @@ const TableTitle: React.FC<{}> = () => {
   )
 }
 
-// const TableHeader: React.FC<{}> = () => {
-//   return (
-//     <div>
-//       <thead>
-//         <tr>
-//           <th>Item Name</th>
-//           <th>Category</th>
-//           <th>Completed</th>
-//           <th>Remove</th>
-//         </tr>
-//       </thead>
-//     </div>
-//   )
-// }
-
-const TableBody: React.FC<{taskData : Task[]}> = ({taskData}) => {
+const TableBody: React.FC<{taskData : Task[], removeTask: (index: number) => void}> = ({taskData, removeTask}) => {
   const rows = taskData.map((row: any, index: any) => {
       return (
         <tr>
-          <td>{row.item_name}</td>
+          <td>{row.name}</td>
           <td>{row.category}</td>
           <td>
             <Form>
               <Form.Check
                 type={'checkbox'}
-                id={'compelted'}
+                id={'completed'}
               />
             </Form>
           </td>
           <td>
-          <Button>
+          <Button onClick={() => removeTask(index)}>
             Delete
           </Button>
           </td>
@@ -78,31 +63,14 @@ const TableBody: React.FC<{taskData : Task[]}> = ({taskData}) => {
   );
 }
 
-const HomeTable: React.FC<{taskData : Task[]}> = (input) => {
-
-  // const [isModalVisible, setIsModalVisible] = useState(false);
-
-  // const toggleModal = () => {
-  //   setIsModalVisible(!isModalVisible);
-  // }
-  
+const HomeTable: React.FC<{taskData : Task[], removeTask: (index: number) => void}> = (input) => {
   return (
     <div>
       <TableTitle/>
       <TableBody
         taskData = {input.taskData}
+        removeTask={input.removeTask}
       />
-
-      {/* need to make container work */}
-      {/* <OwnModal isOpen={isModalVisible} toggle={toggleModal}>
-        <div>Yaay!!! Our Modal is rendered Properly.</div>
-      </OwnModal> */}
-
-      {/* <ModalComponent isVisible={isModalVisible} toggleModal={toggleModal}></ModalComponent> */}
-
-      {/* useless */}
-      {/* <BaseModalWrapper isModalVisible={isModalVisible} onBackdropClick={toggleModal}/> */}
-
     </div>
   )
 }
