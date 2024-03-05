@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "./Page.module.css"
 // import { Link } from 'react-router-dom';
 import Nav from "./Nav/Nav";
@@ -40,7 +40,7 @@ let progressData: CategoryProgress[] = [
 
 const HomePage: React.FC<{}> = () => {
 
-  // const [tasks, setTasks] = useState([]);
+  // const [tasks, setTasks] = useState(tempTasks);
 
   return (
     <div>

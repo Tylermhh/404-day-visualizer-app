@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from "./Table.module.css";
 import { Button, Col, Form, Row, Table} from 'react-bootstrap';
 import {Task} from "./../../types/types";
 import NewTaskModal from '../Modals/NewTaskModal';
+
+interface TableTitleProps {
+  addNewItem(): () => void
+}
 
 const TableTitle: React.FC<{}> = () => {
   return (
@@ -14,6 +18,7 @@ const TableTitle: React.FC<{}> = () => {
           </h2>
         </Col>
         <Col sm={1}>
+          {/* button for adding new task */}
           <NewTaskModal/>
         </Col>
       </Row>
@@ -85,10 +90,12 @@ const HomeTable: React.FC<{taskData : Task[]}> = (input) => {
   // const toggleModal = () => {
   //   setIsModalVisible(!isModalVisible);
   // }
+
+  const [tasks, setTasks] = useState(input.taskData);
   
   return (
     <div>
-      <TableTitle/>
+      <TableTitle />
       <TableBody
         taskData = {input.taskData}
       />

@@ -2,14 +2,51 @@ import { useState } from 'react';
 import { Form } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import NewTaskForm from '../Forms/NewTaskForm';
+// import Task from "../Forms/NewTaskForm";
+import { Task } from '../../types/types';
 
 function NewTaskModal() {
 
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [characters, setCharacters] = useState();
 
   const toggleModal = () => {
     setIsModalVisible(!isModalVisible);
   }
+
+  // function updateList(task) {
+  //   setCharacters([...characters, task]);
+  //   // postUser(person)
+  //   // .then((res) => { 
+  //   //   if (res.status === 201) {
+  //   //     console.log("status 201!");
+  //   //     setCharacters([...characters, res.json()])}
+  //   //   })
+  //   // .catch((error) => {
+  //   //   console.log(error);
+  //   // })
+  // }
+
+  interface UpdateListProps {
+    characters: Task[];
+    // setCharacters: React.Dispatch<React.SetStateAction<Task[]>>;
+  }
+
+  const updateList = async (newTask: Task, { characters, setCharacters }: UpdateListProps) => {
+    setCharacters([...characters, newTask]);
+    // try {
+    //   const res = await postUser(person);
+  
+    //   if (res.status === 201) {
+    //     const newPerson = await res.json();
+    //     console.log("status 201!");
+    //     setCharacters([...characters, newPerson]);
+    //   }
+    // } catch (error) {
+    //   console.log(error);
+    // }
+  };
 
     return (
         <>
@@ -23,7 +60,7 @@ function NewTaskModal() {
             <Modal.Title>Add New Item</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <Form>
+              {/* <Form>
                 <Form.Group className='mb-3' controlId='formItemName'>
                   <Form.Label>Item Name</Form.Label>
                   <Form.Control type="itemName" placeholder="Enter Item Name" />
@@ -39,7 +76,9 @@ function NewTaskModal() {
                   <Form.Control type="itemDeadline" placeholder="yyyy-mm-dd" />
                 </Form.Group>
 
-              </Form>
+              </Form> */}
+
+              <NewTaskForm handleSubmit={updateList}/>
 
             </Modal.Body>
             <Modal.Footer>
