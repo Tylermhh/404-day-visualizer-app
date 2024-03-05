@@ -66,12 +66,23 @@ let tempTasks: ITask[] = [
 ];
 
 function Task() {
+  let completedTasks = [];
+  let toDoTasks = [];
+  for (let i = 0; i < tempTasks.length; i++) {
+    if (tempTasks[i].done) {
+      completedTasks.push(tempTasks[i]);
+    } else {
+      toDoTasks.push(tempTasks[i]);
+    }
+  }
+
   return (
     <div className="App">
       <Navbar />
       <header className="App-header">Task Page</header>
       <Link to="/">go back</Link>
-      <TaskTable tasks={tempTasks} />
+      <TaskTable name="Tasks To Do" todo={true} tasks={toDoTasks} />
+      <TaskTable name="Tasks Completed" todo={false} tasks={completedTasks} />
     </div>
   );
 }

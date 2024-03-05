@@ -1,16 +1,17 @@
 import React from "react";
-import styles from "./Table.module.css";
 import { Button, Col, Form, Row, Table, Container } from "react-bootstrap";
 import { ITask } from "./../../types/types";
+import styles from "../Page.module.css";
 
-function TaskTable(params: { tasks: ITask[] }) {
+function TaskTable(params: { name: String; todo: Boolean; tasks: ITask[] }) {
   let tasks = params.tasks;
+  let todo = params.todo;
   const TableTitle: React.FC<{}> = () => {
     return (
       <div>
         <Row>
           <Col sm={11}>
-            <h2>Todo List (Coming Up)</h2>
+            <h2>{params.name}</h2>
           </Col>
           <Col sm={1}>
             <Button variant="outline-primary">+</Button>
@@ -20,27 +21,48 @@ function TaskTable(params: { tasks: ITask[] }) {
     );
   };
 
-  const TableBody: React.FC<{ tasks: ITask[] }> = ({ tasks }) => {
-    const rows = tasks.map((row: any, index: any) => {
+  const TableBody: React.FC<{ tasks: ITask[]; todo: Boolean }> = ({
+    tasks,
+    todo,
+  }) => {
+    const rows = tasks.map((task: any, index: any) => {
+      if (todo) {
+        return (
+          <tr>
+            <td>{task.name}</td>
+            <td>{task.description}</td>
+            <td>{task.category}</td>
+            <td>
+              <Button>Complete</Button>
+            </td>
+          </tr>
+        );
+      }
       return (
         <tr>
-          <td>{row.name}</td>
-          <td>{row.description}</td>
-          <td>{row.category}</td>
-          <td>{row.done.toString()}</td>
-          <td>
-            <Form>
-              <Form.Check type={"checkbox"} id={"compelted"} />
-            </Form>
-          </td>
-          <td>{row.deadline}</td>
-          <td>
-            <Button>Delete</Button>
-          </td>
+          <td>{task.name}</td>
+          <td>{task.description}</td>
+          <td>{task.category}</td>
         </tr>
       );
     });
-
+    if (todo) {
+      return (
+        <div className={styles["table-responsive"]}>
+          <Table striped hover>
+            <thead>
+              <tr>
+                <th>Item Name</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Complete</th>
+              </tr>
+            </thead>
+            <tbody>{rows}</tbody>
+          </Table>
+        </div>
+      );
+    }
     return (
       <div className={styles["table-responsive"]}>
         <Table striped hover>
@@ -49,8 +71,6 @@ function TaskTable(params: { tasks: ITask[] }) {
               <th>Item Name</th>
               <th>Description</th>
               <th>Category</th>
-              <th>Completed</th>
-              <th>Remove</th>
             </tr>
           </thead>
           <tbody>{rows}</tbody>
@@ -60,9 +80,9 @@ function TaskTable(params: { tasks: ITask[] }) {
   };
 
   return (
-    <Container>
+    <Container className={styles.tableComponent}>
       <TableTitle />
-      <TableBody tasks={tasks} />
+      <TableBody tasks={tasks} todo={params.todo} />
     </Container>
   );
 }
