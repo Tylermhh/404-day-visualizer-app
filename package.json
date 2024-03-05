@@ -4,8 +4,9 @@
   "description": "todo/day-analyzer app",
   "main": "index.js",
   "scripts": {
+    "lint": "npx eslint . && npx prettier --check .",
     "start": "npm -w ./packages/react-frontend start",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npx jest",
     "dev": "tsc && node dist/express-backend/server.js && node dist/react-frontend/"
   },
   "keywords": [],
@@ -20,12 +21,14 @@
   },
   "dependencies": {
     "@types/react-router-dom": "^5.3.3",
+    "@types/styled-components": "^5.1.34",
     "create-react-app": "^5.0.1",
     "date-fns": "^3.3.1",
     "dotenv": "^16.4.4",
     "express": "^4.18.2",
     "mongoose": "^8.1.3",
     "react-router-dom": "^6.22.1",
+    "styled-components": "^6.1.8",
     "typescript": "^5.3.3"
   },
   "workspaces": [

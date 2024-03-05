@@ -11,9 +11,13 @@ app.get("/", (req: Request, res: Response) => {
 
 app.use(express.json());
 
-app.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
-})
+// app.listen(port, () => {
+//   console.log(`Server listening on port ${port}`);
+// })
+
+app.listen(process.env.PORT || port, () => {
+  console.log("REST API is listening.");
+});
 
 app.post("/task", async (req: Request, res: Response) => {
   const task = req.body;
