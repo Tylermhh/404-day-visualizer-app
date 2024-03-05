@@ -110,7 +110,7 @@ const HomePage: React.FC<{}> = () => {
         return i !== index;
     });
 
-    let temp = tasks;
+    console.log(tasks.length)
     
     setTasks(updated);
   }
