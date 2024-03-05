@@ -1,12 +1,28 @@
 export interface Task {
-    item_name: string;
+    _id: string;
+    name: string;
+    userID: string;
+    description?: string;
     category: string;
-    completed: boolean;
+    priority?: string;
+    datesUpdated: DateEntry[];
+    done: boolean;
+    deadline?: Date;
 }
 
-export interface CategoryProgress {
-    category_name: string;
+export interface DateEntry {
+    date: Date;
     hours: number;
+};
+
+export interface CategoryProgress {
+    name?: string;
+    hours: number;
+    color?: string;
+}
+
+export interface Category {
+    name: string;
     color: string;
 }
 

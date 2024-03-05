@@ -1,8 +1,8 @@
 .navbar {
     width: 100%;
-    height: 75px;
+    height: 70px;
     background: #5F6E96;
-    border-bottom: 1px solid #555;
+    /* border-bottom: 1px solid #555; */
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -16,6 +16,13 @@
     margin-left: 80px;
 }
 
+.logo-container a {
+    font-weight: 500;
+    font-size: x-large;
+    color: black;
+    cursor: pointer;
+}
+
 .links-container {
     width: 300px;
     display:flex;
@@ -24,10 +31,11 @@
 
 .links a {
     text-decoration: none;
-    color: rgb(202, 199, 39);
+    color: black;
 }
 
 .links a:hover {
     text-decoration: none;
-    color:rgba(202, 199, 39, 0.8);
+    /*color:rgba(121, 119, 188, 0.5);*/
+    color: white;
 }
