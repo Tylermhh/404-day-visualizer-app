@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './Nav.module.css';
-import { Button, Container, Nav, Navbar, Modal} from 'react-bootstrap';
+import { Button, Container, Nav, Navbar} from 'react-bootstrap';
 import * as data from './links.json'
 import SignUpModal from '../Modals/SignUpModal';
 import LoginModal from '../Modals/LoginModal';
@@ -41,7 +41,7 @@ const LandingNav: React.FC<{}> = () => {
         <Navbar expand="lg" className = {styles.navbar}>
             <Container>
                 <div className = {styles['logo-container']}>
-                    <a className="navbar-brand" href="">
+                    <a className="navbar-brand" href="https://thankful-dune-0d41a831e.5.azurestaticapps.net/">
                         TaskCraft
                     </a>
                 </div>

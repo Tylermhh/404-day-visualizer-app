@@ -1,28 +1,28 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import styles from "./Page.module.css";
-import Nav from "./Nav/Nav";
+// import Nav from "./Nav/Nav";
 import LandingNav from "./Nav/LoginNav";
 import { Container, Col, Row, Stack } from 'react-bootstrap';
 
 function Main() {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
-    const goToAuthenticationPageComp = () => {
-        navigate('/auth');
-    };
+    // const goToAuthenticationPageComp = () => {
+    //     navigate('/auth');
+    // };
 
-    const goToHomePageComp = () => {
-        navigate('/home');
-    };
+    // const goToHomePageComp = () => {
+    //     navigate('/home');
+    // };
 
-    const goToTaskPageComp = () => {
-        navigate('/task');
-    };
+    // const goToTaskPageComp = () => {
+    //     navigate('/task');
+    // };
 
-    const goToVisualizePageComp = () => {
-        navigate('/visualize');
-    }
+    // const goToVisualizePageComp = () => {
+    //     navigate('/visualize');
+    // }
     
     return (
     <div className = {styles['table-responsive']}>
