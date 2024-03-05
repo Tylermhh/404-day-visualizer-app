@@ -6,8 +6,8 @@ import * as data from './links.json'
 import SignUpModal from '../Modals/SignUpModal';
 import LoginModal from '../Modals/LoginModal';
 
-const linksString = JSON.stringify(data)
-const links = JSON.parse(linksString).links;
+// const linksString = JSON.stringify(data)
+// const links = JSON.parse(linksString).links;
 
 // type Link = {
 //     label: string;
