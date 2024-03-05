@@ -34,20 +34,50 @@ Planned feature
 
 #### Get today's tasks - GET /task/{user_id}
 #### Get specific day's tasks - GET /task/{user_id}/{datetime}
+- Example usage:
+`/task/1/?startDate=2024-02-25&endDate=2024-02-29`
 - Response Body:
 ```json
 {
-    "tasks": [
+    "done": [
         {
-              "_id": "string",
-              "name": "string",
-              "userId": "string",
-              "description": "string",
-              "deadline": "string",
-              "done": "boolean"
-        }, ...
+            "_id": "string",
+            "name": "string",
+            "userID": "string",
+            "description": "string",
+            "category": "string",
+            "priority": "string",
+            "createdAt": "datetime string",
+            "done": "true",
+            "deadline": "datetime string",
+            "datesUpdated": [
+                {
+                    "date": "datetime string",
+                    "hours": "float"
+                }
+            ]
+        }
+    ],
+    "notDone": [
+        {
+            "_id": "string",
+            "name": "string",
+            "userID": "string",
+            "description": "string",
+            "category": "string",
+            "priority": "string",
+            "createdAt": "datetime string",
+            "done": "false",
+            "deadline": "datetime string",
+            "datesUpdated": [
+                {
+                    "date": "datetime string",
+                    "hours": "float"
+                }
+            ]
+        }
     ]
-    }
+}
 ```
 #### Create new task - POST /task
 - Request Body:
@@ -63,7 +93,7 @@ Planned feature
 ```
 - Response Body:
 ```
-Status 201
+Status 201 & created resource
 ```
 #### Update a task - PUT /task/{task_id}
 - Response:
