@@ -1,6 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 
 export type IUser = {
+  _id: string;
   username: string;
   password: string;
   categories: ICategory[];
