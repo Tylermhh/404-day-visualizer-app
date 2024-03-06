@@ -1,5 +1,5 @@
-import * as bcrypt from "bcrypt";
-import * as jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 import * as dotenv from 'dotenv';
 import { Request, Response, NextFunction } from 'express';
 
@@ -8,6 +8,7 @@ const creds: { username: any; hashedPassword: string; }[] = [];
   
 
   export function registerUser(req: Request, res: Response) {
+    console.log(req.body);
     const { username, pwd } = req.body; // from form
   
     if (!username || !pwd) {
