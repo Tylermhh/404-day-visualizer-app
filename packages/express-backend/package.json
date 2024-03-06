@@ -5,7 +5,6 @@
   "main": "server.js",
   "scripts": {
     "start": "tsc ./server.ts && node ./server.js",
-    "build": "tsc ./server.ts",
     "test": "echo \"Error: no test specified\"",
     "lint": "eslint --ext=.jsx,.js,.tsx,.ts"
   },
