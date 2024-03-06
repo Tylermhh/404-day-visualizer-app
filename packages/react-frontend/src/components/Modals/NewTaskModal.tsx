@@ -2,8 +2,7 @@ import { useState } from 'react';
 import { Form } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import NewTaskForm from '../Forms/NewTaskForm';
-// import Task from "../Forms/NewTaskForm";
+// import NewTaskForm from '../Forms/NewTaskForm';
 import { Task } from '../../types/types';
 
 function NewTaskModal() {
