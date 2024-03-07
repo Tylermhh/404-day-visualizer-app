@@ -77,7 +77,9 @@ function Task() {
 
   return (
     <div className="App">
-      <MainNav />
+      <MainNav 
+        page = { "Task" }
+      />
       <header className={styles.pageTitle}>Task Page</header>
       <TaskTable
         name="Tasks To Do"

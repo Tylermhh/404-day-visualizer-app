@@ -194,7 +194,9 @@ const HomePage: React.FC<{}> = () => {
 
   return (
     <div>
-      <MainNav />
+      <MainNav 
+        page = { "Home" }
+      />
       <Stack gap={4}>
         <Container />
         <Container>

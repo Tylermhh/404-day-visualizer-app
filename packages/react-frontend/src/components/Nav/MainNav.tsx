@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './Nav.module.css';
-import { Container, Nav, Navbar } from 'react-bootstrap';
+import { Button, Container, Col, Row, Nav, Navbar } from 'react-bootstrap';
 import * as data from './links.json'
 
 const linksString = JSON.stringify(data)
@@ -46,6 +46,50 @@ const LandingNav: React.FC<{page : String}> = (input) => {
             </Navbar>
         )   
     } 
+
+    if((input.page === "Landing")) {
+        return (
+            <Navbar expand="lg" className = {styles.navbar}>
+                <Container>
+                    <div className = {styles['logo-container']}>
+                        <a className="navbar-brand" href="/">
+                            TaskCraft
+                        </a>
+                    </div>
+                    <Row>
+                        <Col sm={7}>
+                            <Button href={"/signup"}>
+                                Sign Up
+                            </Button>
+                        </Col>
+                        <Col sm={5}>
+                            <Button href={"/auth"}>
+                                Login
+                            </Button>
+                        </Col>
+                    </Row>
+                </Container>
+            </Navbar>
+        )
+    }
+
+    if((input.page === "SignUp") || (input.page === "Auth")) {
+        return (
+            <Navbar expand="lg" className = {styles.navbar}>
+                <Container>
+                    <div className = {styles['logo-container']}>
+                        <a className="navbar-brand" href="/">
+                            TaskCraft
+                        </a>
+                    </div>
+                    <Button href={"/"}>
+                        Back
+                    </Button>
+                </Container>
+            </Navbar>
+        )   
+    }
+
     return (
         <Navbar expand="lg" className = {styles.navbar}>
             <Container>
@@ -54,13 +98,14 @@ const LandingNav: React.FC<{page : String}> = (input) => {
                         TaskCraft
                     </a>
                 </div>
-                <Nav fill>
-                    <Links links = { links }/>
-                </Nav>
+                <div className = {styles['logo-container']}>
+                    <a className="navbar-brand">
+                        Error Nav Bar - Not Supposed to be Here
+                    </a>
+                </div>
             </Container>
         </Navbar>
     )
-    
 }
 
 export default LandingNav

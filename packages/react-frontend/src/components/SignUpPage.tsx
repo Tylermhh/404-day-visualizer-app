@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import LoginNav from "./Nav/LoginNav";
+import MainNav from "./Nav/MainNav";
 
 function Main() {
     const navigate = useNavigate();
@@ -17,7 +17,9 @@ function Main() {
  
     return (
         <div className="App">
-            <LoginNav />
+            <MainNav
+                page = { "SignUp" }
+            />
             <header className="App-header">
                 <p>Auth Page</p>
                 <button onClick={gotToHomePageComp}>

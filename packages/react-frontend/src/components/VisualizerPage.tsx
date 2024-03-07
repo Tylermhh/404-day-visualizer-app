@@ -5,7 +5,9 @@ import MainNav from "./Nav/MainNav";
 function Visualizer() {
   return (
     <div className="App">
-      <MainNav />
+      <MainNav 
+        page = { "Visualizer" }
+      />
       <header className="App-header">
         <p>Visualizer Page</p>
  

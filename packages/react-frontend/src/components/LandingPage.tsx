@@ -1,12 +1,14 @@
 import React from 'react';
 import styles from "./Page.module.css";
-import LoginNav from "./Nav/LoginNav";
+import MainNav from "./Nav/MainNav";
 import { Container, Col, Button, Row, Stack } from 'react-bootstrap';
 
 function Main() {
     return (
     <div className = {styles['table-responsive']}>
-        <LoginNav />
+        <MainNav
+            page = { "Landing" }
+        />
         <Stack gap = {3}>
             <Container />
             <Container>
