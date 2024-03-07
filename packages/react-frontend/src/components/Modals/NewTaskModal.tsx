@@ -13,7 +13,6 @@ function NewTaskModal() {
 
     return (
         <>
-
           <Button variant="outline-primary" onClick={toggleModal}>
             +
           </Button>

@@ -3,9 +3,8 @@ import HomePieChart from "./Chart/HomePieChart";
 import HomeProgressBar from "./ProgressBar/HomeProgressBar";
 import { ITask, Category } from "./../types/types";
 import { Container, Col, Row, Stack } from "react-bootstrap";
-import Table from "./Table/HomeTable"
+import TaskTable from "./Table/TaskTable";
 import LandingNav from "./Nav/LoginNav";
-
 import "./Page.module.css"
 
 let tempTasks: ITask[] = [
@@ -188,13 +187,6 @@ const HomePage: React.FC<{}> = () => {
     setTasks(updated);
   }
 
-  let toDoTasks = [];
-  for (let i = 0; i < tempTasks.length; i++) {
-    if (!tempTasks[i].done) {
-      toDoTasks.push(tempTasks[i]);
-    }
-  }
-
   return (
     <div>
       <LandingNav />
@@ -203,9 +195,11 @@ const HomePage: React.FC<{}> = () => {
         <Container>
           <Row>
             <Col sm={9}>
-            <Table 
-                taskData = {tempTasks}
-                removeTask={removeTask}
+            <TaskTable
+                name="To-Do List"
+                todo={false}
+                page="HomePage"
+                tasks={tempTasks}
               />
             </Col>
             <Col sm={3}>

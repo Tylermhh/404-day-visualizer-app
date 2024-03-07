@@ -3,7 +3,7 @@ export interface CategoryProgress {
     hours: number;
     color?: string;
 }
-
+ 
 export interface Category {
     name: string;
     color: string;

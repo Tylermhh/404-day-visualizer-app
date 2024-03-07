@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from "./Table.module.css";
 import { Button, Col, Form, Row, Table} from 'react-bootstrap';
-import {ITask} from "./../../types/types";
+import { ITask } from "./../../types/types";
 import NewTaskModal from '../Modals/NewTaskModal';
 
 const TableTitle: React.FC<{}> = () => {
