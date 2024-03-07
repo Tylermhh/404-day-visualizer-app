@@ -1,6 +1,6 @@
 import React from 'react'
 import { PieChart, Pie, Cell } from 'recharts';
-import { Task, Category, CategoryProgress, DateEntry } from '../../types/types';
+import { ITask, Category, CategoryProgress, IDateEntry } from '../../types/types';
 
 const RADIAN = Math.PI / 180;
 const renderCustomizedLabel: React.FC<{cx: number , cy: number, midAngle: number, innerRadius: number, outerRadius: number, category: string, hours: number}> 
@@ -17,7 +17,7 @@ const renderCustomizedLabel: React.FC<{cx: number , cy: number, midAngle: number
     )
 }
 
-function calculateTaskHours(taskDateEntries : DateEntry[]): number {
+function calculateTaskHours(taskDateEntries : IDateEntry[]): number {
 
     let taskHours = 0;
 
@@ -28,7 +28,7 @@ function calculateTaskHours(taskDateEntries : DateEntry[]): number {
     return taskHours;
 }
 
-function calculateCategoryProgress(tasks : Task[], categories : Category[]): CategoryProgress[] {
+function calculateCategoryProgress(tasks : ITask[], categories : Category[]): CategoryProgress[] {
 
     let category_progress: CategoryProgress[] = [];
 
@@ -43,14 +43,14 @@ function calculateCategoryProgress(tasks : Task[], categories : Category[]): Cat
             if (object.name === task.category) {
                 object.hours += calculateTaskHours(task.datesUpdated);
             }
-        }
+        }   
     }
     
     return category_progress;
 }
 
-const HomePieChart: React.FC<{tasks : Task[], categories : Category[]}> = (input) => {
-    
+const HomePieChart: React.FC<{tasks : ITask[], categories : Category[]}> = (input) => {
+        
     let category_progress: CategoryProgress[] = calculateCategoryProgress(input.tasks, input.categories);
 
     return (

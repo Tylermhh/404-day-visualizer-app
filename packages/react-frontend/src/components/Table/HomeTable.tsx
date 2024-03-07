@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from "./Table.module.css";
 import { Button, Col, Form, Row, Table} from 'react-bootstrap';
-import {Task} from "./../../types/types";
+import {ITask} from "./../../types/types";
 import NewTaskModal from '../Modals/NewTaskModal';
 
 const TableTitle: React.FC<{}> = () => {
@@ -21,7 +21,7 @@ const TableTitle: React.FC<{}> = () => {
   )
 }
 
-const TableBody: React.FC<{taskData : Task[], removeTask: (index: number) => void}> = ({taskData, removeTask}) => {
+const TableBody: React.FC<{taskData : ITask[], removeTask: (index: number) => void}> = ({taskData, removeTask}) => {
   const rows = taskData.map((row: any, index: any) => {
       return (
         <tr>
@@ -63,7 +63,7 @@ const TableBody: React.FC<{taskData : Task[], removeTask: (index: number) => voi
   );
 }
 
-const HomeTable: React.FC<{taskData : Task[], removeTask: (index: number) => void}> = (input) => {
+const HomeTable: React.FC<{taskData : ITask[], removeTask: (index: number) => void}> = (input) => {
   return (
     <div>
       <TableTitle/>
