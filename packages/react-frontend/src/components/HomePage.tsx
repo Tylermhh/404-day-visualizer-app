@@ -4,7 +4,7 @@ import HomeProgressBar from "./ProgressBar/HomeProgressBar";
 import { ITask, Category } from "./../types/types";
 import { Container, Col, Row, Stack } from "react-bootstrap";
 import TaskTable from "./Table/TaskTable";
-import LandingNav from "./Nav/LoginNav";
+import MainNav from "./Nav/MainNav";
 
 let tempTasks: ITask[] = [
   {
@@ -194,7 +194,7 @@ const HomePage: React.FC<{}> = () => {
 
   return (
     <div>
-      <LandingNav />
+      <MainNav />
       <Stack gap={4}>
         <Container />
         <Container>

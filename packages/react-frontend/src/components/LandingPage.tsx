@@ -1,14 +1,13 @@
 import React from 'react';
 import styles from "./Page.module.css";
-import LandingNav from "./Nav/LoginNav";
-import { Container, Col, Row, Stack } from 'react-bootstrap';
+import LoginNav from "./Nav/LoginNav";
+import { Container, Col, Button, Row, Stack } from 'react-bootstrap';
 
 function Main() {
     return (
     <div className = {styles['table-responsive']}>
-        <LandingNav />
+        <LoginNav />
         <Stack gap = {3}>
-            <Container />
             <Container />
             <Container>
                 <Row>
@@ -32,25 +31,6 @@ function Main() {
                             Unlike built-in “to-do lists” our product analyzes how long each item took you to visualize 
                             how you spent your time that day and motivates you to be more productive.
                         </h4>
-                    </Col>
-                </Row>
-            </Container>
-            <Container>
-                <Row>
-                    <Col sm={4}>
-                        <h1>
-                            Images of app
-                        </h1>
-                    </Col>
-                    <Col sm={4}>
-                        <h1>
-                            Images of app
-                        </h1>
-                    </Col>
-                    <Col sm={4}>
-                        <h1>
-                            Images of app
-                        </h1>
                     </Col>
                 </Row>
             </Container>

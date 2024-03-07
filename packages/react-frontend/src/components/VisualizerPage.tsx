@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import LandingNav from "./Nav/LoginNav";
+import MainNav from "./Nav/MainNav";
  
 function Visualizer() {
   return (
     <div className="App">
-      <LandingNav />
+      <MainNav />
       <header className="App-header">
         <p>Visualizer Page</p>
  
