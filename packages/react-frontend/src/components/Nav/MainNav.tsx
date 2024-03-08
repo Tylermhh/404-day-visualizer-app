@@ -88,7 +88,7 @@ const LandingNav: React.FC<{page : String}> = (input) => {
                 </Container>
             </Navbar>
         )   
-    }
+    } 
 
     return (
         <Navbar expand="lg" className = {styles.navbar}>

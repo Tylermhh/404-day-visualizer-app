@@ -6,17 +6,6 @@ import { Button, Container, Col, Row, Form } from "react-bootstrap";
 function Main() {
     const navigate = useNavigate();
  
-    const goToTaskPageComp = () => {
- 
-        // This will navigate to second component
-        navigate('/task');
-    };
-    const gotToHomePageComp = () => {
- 
-        // This will navigate to first component
-        navigate('/home');
-    };
- 
     return (
         <div className="App">
             <MainNav

@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from "./Page.module.css";
 import MainNav from "./Nav/MainNav";
-import { Container, Col, Button, Row, Stack } from 'react-bootstrap';
+import { Container, Col, Row, Stack } from 'react-bootstrap';
 
 function Main() {
     return (
