@@ -4,9 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "tsc ./server.ts && node ./server.js",
+    "start": "node ./server.js",
     "test": "echo \"Error: no test specified\"",
-    "lint": "eslint --ext=.jsx,.js,.tsx,.ts"
+    "lint": "eslint --ext=.jsx,.js"
   },
   "author": "",
   "license": "ISC",
@@ -17,12 +17,10 @@
     "bcrypt": "^5.1.1",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.1.2",
-    "typescript": "^5.3.3"
+    "mongoose": "^8.1.2"
   },
   "devDependencies": {
-    "@types/bcrypt": "^5.0.2",
-    "@types/jsonwebtoken": "^9.0.6",
     "date-fns": "^3.3.1"
   }
 }
+
