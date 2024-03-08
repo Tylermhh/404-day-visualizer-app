@@ -1,5 +1,6 @@
-{
+/*{
   "compilerOptions": {
+    "jsx": "react-jsx",
     "target": "es6",
     "module": "ES2020",
     "strict": true,
@@ -17,3 +18,4 @@
   },
   "exclude": ["node_modules", "dist"]
 }
+*/
