@@ -1,8 +1,10 @@
-// import React from "react";
+// import { useState, useEffect } from "react";
 import LandingNav from "./Nav/LoginNav";
 import TaskTable from "./Table/TaskTable";
 import { ITask } from "./../types/types";
 import styles from "./Page.module.css";
+// import { getTasks } from "../api/TaskHooks";
+// import userID from "./User";
 
 let tempTasks: ITask[] = [
   {
@@ -65,6 +67,21 @@ let tempTasks: ITask[] = [
 ];
 
 function Task() {
+  // const [doneTasksList, setDoneTasksList] = useState([]);
+  // const [toDoTasksList, setToDoTasksList] = useState([]);
+
+  // useEffect(() => {
+  //   getTasks(userID, new Date(), new Date())
+  //     .then(res => res.json())
+  //     .then(json => {
+  //       setToDoTasksList(json.notDone);
+  //       setDoneTasksList(json.done);
+  //     })
+  //     .catch(error => {
+  //       console.log(error);
+  //     });
+  // }, []);
+
   let completedTasks = [];
   let toDoTasks = [];
   for (let i = 0; i < tempTasks.length; i++) {
@@ -83,12 +100,14 @@ function Task() {
         name="Tasks To Do"
         todo={true}
         page="TaskPage"
+        // tasks={toDoTasksList}
         tasks={toDoTasks}
       />
       <TaskTable
         name="Tasks Completed"
         todo={false}
         page="TaskPage"
+        // tasks={doneTasksList}
         tasks={completedTasks}
       />
     </div>

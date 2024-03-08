@@ -5,8 +5,8 @@ dotenv.config();
 const url: string = process.env.BACKEND_URL as string;
 
 // hook to get Tasks
-export function getTasks(id: string, start: Date, end: Date) {
-  const promise = fetch(`${url}/${id}/?startDate=${start}&endDate=${end}`);
+export function getTasks(userID: string, start: Date, end: Date) {
+  const promise = fetch(`${url}/${userID}/?startDate=${start}&endDate=${end}`);
   return promise;
 }
 
