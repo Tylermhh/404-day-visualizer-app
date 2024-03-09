@@ -86,7 +86,7 @@ export const loginUser = async (req, res) => {
 
     const matched = await bcrypt.compare(pwd, retrievedUser.hashedPassword);
     if (matched) {
-      console.log("Token secret:", process.env.TOKEN_SECRET); // Debug log
+      // console.log("Token secret:", process.env.TOKEN_SECRET); // Debug log
       const token = jwt.sign(
         { username: retrievedUser.username, id: retrievedUser._id },
         process.env.TOKEN_SECRET,
