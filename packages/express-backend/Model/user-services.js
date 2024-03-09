@@ -27,15 +27,3 @@ export const addUser = async user => {
   const savedUser = await userToAdd.save()
   return savedUser
 }
-
-export const findUserByName = async name => {
-  await connectDB()
-  const users = await userModel.find({ name })
-  return users
-}
-
-export const findUserByJob = async job => {
-  await connectDB()
-  const users = await userModel.find({ job })
-  return users
-}
