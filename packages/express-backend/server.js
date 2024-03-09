@@ -6,6 +6,9 @@ import {
   findTaskById
 } from "./Model/task-services.js"
 import { addUser, getUsers, findUserById } from "./Model/user-services.js"
+import { registerUser, loginUser } from "./Model/auth.js";
+import dotenv from 'dotenv';
+dotenv.config({ path: '../../.env' });
 
 const port = 8000
 const app = express()
@@ -118,5 +121,5 @@ app.get("/user/:id", async (req, res) => {
   }
 })
 
-app.post("/signup", registerUser)
-app.post("/login", registerUser)
+app.post("/users/register", registerUser)
+app.post("/users/login", loginUser)
