@@ -6,21 +6,22 @@
   "scripts": {
     "start": "node server.js",
     "test": "echo \"Error: no test specified\"",
-    "lint": "eslint --ext=.jsx,.js"
+    "lint": "eslint --ext=.jsx,.js",
+    "dev": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
   "esModuleInterop": true,
   "type": "module",
   "dependencies": {
-    "dotenv": "^16.4.3",
     "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.3",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.1.2"
   },
   "devDependencies": {
-    "date-fns": "^3.3.1"
+    "date-fns": "^3.3.1",
+    "nodemon": "^3.1.0"
   }
 }
-
