@@ -39,6 +39,11 @@ function Main() {
                     <Col sm={3}>
                     </Col>
                 </Row>
+                <Row>
+                    <Button variant="primary" size="lg">
+                        Block level button
+                    </Button>
+                </Row>
             </Container>
         </div>
     );
