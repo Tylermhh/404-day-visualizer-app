@@ -5,7 +5,7 @@ function Main() {
     return (
         <div className="App">
             <MainNav
-                page = { "Auth" }
+                page = { "SignUp" }
             />
             <Stack gap = {5}>
                 <Container />
@@ -28,6 +28,9 @@ function Main() {
                                     <Form.Control 
                                         type="password"
                                         placeholder="Password"/>
+                                    <Form.Text id="passwordHelpBlock" muted>
+                                        Your password must be 8-20 characters long.
+                                    </Form.Text>
                                 </Form.Group>
                             </Form>
                         </Col>
