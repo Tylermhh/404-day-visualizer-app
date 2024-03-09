@@ -19,29 +19,35 @@ export const createTask = async task => {
   return promise
 }
 
-export const getTasks = async (userId, date) => {
+// no date -> All user's tasks
+// date -> Always passed to view day's tasks
+// stretch -> Date Range
+
+export const getTasks = async (userId, startDate, endDate, category, done) => {
   await connectDB()
   let promise
 
-  // Today
-  if (date === undefined) {
+  // category specified
+  if (category != undefined) {
     promise = taskModel.find({
       userID: userId,
       createdAt: {
-        $gte: startOfDay(new Date()),
-        $lte: endOfDay(new Date())
+        $gte: startOfDay(startDate),
+        $lte: endOfDay(endDate)
       },
-      done: false
+      category: category,
+      done: done
     })
+
+    // all categories
   } else {
-    // Specific Day
     promise = taskModel.find({
       userID: userId,
       createdAt: {
-        $gte: startOfDay(date),
-        $lte: endOfDay(date)
+        $gte: startOfDay(startDate),
+        $lte: endOfDay(endDate)
       },
-      done: false
+      done: done
     })
   }
 
