@@ -2,6 +2,7 @@ import express from 'express';
 import { addUser, getUsers, findUserById } from "../Model/user-services.js"
 
 const router = express.Router();
+const app = express();
 
 router.post("/user", async (req, res) => {
     try {
@@ -19,7 +20,7 @@ router.post("/user", async (req, res) => {
     }
   })
   
-  router.get("/users", async (req, res) => {
+  app.get("/users", async (req, res) => {
     const { name, job } = req.query
   
     try {
