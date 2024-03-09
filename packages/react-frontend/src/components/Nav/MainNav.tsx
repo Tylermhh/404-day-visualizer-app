@@ -99,9 +99,7 @@ const LandingNav: React.FC<{page : String}> = (input) => {
                     </a>
                 </div>
                 <div className = {styles['logo-container']}>
-                    <a className="navbar-brand">
-                        Error Nav Bar - Not Supposed to be Here
-                    </a>
+                    Error Nav Bar - Not Supposed to be Here
                 </div>
             </Container>
         </Navbar>
