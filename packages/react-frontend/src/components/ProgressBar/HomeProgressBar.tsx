@@ -1,11 +1,11 @@
 import React from 'react'
 import ProgressBar from 'react-bootstrap/ProgressBar';
-import {Task} from "./../../types/types";
+import {ITask} from "./../../types/types";
 
-const ProgressMade: React.FC<{taskData : Task[]}> = (input) => {
+const ProgressMade: React.FC<{taskData : ITask[]}> = (input) => {
 
     const totalProgress = input.taskData.length
-    const progress = input.taskData.reduce((a, item) => a + (item.completed === true ? 1 : 0) , 0)
+    const progress = input.taskData.reduce((a, item) => a + (item.done === true ? 1 : 0) , 0)
 
     const now = ((progress / totalProgress) * 100)
     
@@ -16,7 +16,7 @@ const ProgressMade: React.FC<{taskData : Task[]}> = (input) => {
     )
 }
 
-const HomeProgressBar: React.FC<{taskData : Task[]}> = (input) => {
+const HomeProgressBar: React.FC<{taskData : ITask[]}> = (input) => {
     return (
         <div>
             <h5>
