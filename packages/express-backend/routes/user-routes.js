@@ -20,33 +20,33 @@ router.post("/user", async (req, res) => {
     }
   })
   
-  app.get("/users", async (req, res) => {
-    const { name, job } = req.query
+app.get("/users", async (req, res) => {
+  const { name, job } = req.query
   
-    try {
-      const users = await getUsers(name, job)
-      res.status(200).send(users)
-    } catch (error) {
-      console.error(error)
-      res.status(500).send("Error fetching users.")
+  try {
+    const users = await getUsers(name, job)
+    res.status(200).send(users)
+  } catch (error) {
+    console.error(error)
+    res.status(500).send("Error fetching users.")
+  }
+})
+  
+router.get("/user/:id", async (req, res) => {
+  const id = req.params["id"]
+
+  try {
+    const user = await findUserById(id)
+  
+    if (user) {
+      res.status(200).send(user)
+    } else {
+      res.status(404).send("User not found.")
     }
-  })
-  
-  router.get("/user/:id", async (req, res) => {
-    const id = req.params["id"]
-  
-    try {
-      const user = await findUserById(id)
-  
-      if (user) {
-        res.status(200).send(user)
-      } else {
-        res.status(404).send("User not found.")
-      }
-    } catch (error) {
-      console.error(error)
-      res.status(500).send("Error fetching user.")
-    }
-  })
+  } catch (error) {
+    console.error(error)
+    res.status(500).send("Error fetching user.")
+  }
+})
 
   export default router;
