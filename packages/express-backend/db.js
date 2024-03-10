@@ -9,7 +9,7 @@ let connection
 const connectDB = async () => {
   if (!connection) {
     console.log("Connected to MongoDB")
-    connection = await mongoose.connect(urlString)
+    connection = await mongoose.connect(url || urlString)
     return connection
   }
   console.log("Connected to MongoDB")
