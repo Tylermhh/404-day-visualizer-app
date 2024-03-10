@@ -16,12 +16,9 @@ app.get("/", (req, res) => {
 
 app.use(express.json())
 
-// app.listen(port, () => {
-//   console.log(`Server listening on port ${port}`);
-// })
-
 app.listen(process.env.PORT || port, () => {
-  console.log("REST API is listening.")
+  console.log("REST API is listening.");
+  // console.log(`Example app listening at http://localhost:${port}`);
 })
 
 app.use("/task", taskRoutes)

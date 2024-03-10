@@ -4,7 +4,7 @@ import { addUser, getUsers, findUserById } from "../Model/user-services.js"
 const router = express.Router();
 const app = express();
 
-router.post("/user", async (req, res) => {
+router.post("/", async (req, res) => {
     try {
       const user = req.body
       const savedUser = await addUser(user)
@@ -20,7 +20,7 @@ router.post("/user", async (req, res) => {
     }
   })
   
-app.get("/users", async (req, res) => {
+router.get("/", async (req, res) => {
   const { name, job } = req.query
   
   try {
@@ -32,7 +32,7 @@ app.get("/users", async (req, res) => {
   }
 })
   
-router.get("/user/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
   const id = req.params["id"]
 
   try {
@@ -45,7 +45,7 @@ router.get("/user/:id", async (req, res) => {
     }
   } catch (error) {
     console.error(error)
-    res.status(500).send("Error fetching user.")
+    res.status(500).send("Error fetching user with id.")
   }
 })
 
