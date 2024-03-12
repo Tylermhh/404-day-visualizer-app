@@ -1,9 +1,10 @@
 // import React from "react";
+"use client";
+import { getTasks } from "../api/TaskHooks";
 import MainNav from "./Nav/MainNav";
 import TaskTable from "./Table/TaskTable";
 import { Category, ITask } from "./../types/types";
 import styles from "./Page.module.css";
-// import { getTasks } from "../api/TaskHooks";
 // import userID from "./User";
 
 let tempTasks: ITask[] = [
@@ -90,6 +91,14 @@ function Task() {
   //     });
   // }, []);
 
+  getTasks("65d1d1bfe907b971e50b2cca", new Date(), new Date())
+    .then(tasks => {
+      console.log(tasks);
+    })
+    .catch(err => {
+      console.error(err);
+    });
+
   let completedTasks = [];
   let toDoTasks = [];
   for (let i = 0; i < tempTasks.length; i++) {
@@ -102,9 +111,7 @@ function Task() {
 
   return (
     <div className="App">
-      <MainNav 
-        page = { "Task" }
-      />
+      <MainNav page={"Task"} />
       <header className={styles.pageTitle}>Task Page</header>
       <TaskTable
         name="Tasks To Do"
