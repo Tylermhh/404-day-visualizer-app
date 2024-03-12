@@ -144,32 +144,6 @@ const NewTaskModal: React.FC<{tasks : ITask[], categories : Category[]}> = (inpu
                 </Form.Group>
 
               </Form>
-
-              {/* <form>
-                <Form.Group className='mb-3' controlId='formItemName' onChange={handleChange}>
-                  <Form.Label>Item Name</Form.Label>
-                  <input
-                    type="text"
-                    name="name"
-                    id="name"
-                    value={newTask.name}
-                    onChange={handleChange}
-                  />
-                </Form.Group>
-                <Form.Group className='mb-3' controlId='formItemName' onChange={handleChange}>
-                  <Form.Label>Description</Form.Label>
-                  <input
-                    type="text"
-                    name="description"
-                    id="description"
-                    value={newTask.description}
-                    onChange={handleChange}
-                  />
-                  <input type="button" value="Submit" onClick={handleSubmit} />
-                </Form.Group>
-              </form> */}
-
-
             </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={toggleModal}>
