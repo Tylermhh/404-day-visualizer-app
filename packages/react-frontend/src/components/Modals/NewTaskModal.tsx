@@ -3,11 +3,21 @@ import { DropdownDivider, Form } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 // import NewTaskForm from '../Forms/NewTaskForm';
-import { Category, ITask, Task } from '../../types/types';
+import { Category, ITask, Task, IDateEntry } from '../../types/types';
 
 const NewTaskModal: React.FC<{tasks : ITask[], categories : Category[]}> = (input) => {
 
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [newTask, setNewTask] = useState({
+    name: "",
+    userID: "",
+    description: "",
+    category: "",
+    createdAt: Date,
+    datesUpdated: [null, null],
+    done: false,
+    deadline: Date,
+  });
   // const [characters, setCharacters] = useState();
 
   const toggleModal = () => {
@@ -72,7 +82,7 @@ const NewTaskModal: React.FC<{tasks : ITask[], categories : Category[]}> = (inpu
 
                 <Form.Group className='mb-3' controlId='formItemDescription'>
                   <Form.Label>Description</Form.Label>
-                  <Form.Control type="dropdown" placeholder="Some more details" />
+                  <Form.Control type="description" placeholder="Some more details" />
                 </Form.Group>
 
                 <Form.Group className='mb-3' controlId='formItemDeadline'>
@@ -91,7 +101,7 @@ const NewTaskModal: React.FC<{tasks : ITask[], categories : Category[]}> = (inpu
                   })} */}
                   <Form.Select >
                     {input.categories.map((entry, index) => (
-                      <option>{entry.name}</option>
+                      <option value={entry.name}>{entry.name}</option>
                     ))}    
                     <DropdownDivider></DropdownDivider>
                     <option>Add new category</option>             
