@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import MainNav from "./Nav/MainNav";
-import { Container, Col, Dropdown, DropdownButton, Form, Row, Stack } from 'react-bootstrap';
+import { Container, Col, Form, Row, Stack } from 'react-bootstrap';
 import VisualizerNumberTasksPerCategoryPieChart from "./Chart/VisualizerNumberTasksPerCategoryPieChart"
 import {tempTasks, userCategories} from "./../TempData"
 
 function VisualizerType(value : any) {
-  if (value.toString() === '1') {
+  if (value.value === '1') {
     return <VisualizerNumberTasksPerCategoryPieChart tasks={tempTasks} categories={userCategories} />
   } else {
     return (
-      <Container className="d-flex justify-content-center">
-        <VisualizerNumberTasksPerCategoryPieChart tasks={tempTasks} categories={userCategories} />;
-      </Container>
+      <text>
+        {`Visualization ${value.value}`}
+      </text>
     )
   }
 }
@@ -22,7 +22,7 @@ function Visualizer() {
   const [value, setValue] = useState('');
   const handleSelect=(e : any)=>{
     console.log(e);
-    setValue(e.toString())
+    setValue(e.target.value)
   }
 
   return (
@@ -35,14 +35,12 @@ function Visualizer() {
         <Container>
           <Row>
             <Col sm={4}>
-              <DropdownButton id="dropdown-item-button" title="Visualization Method" onSelect={handleSelect}>
-                <Dropdown.Item eventKey="1">
-                  Number of Tasks / Category
-                </Dropdown.Item>
-                <Dropdown.Item eventKey="2" as="button">
-                  Hours / Task
-                </Dropdown.Item>
-              </DropdownButton>
+              <Form>
+                <Form.Select value={value} onChange={handleSelect}>
+                  <option value="1">Number of Tasks / Category</option>
+                  <option value="2">Hours / Task</option>
+                </Form.Select>
+              </Form>
             </Col>
             <Col sm={4}>
               <Form>
@@ -59,7 +57,9 @@ function Visualizer() {
         </Container>
         <Container>
           <Row>
-            <VisualizerType value={value}/>
+            <Container className="d-flex justify-content-center">
+              <VisualizerType value={value}/>
+            </Container>
           </Row>
         </Container>
       </Stack>
