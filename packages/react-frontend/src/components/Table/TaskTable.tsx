@@ -13,7 +13,7 @@ function TaskTable(params: {
 }) {
   let tasks = params.tasks;
 
-  const TableTitle: React.FC<{}> = () => {
+  const TableTitle: React.FC<{tasks : ITask[]}> = () => {
     if (params.todo) {
       return (
         <div>
@@ -22,7 +22,7 @@ function TaskTable(params: {
               <h2>{params.name}</h2>
             </Col>
             <Col sm={1}>
-              <NewTaskModal/>
+              <NewTaskModal tasks={tasks} />
             </Col>
           </Row>
         </div>
@@ -115,7 +115,7 @@ function TaskTable(params: {
 
   return (
     <Container className={styles.tableComponent}>
-      <TableTitle />
+      <TableTitle tasks={tasks}/>
       <TableBody tasks={tasks} todo={params.todo} />
     </Container>
   );

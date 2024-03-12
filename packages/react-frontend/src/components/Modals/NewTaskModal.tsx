@@ -3,9 +3,9 @@ import { Form } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 // import NewTaskForm from '../Forms/NewTaskForm';
-import { Task } from '../../types/types';
+import { Category, ITask, Task } from '../../types/types';
 
-function NewTaskModal() {
+const NewTaskModal: React.FC<{tasks : ITask[]}> = (input) => {
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   // const [characters, setCharacters] = useState();
@@ -47,6 +47,11 @@ function NewTaskModal() {
   //   // }
   // };
 
+    let categories: String[] = [];
+    for (let task of input.tasks) {
+      categories.push(task.category);
+    }
+
     return (
         <>
 
@@ -67,23 +72,33 @@ function NewTaskModal() {
 
                 <Form.Group className='mb-3' controlId='formItemDescription'>
                   <Form.Label>Description</Form.Label>
-                  <Form.Control type="description" placeholder="Some more details" />
+                  <Form.Control type="dropdown" placeholder="Some more details" />
                 </Form.Group>
 
                 <Form.Group className='mb-3' controlId='formItemDeadline'>
                   <Form.Label>Category</Form.Label>
-                  <Form.Select>
+                  {/* hardcoded dropdown */}
+                  {/* <Form.Select>
                     <option>Academics</option>
                     <option>Sports</option>
                     <option>Business</option>
                     <option>Fun</option>
                     <option>Add new category</option>                    
+                  </Form.Select> */}
+
+                  {/* {tasks.map((category) => {
+
+                  })} */}
+                  <Form.Select >
+                    {categories.map((entry, index) => (
+                      <option>{entry}</option>
+                    ))}                 
                   </Form.Select>
                 </Form.Group>
 
                 <Form.Group className='mb-3' controlId='formItemDeadline'>
                   <Form.Label>Deadline</Form.Label>
-                  <Form.Control type="deadline" placeholder="yyyy-mm-dd" />
+                  <Form.Control type="date"/>
                 </Form.Group>
 
               </Form>
