@@ -2,65 +2,100 @@ import { useState } from 'react';
 import { DropdownDivider, Form } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-// import NewTaskForm from '../Forms/NewTaskForm';
-import { Category, ITask, Task, IDateEntry } from '../../types/types';
+import { Category, ITask, IDateEntry } from '../../types/types';
+import { postTask } from '../../api/TaskHooks';
 
 const NewTaskModal: React.FC<{tasks : ITask[], categories : Category[]}> = (input) => {
 
+  const empty_IDateEntry: IDateEntry[] = [];
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [newTask, setNewTask] = useState({
+  const [newTask, setNewTask] = useState<ITask>({
+    _id: "",
     name: "",
     userID: "",
     description: "",
     category: "",
-    createdAt: Date,
-    datesUpdated: [null, null],
+    createdAt: new Date(),
+    datesUpdated: empty_IDateEntry,
     done: false,
-    deadline: Date,
+    deadline: new Date(),
   });
-  // const [characters, setCharacters] = useState();
+
+  const handleChange = (event: any) => {
+    const {field, value} = event.target;
+
+    switch(field){
+      case "formItemName": {
+        setNewTask({
+          _id: newTask["_id"],
+          name: value,
+          userID: newTask["userID"],
+          description: newTask["description"],
+          category: newTask["category"],
+          createdAt: newTask["createdAt"],
+          datesUpdated: newTask["datesUpdated"],
+          done: newTask["done"],
+          deadline: newTask["deadline"],
+        })
+        break;
+      }
+      case "formItemDescription": {
+        setNewTask({
+          _id: newTask["_id"],
+          name: newTask["name"],
+          userID: newTask["userID"],
+          description: value,
+          category: newTask["category"],
+          createdAt: newTask["createdAt"],
+          datesUpdated: newTask["datesUpdated"],
+          done: newTask["done"],
+          deadline: newTask["deadline"],
+        })
+        break;
+      }
+      case "formItemCategory": {
+        setNewTask({
+          _id: newTask["_id"],
+          name: newTask["name"],
+          userID: newTask["userID"],
+          description: newTask["description"],
+          category: value,
+          createdAt: newTask["createdAt"],
+          datesUpdated: newTask["datesUpdated"],
+          done: newTask["done"],
+          deadline: newTask["deadline"],
+        })
+        break;
+      }
+
+      case "formItemDeadline": {
+        setNewTask({
+          _id: newTask["_id"],
+          name: newTask["name"],
+          userID: newTask["userID"],
+          description: newTask["description"],
+          category: newTask["category"],
+          createdAt: newTask["createdAt"],
+          datesUpdated: newTask["datesUpdated"],
+          done: newTask["done"],
+          deadline: value,
+        })
+        break;
+      }
+      default: {
+        break;
+      }
+    }
+  };
+
+  const handleSubmit = () => {
+    postTask(newTask);
+    toggleModal();
+  }
 
   const toggleModal = () => {
     setIsModalVisible(!isModalVisible);
-  }
-
-  // function updateList(task) {
-  //   setCharacters([...characters, task]);
-  //   // postUser(person)
-  //   // .then((res) => { 
-  //   //   if (res.status === 201) {
-  //   //     console.log("status 201!");
-  //   //     setCharacters([...characters, res.json()])}
-  //   //   })
-  //   // .catch((error) => {
-  //   //   console.log(error);
-  //   // })
-  // }
-
-  interface UpdateListProps {
-    characters: Task[];
-    // setCharacters: React.Dispatch<React.SetStateAction<Task[]>>;
-  }
-
-  // const updateList = async (newTask: Task, { characters, setCharacters }: UpdateListProps) => {
-  //   setCharacters([...characters, newTask]);
-  //   // try {
-  //   //   const res = await postUser(person);
-  
-  //   //   if (res.status === 201) {
-  //   //     const newPerson = await res.json();
-  //   //     console.log("status 201!");
-  //   //     setCharacters([...characters, newPerson]);
-  //   //   }
-  //   // } catch (error) {
-  //   //   console.log(error);
-  //   // }
-  // };
-
-    // let categories: String[] = [];
-    // for (let task of input.tasks) {
-    //   categories.push(task.category);
-    // }
+  };
 
     return (
         <>
@@ -77,29 +112,17 @@ const NewTaskModal: React.FC<{tasks : ITask[], categories : Category[]}> = (inpu
               <Form>
                 <Form.Group className='mb-3' controlId='formItemName'>
                   <Form.Label>Item Name</Form.Label>
-                  <Form.Control type="name" placeholder="Enter Item Name" />
+                  <Form.Control type="text" placeholder="Enter Item Name" onChange={handleChange}/>
                 </Form.Group>
 
                 <Form.Group className='mb-3' controlId='formItemDescription'>
                   <Form.Label>Description</Form.Label>
-                  <Form.Control type="description" placeholder="Some more details" />
+                  <Form.Control type="text" placeholder="Some more details" onChange={handleChange}/>
                 </Form.Group>
 
-                <Form.Group className='mb-3' controlId='formItemDeadline'>
+                <Form.Group className='mb-3' controlId='formItemCategory'>
                   <Form.Label>Category</Form.Label>
-                  {/* hardcoded dropdown */}
-                  {/* <Form.Select>
-                    <option>Academics</option>
-                    <option>Sports</option>
-                    <option>Business</option>
-                    <option>Fun</option>
-                    <option>Add new category</option>                    
-                  </Form.Select> */}
-
-                  {/* {tasks.map((category) => {
-
-                  })} */}
-                  <Form.Select >
+                  <Form.Select onChange={handleChange}>
                     {input.categories.map((entry, index) => (
                       <option value={entry.name}>{entry.name}</option>
                     ))}    
@@ -110,19 +133,17 @@ const NewTaskModal: React.FC<{tasks : ITask[], categories : Category[]}> = (inpu
 
                 <Form.Group className='mb-3' controlId='formItemDeadline'>
                   <Form.Label>Deadline</Form.Label>
-                  <Form.Control type="date"/>
+                  <Form.Control type="date" onChange={handleChange}/>
                 </Form.Group>
 
               </Form>
-
-              {/* <NewTaskForm handleSubmit={updateList}/> */}
 
             </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={toggleModal}>
                 Close
               </Button>
-              <Button variant="primary" onClick={toggleModal}>
+              <Button variant="primary" onClick={handleSubmit}>
                 Save Changes
               </Button>
             </Modal.Footer>

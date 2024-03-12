@@ -1,8 +1,6 @@
-import dotenv from "dotenv";
 import { ITask } from "../types/types";
 
-dotenv.config();
-const url: string = process.env.BACKEND_URL as string;
+const url: string = "http://localhost:8000" as string;
 
 // hook to get Tasks
 export function getTasks(id: string, start: Date, end: Date) {
