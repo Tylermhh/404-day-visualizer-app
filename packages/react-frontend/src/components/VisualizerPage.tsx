@@ -1,5 +1,4 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
 import MainNav from "./Nav/MainNav";
 import { Container, Col, Dropdown, DropdownButton, Row, Stack } from 'react-bootstrap';
  
@@ -14,15 +13,12 @@ function Visualizer() {
         <Container>
           <Row>
             <Col sm={4}>
-              <DropdownButton id="dropdown-item-button" title="Dropdown button">
-                <Dropdown.Item eventKey="1">
-                  Action
+              <DropdownButton id="dropdown-item-button" title="Visualization Method">
+                <Dropdown.Item eventKey="1" as="button">
+                  Number of Tasks / Category
                 </Dropdown.Item>
-                <Dropdown.Item eventKey="2">
-                  Another action
-                </Dropdown.Item>
-                <Dropdown.Item eventKey="3">
-                  Active Item
+                <Dropdown.Item eventKey="2" as="button">
+                  Hours / Task
                 </Dropdown.Item>
               </DropdownButton>
             </Col>
