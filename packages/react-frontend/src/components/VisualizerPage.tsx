@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import MainNav from "./Nav/MainNav";
-import { Container, Col, Button, Form, Row, Stack } from 'react-bootstrap';
+import { Container, Col, Form, Row, Stack } from 'react-bootstrap';
 import VisualizerNumberTasksPerCategoryPieChart from "./Chart/VisualizerNumberTasksPerCategoryPieChart"
+import VisualizerHoursSpentPerCategoryPieChart from "./Chart/VisualizerHoursSpentPerCategoryPieChart"
+import VisualizerHoursSpentPerTask from "./Chart/VisualizerHoursSpentPerTask";
 import {tempTasks, userCategories} from "./../TempData"
 
 function VisualizerType(value : any) {
@@ -10,7 +12,6 @@ function VisualizerType(value : any) {
     console.log(e);
     setCategory(e.target.value)
   }
-
   if (value.value === '1') {
     return (
       <Container className="d-flex justify-content-center">
@@ -18,7 +19,14 @@ function VisualizerType(value : any) {
       </Container>
     )
   }
-  else if (value.value === '2'){
+  else if (value.value === '2') {
+    return (
+      <Container className="d-flex justify-content-center">
+        <VisualizerHoursSpentPerCategoryPieChart tasks={tempTasks} categories={userCategories} />
+      </Container>
+    )
+  }
+  else if (value.value === '3'){
     return (
       <Container>
         <Row>
@@ -32,6 +40,9 @@ function VisualizerType(value : any) {
           </Col>
           <Col sm={4} />
         </Row>
+        <Container className="d-flex justify-content-center">
+          <VisualizerHoursSpentPerTask tasks={tempTasks} categories={userCategories} category={category}/>
+        </Container>
       </Container>
     )
   } else {
@@ -65,7 +76,8 @@ function Visualizer() {
               <Form>
                 <Form.Select value={visualizer} onChange={handleSelectVisualizer}>
                   <option value="1">Number of Tasks Per Category</option>
-                  <option value="2">Average Hours Spent Per Task</option>
+                  <option value="2">Hours Spent Per Category</option>
+                  <option value="3">Average Hours Spent Per Task</option>
                 </Form.Select>
               </Form>
             </Col>

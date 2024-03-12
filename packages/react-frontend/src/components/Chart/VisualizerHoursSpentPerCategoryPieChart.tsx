@@ -10,29 +10,32 @@ const labelNameHoursPercentage: React.FC<{cx: number , cy: number, midAngle: num
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
-    if(hours === 1) {
-        return (
-            <text x={x} y={y} fill="black" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
-                {`${name}: ${hours} Task - ${(percent * 100).toFixed(0)}%`}
-            </text>
-        )
-    } else {
-        return (
-            <text x={x} y={y} fill="black" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
-                {`${name}: ${hours} Tasks - ${(percent * 100).toFixed(0)}%`}
-            </text>
-        )
-    }
+    return (
+        <text x={x} y={y} fill="black" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
+            {`${name}: ${hours} Hours - ${(percent * 100).toFixed(0)}%`}
+        </text>
+    )
 }
 
-function calculateTotalTasks(tasks : Task[]): number {
-    let totalTasks = 0;
+function calculateTaskHours(taskDateEntries : DateEntry[]): number {
 
-    for (let object of tasks) {
-        totalTasks += 1;
+    let taskHours = 0;
+
+    for (let object of taskDateEntries) {
+        taskHours += object.hours;
     }
-    
-    return totalTasks;;
+
+    return taskHours;
+}
+
+function calculateTotalHours(categoryProgress: CategoryProgress[]): number {
+    let totalHours = 0;
+
+    for (let object of categoryProgress) {
+        totalHours += object.hours;
+    }
+
+    return totalHours;;
 }
 
 function calculateCategoryProgress(tasks : Task[], categories : Category[]): CategoryProgress[] {
@@ -41,13 +44,14 @@ function calculateCategoryProgress(tasks : Task[], categories : Category[]): Cat
 
     for (let i = 0; i < categories.length; i++) {
         let categoryType: CategoryProgress = { name: categories.at(i)?.name, hours : 0 , color: categories.at(i)?.color}
+
         category_progress.push(categoryType)
     }
 
     for(let task of tasks) {
         for (let object of category_progress) {
             if (object.name === task.category) {
-                object.hours += 1;
+                object.hours += calculateTaskHours(task.datesUpdated);
             }
         }
     }
@@ -63,7 +67,7 @@ const VisualizerNumberTasksPerCategoryPieChart: React.FC<{tasks : Task[], catego
     return (
         <PieChart width={900} height={600}>
             <text x={450} y={300} textAnchor="middle" dominantBaseline="middle">
-                {`Total Tasks: ${calculateTotalTasks(input.tasks)}`}
+                {`Total Hours: ${calculateTotalHours(category_progress)}`}
             </text>
             <Pie data={category_progress} cx="50%" cy="50%" labelLine={true} label={labelNameHoursPercentage}
                 fill="#8884d8" dataKey="hours" innerRadius={'25%'} outerRadius={'80%'}>
