@@ -36,7 +36,6 @@ const SignUpModal: React.FC<{}> = (input) => {
                                 Your password must be 8-20 characters long.
                             </Form.Text>
                         </Form.Group>
-                        
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>

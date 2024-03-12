@@ -1,10 +1,11 @@
-import React from "react";
+//import React, { useState }from 'react';
+import React from 'react';
 import HomePieChart from "./Chart/HomePieChart";
 import HomeProgressBar from "./ProgressBar/HomeProgressBar";
 import { ITask, Category } from "./../types/types";
 import { Container, Col, Row, Stack } from "react-bootstrap";
 import TaskTable from "./Table/TaskTable";
-import LandingNav from "./Nav/LoginNav";
+import MainNav from "./Nav/MainNav";
 
 let tempTasks: ITask[] = [
   {
@@ -64,147 +65,144 @@ let tempTasks: ITask[] = [
     category: "Business",
     done: false,
   },
+  {
+    _id: "tempID400",
+    name: "Complete Frontend Tasks",
+    userID: "test_user",
+    description: "N/A",
+    createdAt: new Date("2024-01-24"),
+    category: "Frontend",
+    priority: "High",
+    datesUpdated: [
+      {
+        date: new Date("2024-01-24"),
+        hours: 6,
+      },
+    ],
+    done: true
+  },
+  {
+    _id: "1",
+    name: "Complete Backend Tasks",
+    userID: "test_user",
+    description: "N/A",
+    createdAt: new Date("2024-01-24"),
+    category: "Backend",
+    priority: "High",
+    datesUpdated: [
+      {
+        date: new Date("2024-01-24"),
+        hours: 6,
+      },
+    ],
+    done: true
+  },
+      {
+        _id: "2",
+        name: "Get Other Things Done",
+        userID: "test_user",
+        description: "N/A",
+        createdAt: new Date("2024-01-24"),
+        category: "Other",
+        priority: "Low",
+        datesUpdated: [
+          {
+            date: new Date("2024-01-24"),
+            hours: 1,
+          },
+        ],
+        done: true
+      },
+      {
+        _id: "3",
+        name: "OAZO 7",
+        userID: "test_user",
+        description: "N/A",
+        createdAt: new Date("2024-01-24"),
+        category: "CSC 430",
+        priority: "Low",
+        datesUpdated: [
+          {
+            date: new Date("2024-01-24"),
+            hours: 10,
+          },
+        ],
+        done: false
+      },
+      {
+        _id: "4",
+        name: "Assignment 9",
+        userID: "test_user",
+        description: "N/A",
+        createdAt: new Date("2024-01-24"),
+        category: "Physics",
+        priority: "Low",
+        datesUpdated: [
+          {
+            date: new Date("2024-01-24"),
+            hours: 2,
+          },
+        ],
+        done: false
+      },
+      {
+        _id: "5",
+        name: "Assignment 10",
+        userID: "test_user",
+        description: "N/A",
+        createdAt: new Date("2024-01-24"),
+        category: "Physics",
+        priority: "Low",
+        datesUpdated: [
+          {
+            date: new Date("2024-01-24"),
+            hours: 3,
+          },
+        ],
+        done: false
+      }
+];
+
+let userCategories: Category[] = [
+  { name: "Frontend", color: "#0088FE" },
+  { name: "Backend", color: "#F098FE" },
+  { name: "Other", color: "#FFBB28" },
+  { name: "CSC 430", color: "#2BA428" },
+  { name: "Physics", color: "#123456" },
+  { name: "Business", color: "#234324" },
+  { name: "Academic", color: "#f3e2r1" },
 ];
 
 const HomePage: React.FC<{}> = () => {
-  // const [tasks, setTasks] = useState([]);
-  // import React, { useState }from 'react';
-  // import "./Page.module.css"
-  // // import { Link } from 'react-router-dom';
-  // import LandingNav from "./Nav/LoginNav";
-  // import Table from "./Table/HomeTable"
-  // import HomePieChart from "./Chart/HomePieChart"
-  // import HomeProgressBar from "./ProgressBar/HomeProgressBar"
-  // import { Task, Category, DateEntry } from "./../types/types";
-  // import { Container, Col, Row, Stack } from 'react-bootstrap';
 
-  // let tempDateUpdates: DateEntry[] = [
-  //   {
-  //     date: new Date("2024-03-01"),
-  //     hours: 1,
-  //   },
-  //   {
-  //     date: new Date("2024-03-02"),
-  //     hours: 1,
-  //   },
-  //   {
-  //     date: new Date("2024-03-03"),
-  //     hours: 1,
-  //   }
-  // ]
+  // const [tasks, setTasks] = useState(tempTasks);
 
-  // let tempDateUpdatesNoTime: DateEntry[] = [
-  //   {
-  //     date: new Date("2024-03-04"),
-  //     hours: 0,
-  //   }
-  // ]
+  // function removeTask(index : number) {
+  //   const updated = tempTasks.filter((character, i) => {
+  //       return i !== index;
+  //   });
 
-  // let tempTasks: Task[] = [
-  //   {
-  //     _id: "0",
-  //     name: "Complete Frontend Tasks",
-  //     userID: "test_user",
-  //     description: "N/A",
-  //     category: "Frontend",
-  //     priority: "High",
-  //     datesUpdated: tempDateUpdates,
-  //     done: true
-  //   },
-  //   {
-  //     _id: "1",
-  //     name: "Complete Backend Tasks",
-  //     userID: "test_user",
-  //     description: "N/A",
-  //     category: "Backend",
-  //     priority: "High",
-  //     datesUpdated: tempDateUpdates,
-  //     done: true
-  //   },
-  //   {
-  //     _id: "2",
-  //     name: "Get Other Things Done",
-  //     userID: "test_user",
-  //     description: "N/A",
-  //     category: "Other",
-  //     priority: "Low",
-  //     datesUpdated: tempDateUpdates,
-  //     done: true
-  //   },
-  //   {
-  //     _id: "3",
-  //     name: "OAZO 7",
-  //     userID: "test_user",
-  //     description: "N/A",
-  //     category: "CSC 430",
-  //     priority: "Low",
-  //     datesUpdated: tempDateUpdatesNoTime,
-  //     done: false
-  //   },
-  //   {
-  //     _id: "4",
-  //     name: "Assignment 9",
-  //     userID: "test_user",
-  //     description: "N/A",
-  //     category: "Physics",
-  //     priority: "Low",
-  //     datesUpdated: tempDateUpdatesNoTime,
-  //     done: false
-  //   },
-  //   {
-  //     _id: "5",
-  //     name: "Assignment 10",
-  //     userID: "test_user",
-  //     description: "N/A",
-  //     category: "Physics",
-  //     priority: "Low",
-  //     datesUpdated: tempDateUpdates,
-  //     done: false
-  //   }
-  // ];
+  //   console.log(tasks.length)
 
-  let userCategories: Category[] = [
-    { name: "Frontend", color: "#0088FE" },
-    { name: "Backend", color: "#F098FE" },
-    { name: "Other", color: "#FFBB28" },
-    { name: "CSC 430", color: "#2BA428" },
-    { name: "Physics", color: "#123456" },
-  ];
-
-  // const HomePage: React.FC<{}> = () => {
-
-  //   const [tasks, setTasks] = useState(tempTasks);
-
-  //   function removeTask(index : number) {
-  //     const updated = tempTasks.filter((character, i) => {
-  //         return i !== index;
-  //     });
-
-  //     console.log(tasks.length)
-
-  //     setTasks(updated);
-  //   }
-
-  let toDoTasks = [];
-  for (let i = 0; i < tempTasks.length; i++) {
-    if (!tempTasks[i].done) {
-      toDoTasks.push(tempTasks[i]);
-    }
-  }
+  //   setTasks(updated);
+  // }
 
   return (
     <div>
-      <LandingNav />
+      <MainNav 
+        page = { "Home" }
+      />
       <Stack gap={4}>
         <Container />
         <Container>
           <Row>
             <Col sm={9}>
-              <TaskTable
+            <TaskTable
                 name="To-Do List"
                 todo={false}
                 page="HomePage"
-                tasks={toDoTasks}
+                tasks={tempTasks}
+                categories={userCategories}
               />
             </Col>
             <Col sm={3}>

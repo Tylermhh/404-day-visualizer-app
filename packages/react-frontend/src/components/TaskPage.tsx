@@ -1,7 +1,7 @@
-// import { useState, useEffect } from "react";
-import LandingNav from "./Nav/LoginNav";
+// import React from "react";
+import MainNav from "./Nav/MainNav";
 import TaskTable from "./Table/TaskTable";
-import { ITask } from "./../types/types";
+import { Category, ITask } from "./../types/types";
 import styles from "./Page.module.css";
 // import { getTasks } from "../api/TaskHooks";
 // import userID from "./User";
@@ -66,6 +66,14 @@ let tempTasks: ITask[] = [
   },
 ];
 
+let userCategories: Category[] = [
+  { name: "Frontend", color: "#0088FE" },
+  { name: "Backend", color: "#F098FE" },
+  { name: "Other", color: "#FFBB28" },
+  { name: "CSC 430", color: "#2BA428" },
+  { name: "Physics", color: "#123456" },
+];
+
 function Task() {
   // const [doneTasksList, setDoneTasksList] = useState([]);
   // const [toDoTasksList, setToDoTasksList] = useState([]);
@@ -94,7 +102,9 @@ function Task() {
 
   return (
     <div className="App">
-      <LandingNav />
+      <MainNav 
+        page = { "Task" }
+      />
       <header className={styles.pageTitle}>Task Page</header>
       <TaskTable
         name="Tasks To Do"
@@ -102,6 +112,7 @@ function Task() {
         page="TaskPage"
         // tasks={toDoTasksList}
         tasks={toDoTasks}
+        categories={userCategories}
       />
       <TaskTable
         name="Tasks Completed"
@@ -109,6 +120,7 @@ function Task() {
         page="TaskPage"
         // tasks={doneTasksList}
         tasks={completedTasks}
+        categories={userCategories}
       />
     </div>
   );
