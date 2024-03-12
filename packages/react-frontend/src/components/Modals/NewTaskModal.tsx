@@ -21,75 +21,82 @@ const NewTaskModal: React.FC<{tasks : ITask[], categories : Category[]}> = (inpu
     deadline: new Date(),
   });
 
-  const handleChange = (event: any) => {
-    const {field, value} = event.target;
+  const handleChange = (field: any, event: any) => {
+    const value = event.target.value;
+    // const field = event.target.controlID;
+    console.log(value);
+    // const {field, value} = event.target;
 
-    switch(field){
-      case "formItemName": {
-        setNewTask({
-          _id: newTask["_id"],
-          name: value,
-          userID: newTask["userID"],
-          description: newTask["description"],
-          category: newTask["category"],
-          createdAt: newTask["createdAt"],
-          datesUpdated: newTask["datesUpdated"],
-          done: newTask["done"],
-          deadline: newTask["deadline"],
-        })
-        break;
-      }
-      case "formItemDescription": {
-        setNewTask({
-          _id: newTask["_id"],
-          name: newTask["name"],
-          userID: newTask["userID"],
-          description: value,
-          category: newTask["category"],
-          createdAt: newTask["createdAt"],
-          datesUpdated: newTask["datesUpdated"],
-          done: newTask["done"],
-          deadline: newTask["deadline"],
-        })
-        break;
-      }
-      case "formItemCategory": {
-        setNewTask({
-          _id: newTask["_id"],
-          name: newTask["name"],
-          userID: newTask["userID"],
-          description: newTask["description"],
-          category: value,
-          createdAt: newTask["createdAt"],
-          datesUpdated: newTask["datesUpdated"],
-          done: newTask["done"],
-          deadline: newTask["deadline"],
-        })
-        break;
-      }
+    setNewTask({...newTask, [field]: value});
 
-      case "formItemDeadline": {
-        setNewTask({
-          _id: newTask["_id"],
-          name: newTask["name"],
-          userID: newTask["userID"],
-          description: newTask["description"],
-          category: newTask["category"],
-          createdAt: newTask["createdAt"],
-          datesUpdated: newTask["datesUpdated"],
-          done: newTask["done"],
-          deadline: value,
-        })
-        break;
-      }
-      default: {
-        break;
-      }
-    }
+    // switch(field){
+    //   case "formItemName": {
+    //     // console.log("item name added");
+    //     setNewTask({
+    //       _id: newTask["_id"],
+    //       name: value,
+    //       userID: newTask["userID"],
+    //       description: newTask["description"],
+    //       category: newTask["category"],
+    //       createdAt: newTask["createdAt"],
+    //       datesUpdated: newTask["datesUpdated"],
+    //       done: newTask["done"],
+    //       deadline: newTask["deadline"],
+    //     })
+    //     break;
+    //   }
+    //   case "formItemDescription": {
+    //     setNewTask({
+    //       _id: newTask["_id"],
+    //       name: newTask["name"],
+    //       userID: newTask["userID"],
+    //       description: value,
+    //       category: newTask["category"],
+    //       createdAt: newTask["createdAt"],
+    //       datesUpdated: newTask["datesUpdated"],
+    //       done: newTask["done"],
+    //       deadline: newTask["deadline"],
+    //     })
+    //     break;
+    //   }
+    //   case "formItemCategory": {
+    //     setNewTask({
+    //       _id: newTask["_id"],
+    //       name: newTask["name"],
+    //       userID: newTask["userID"],
+    //       description: newTask["description"],
+    //       category: value,
+    //       createdAt: newTask["createdAt"],
+    //       datesUpdated: newTask["datesUpdated"],
+    //       done: newTask["done"],
+    //       deadline: newTask["deadline"],
+    //     })
+    //     break;
+    //   }
+
+    //   case "formItemDeadline": {
+    //     setNewTask({
+    //       _id: newTask["_id"],
+    //       name: newTask["name"],
+    //       userID: newTask["userID"],
+    //       description: newTask["description"],
+    //       category: newTask["category"],
+    //       createdAt: newTask["createdAt"],
+    //       datesUpdated: newTask["datesUpdated"],
+    //       done: newTask["done"],
+    //       deadline: value,
+    //     })
+    //     break;
+    //   }
+    //   default: {
+    //     break;
+    //   }
+    // }
   };
 
   const handleSubmit = () => {
-    postTask(newTask);
+    console.log(newTask);
+    // postTask(newTask);
     toggleModal();
   }
 
@@ -112,17 +119,17 @@ const NewTaskModal: React.FC<{tasks : ITask[], categories : Category[]}> = (inpu
               <Form>
                 <Form.Group className='mb-3' controlId='formItemName'>
                   <Form.Label>Item Name</Form.Label>
-                  <Form.Control type="text" placeholder="Enter Item Name" onChange={handleChange}/>
+                  <Form.Control type="text" placeholder="Enter Item Name" onChange={(e) => {handleChange("name", e)}}/>
                 </Form.Group>
 
                 <Form.Group className='mb-3' controlId='formItemDescription'>
                   <Form.Label>Description</Form.Label>
-                  <Form.Control type="text" placeholder="Some more details" onChange={handleChange}/>
+                  <Form.Control type="text" placeholder="Some more details" onChange={(e) => {handleChange("description", e)}}/>
                 </Form.Group>
 
                 <Form.Group className='mb-3' controlId='formItemCategory'>
                   <Form.Label>Category</Form.Label>
-                  <Form.Select onChange={handleChange}>
+                  <Form.Select onChange={(e) => {handleChange("category", e)}}>
                     {input.categories.map((entry, index) => (
                       <option value={entry.name}>{entry.name}</option>
                     ))}    
@@ -133,10 +140,35 @@ const NewTaskModal: React.FC<{tasks : ITask[], categories : Category[]}> = (inpu
 
                 <Form.Group className='mb-3' controlId='formItemDeadline'>
                   <Form.Label>Deadline</Form.Label>
-                  <Form.Control type="date" onChange={handleChange}/>
+                  <Form.Control type="date" onChange={(e) => {handleChange("deadline", e)}}/>
                 </Form.Group>
 
               </Form>
+
+              {/* <form>
+                <Form.Group className='mb-3' controlId='formItemName' onChange={handleChange}>
+                  <Form.Label>Item Name</Form.Label>
+                  <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    value={newTask.name}
+                    onChange={handleChange}
+                  />
+                </Form.Group>
+                <Form.Group className='mb-3' controlId='formItemName' onChange={handleChange}>
+                  <Form.Label>Description</Form.Label>
+                  <input
+                    type="text"
+                    name="description"
+                    id="description"
+                    value={newTask.description}
+                    onChange={handleChange}
+                  />
+                  <input type="button" value="Submit" onClick={handleSubmit} />
+                </Form.Group>
+              </form> */}
+
 
             </Modal.Body>
             <Modal.Footer>
