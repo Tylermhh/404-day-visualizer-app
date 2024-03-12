@@ -1,5 +1,5 @@
 // import React from "react";
-import LandingNav from "./Nav/LoginNav";
+import MainNav from "./Nav/MainNav";
 import TaskTable from "./Table/TaskTable";
 import { Category, ITask } from "./../types/types";
 import styles from "./Page.module.css";
@@ -85,7 +85,9 @@ function Task() {
 
   return (
     <div className="App">
-      <LandingNav />
+      <MainNav 
+        page = { "Task" }
+      />
       <header className={styles.pageTitle}>Task Page</header>
       <TaskTable
         name="Tasks To Do"
