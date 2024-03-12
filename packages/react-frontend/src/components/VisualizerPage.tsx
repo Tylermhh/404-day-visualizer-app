@@ -99,7 +99,12 @@ function Visualizer() {
                 </Form.Select>
               </Form>
             </Col>
-            <Col sm={4}>
+            <Col sm={1}>
+              <text style={{fontSize : "122%"}}>
+                Start Date
+              </text>
+            </Col>
+            <Col sm={3}>
               <Form>
                 <Form.Control
                   type="date"
@@ -109,7 +114,12 @@ function Visualizer() {
                 />
               </Form>
             </Col>
-            <Col sm={4}>
+            <Col sm={1}>
+              <text style={{fontSize : "122%"}}>
+                End Date
+              </text>
+            </Col>
+            <Col sm={3}>
               <Form>
                 <Form.Control
                   type="date"
@@ -123,14 +133,6 @@ function Visualizer() {
           </Row>
         </Container>
         <Container>
-          <Row>
-            <text>
-              {startDateString}
-            </text>
-            <text>
-              {endDateString}
-            </text>
-          </Row>
           <Row>
             <VisualizerType value={visualizer}/>
           </Row>

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Task, TaskHours, Category, DateEntry } from '../../types/types';
-import { BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 
 function calculateTaskHours(taskDateEntries : DateEntry[]): number {
     let taskHours = 0;
@@ -65,7 +65,6 @@ const VisualizerHoursSpentPerTaskBarChart: React.FC<{tasks : Task[], categories 
           <XAxis dataKey="hours" />
           <YAxis/>
           <Tooltip />
-          <Legend />
           <Bar dataKey="amount" fill={input.categories.at(Number(input.category))?.color} activeBar={<Rectangle fill={input.categories.at(Number(input.category))?.color}/>} />
         </BarChart>
     )
