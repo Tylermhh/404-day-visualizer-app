@@ -2,7 +2,8 @@ import dotenv from "dotenv";
 import { ITask } from "../types/types";
 
 dotenv.config();
-const url: string = process.env.BACKEND_URL as string;
+const url: string =
+  (process.env.BACKEND_URL as string) || ("localhost:8000" as string);
 
 // hook to get Tasks
 export function getTasks(userID: string, start: Date, end: Date) {
@@ -41,3 +42,5 @@ export function updateTask(task: ITask) {
   });
   return promise;
 }
+
+
