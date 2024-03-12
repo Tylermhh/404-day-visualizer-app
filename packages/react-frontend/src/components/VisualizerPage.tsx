@@ -9,7 +9,7 @@ import {tempTasks, userCategories} from "./../TempData"
 function GetDateString(date : Date) : string {
   let year = date.getFullYear().toString();
   let month = (date.getMonth() + 1).toString();
-  let day = date.getDate().toString();
+  let day = (date.getDate() + 1).toString();
 
   if(date.getMonth() < 10) {
     month = "0" + month;
