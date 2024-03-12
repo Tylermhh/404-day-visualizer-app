@@ -1,6 +1,6 @@
 import React from 'react'
 import { PieChart, Pie, Cell } from 'recharts';
-import { Task, Category, CategoryProgress, DateEntry } from '../../types/types';
+import { Task, Category, CategoryProgress } from '../../types/types';
 
 const RADIAN = Math.PI / 180;
 const labelNameHoursPercentage: React.FC<{cx: number , cy: number, midAngle: number, innerRadius: number, outerRadius: number, name: string, hours: number, percent : number}> 
@@ -28,7 +28,7 @@ const labelNameHoursPercentage: React.FC<{cx: number , cy: number, midAngle: num
 function calculateTotalTasks(tasks : Task[]): number {
     let totalTasks = 0;
 
-    for (let object of tasks) {
+    for(let i = 0; i < tasks.length; i++) {
         totalTasks += 1;
     }
     

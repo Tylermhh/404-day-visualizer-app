@@ -3,7 +3,7 @@ import MainNav from "./Nav/MainNav";
 import { Container, Col, Form, Row, Stack } from 'react-bootstrap';
 import VisualizerNumberTasksPerCategoryPieChart from "./Chart/VisualizerNumberTasksPerCategoryPieChart"
 import VisualizerHoursSpentPerCategoryPieChart from "./Chart/VisualizerHoursSpentPerCategoryPieChart"
-import VisualizerHoursSpentPerTask from "./Chart/VisualizerHoursSpentPerTask";
+import VisualizerHoursSpentPerTaskBarChart from "./Chart/VisualizerHoursSpentPerTaskBarChart";
 import {tempTasks, userCategories} from "./../TempData"
 
 function VisualizerType(value : any) {
@@ -12,14 +12,8 @@ function VisualizerType(value : any) {
     console.log(e);
     setCategory(e.target.value)
   }
-  if (value.value === '1') {
-    return (
-      <Container className="d-flex justify-content-center">
-        <VisualizerNumberTasksPerCategoryPieChart tasks={tempTasks} categories={userCategories} />
-      </Container>
-    )
-  }
-  else if (value.value === '2') {
+
+  if (value.value === '2') {
     return (
       <Container className="d-flex justify-content-center">
         <VisualizerHoursSpentPerCategoryPieChart tasks={tempTasks} categories={userCategories} />
@@ -41,15 +35,15 @@ function VisualizerType(value : any) {
           <Col sm={4} />
         </Row>
         <Container className="d-flex justify-content-center">
-          <VisualizerHoursSpentPerTask tasks={tempTasks} categories={userCategories} category={category}/>
+          <VisualizerHoursSpentPerTaskBarChart tasks={tempTasks} categories={userCategories} category={category}/>
         </Container>
       </Container>
     )
   } else {
     return (
-      <text>
-        {`Visualization ${value.value}`}
-      </text>
+      <Container className="d-flex justify-content-center">
+        <VisualizerNumberTasksPerCategoryPieChart tasks={tempTasks} categories={userCategories} />
+      </Container>
     )
   }
 }

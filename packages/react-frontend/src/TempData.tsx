@@ -69,6 +69,54 @@ export let tempTasks: ITask[] = [
       datesUpdated: [
         {
           date: new Date("2024-01-24"),
+          hours: 1,
+        },
+      ],
+      done: true
+    },
+    {
+      _id: "tempID400",
+      name: "Complete Frontend Tasks",
+      userID: "test_user",
+      description: "N/A",
+      createdAt: new Date("2024-01-24"),
+      category: "Frontend",
+      priority: "High",
+      datesUpdated: [
+        {
+          date: new Date("2024-01-24"),
+          hours: 1,
+        },
+      ],
+      done: true
+    },
+    {
+      _id: "tempID400",
+      name: "Complete Frontend Tasks",
+      userID: "test_user",
+      description: "N/A",
+      createdAt: new Date("2024-01-24"),
+      category: "Frontend",
+      priority: "High",
+      datesUpdated: [
+        {
+          date: new Date("2024-01-24"),
+          hours: 3,
+        },
+      ],
+      done: true
+    },
+    {
+      _id: "tempID400",
+      name: "Complete Frontend Tasks",
+      userID: "test_user",
+      description: "N/A",
+      createdAt: new Date("2024-01-24"),
+      category: "Frontend",
+      priority: "High",
+      datesUpdated: [
+        {
+          date: new Date("2024-01-24"),
           hours: 6,
         },
       ],
