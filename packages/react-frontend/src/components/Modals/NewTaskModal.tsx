@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { Form } from 'react-bootstrap';
+import { DropdownDivider, Form } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 // import NewTaskForm from '../Forms/NewTaskForm';
 import { Category, ITask, Task } from '../../types/types';
 
-const NewTaskModal: React.FC<{tasks : ITask[]}> = (input) => {
+const NewTaskModal: React.FC<{tasks : ITask[], categories : Category[]}> = (input) => {
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   // const [characters, setCharacters] = useState();
@@ -47,10 +47,10 @@ const NewTaskModal: React.FC<{tasks : ITask[]}> = (input) => {
   //   // }
   // };
 
-    let categories: String[] = [];
-    for (let task of input.tasks) {
-      categories.push(task.category);
-    }
+    // let categories: String[] = [];
+    // for (let task of input.tasks) {
+    //   categories.push(task.category);
+    // }
 
     return (
         <>
@@ -90,9 +90,11 @@ const NewTaskModal: React.FC<{tasks : ITask[]}> = (input) => {
 
                   })} */}
                   <Form.Select >
-                    {categories.map((entry, index) => (
-                      <option>{entry}</option>
-                    ))}                 
+                    {input.categories.map((entry, index) => (
+                      <option>{entry.name}</option>
+                    ))}    
+                    <DropdownDivider></DropdownDivider>
+                    <option>Add new category</option>             
                   </Form.Select>
                 </Form.Group>
 

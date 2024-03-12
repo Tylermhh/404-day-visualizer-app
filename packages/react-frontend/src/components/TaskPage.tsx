@@ -1,7 +1,7 @@
 // import React from "react";
 import LandingNav from "./Nav/LoginNav";
 import TaskTable from "./Table/TaskTable";
-import { ITask } from "./../types/types";
+import { Category, ITask } from "./../types/types";
 import styles from "./Page.module.css";
 
 let tempTasks: ITask[] = [
@@ -64,6 +64,14 @@ let tempTasks: ITask[] = [
   },
 ];
 
+let userCategories: Category[] = [
+  { name: "Frontend", color: "#0088FE" },
+  { name: "Backend", color: "#F098FE" },
+  { name: "Other", color: "#FFBB28" },
+  { name: "CSC 430", color: "#2BA428" },
+  { name: "Physics", color: "#123456" },
+];
+
 function Task() {
   let completedTasks = [];
   let toDoTasks = [];
@@ -84,12 +92,14 @@ function Task() {
         todo={true}
         page="TaskPage"
         tasks={toDoTasks}
+        categories={userCategories}
       />
       <TaskTable
         name="Tasks Completed"
         todo={false}
         page="TaskPage"
         tasks={completedTasks}
+        categories={userCategories}
       />
     </div>
   );

@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Col, Row, Table, Container } from "react-bootstrap";
-import { ITask } from "./../../types/types";
+import { Category, ITask } from "./../../types/types";
 import styles from "../Page.module.css";
 import moment from "moment";
 import NewTaskModal from "../Modals/NewTaskModal";
@@ -10,10 +10,11 @@ function TaskTable(params: {
   todo: Boolean;
   page: String;
   tasks: ITask[];
+  categories: Category[];
 }) {
   let tasks = params.tasks;
 
-  const TableTitle: React.FC<{tasks : ITask[]}> = () => {
+  const TableTitle: React.FC<{tasks : ITask[], categories_lst : Category[]}> = (input) => {
     if (params.todo) {
       return (
         <div>
@@ -22,7 +23,7 @@ function TaskTable(params: {
               <h2>{params.name}</h2>
             </Col>
             <Col sm={1}>
-              <NewTaskModal tasks={tasks} />
+              <NewTaskModal tasks={tasks} categories={input.categories_lst}/>
             </Col>
           </Row>
         </div>
@@ -115,7 +116,7 @@ function TaskTable(params: {
 
   return (
     <Container className={styles.tableComponent}>
-      <TableTitle tasks={tasks}/>
+      <TableTitle tasks={tasks} categories_lst={params.categories}/>
       <TableBody tasks={tasks} todo={params.todo} />
     </Container>
   );

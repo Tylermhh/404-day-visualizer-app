@@ -205,6 +205,7 @@ const HomePage: React.FC<{}> = () => {
                 todo={false}
                 page="HomePage"
                 tasks={toDoTasks}
+                categories={userCategories}
               />
             </Col>
             <Col sm={3}>
