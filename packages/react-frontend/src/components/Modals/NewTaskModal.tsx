@@ -38,12 +38,11 @@ const NewTaskModal: React.FC<{tasks : ITask[], categories : Category[]}> = (inpu
     setIsModalVisible(!isModalVisible);
   };
 
-    return (
-        <>
-
-          <Button variant="outline-primary" onClick={toggleModal}>
-            +
-          </Button>
+  return (
+    <>
+      <Button variant="outline-primary" onClick={toggleModal}>
+        +
+      </Button>
 
           <Modal show={isModalVisible} onHide={toggleModal}>
             <Modal.Header closeButton>
