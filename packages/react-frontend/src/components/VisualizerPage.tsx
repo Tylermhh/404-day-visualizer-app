@@ -6,6 +6,22 @@ import VisualizerHoursSpentPerCategoryPieChart from "./Chart/VisualizerHoursSpen
 import VisualizerHoursSpentPerTaskBarChart from "./Chart/VisualizerHoursSpentPerTaskBarChart";
 import {tempTasks, userCategories} from "./../TempData"
 
+function GetDateString(date : Date) : string {
+  let year = date.getFullYear().toString();
+  let month = (date.getMonth() + 1).toString();
+  let day = date.getDate().toString();
+
+  if(date.getMonth() < 10) {
+    month = "0" + month;
+  }
+  
+  if(date.getDate() < 10) {
+    day = "0" + day;
+  }
+
+  return year + "-" + month + "-" + day;
+}
+
 function VisualizerType(value : any) {
   const [category, setCategory] = useState('');
   const handleSelectCategory=(e : any)=>{
@@ -49,12 +65,20 @@ function VisualizerType(value : any) {
 }
 
 function Visualizer() {
-  const [date, setDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
 
   const [visualizer, setVisualizer] = useState('');
   const handleSelectVisualizer=(e : any)=>{
     console.log(e);
     setVisualizer(e.target.value)
+  }
+
+  let startDateString = GetDateString(startDate);
+  let endDateString = GetDateString(endDate);
+
+  if(startDate > endDate) {
+    setEndDate(startDate)
   }
 
   return (
@@ -80,9 +104,8 @@ function Visualizer() {
                 <Form.Control
                   type="date"
                   name="startDate"
-                  placeholder="DateRange"
-                  value={date.toUTCString()}
-                  onChange={(e) => setDate(new Date(e.target.value))}
+                  value={startDateString}
+                  onChange={(e) => setStartDate(new Date(e.target.value))}
                 />
               </Form>
             </Col>
@@ -91,15 +114,23 @@ function Visualizer() {
                 <Form.Control
                   type="date"
                   name="endDate"
-                  placeholder="DateRange"
-                  value={date.toUTCString()}
-                  onChange={(e) => setDate(new Date(e.target.value))}
+                  value={endDateString}
+                  min={startDateString}
+                  onChange={(e) => setEndDate(new Date(e.target.value))}
                 />
               </Form>
             </Col>
           </Row>
         </Container>
         <Container>
+          <Row>
+            <text>
+              {startDateString}
+            </text>
+            <text>
+              {endDateString}
+            </text>
+          </Row>
           <Row>
             <VisualizerType value={visualizer}/>
           </Row>
