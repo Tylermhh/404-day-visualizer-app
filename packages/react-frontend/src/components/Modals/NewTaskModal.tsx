@@ -23,75 +23,9 @@ const NewTaskModal: React.FC<{tasks : ITask[], categories : Category[]}> = (inpu
 
   const handleChange = (field: any, event: any) => {
     const value = event.target.value;
-    // const field = event.target.controlID;
     console.log(value);
-    // const {field, value} = event.target;
 
     setNewTask({...newTask, [field]: value});
-
-    // switch(field){
-    //   case "formItemName": {
-    //     // console.log("item name added");
-    //     setNewTask({
-    //       _id: newTask["_id"],
-    //       name: value,
-    //       userID: newTask["userID"],
-    //       description: newTask["description"],
-    //       category: newTask["category"],
-    //       createdAt: newTask["createdAt"],
-    //       datesUpdated: newTask["datesUpdated"],
-    //       done: newTask["done"],
-    //       deadline: newTask["deadline"],
-    //     })
-    //     break;
-    //   }
-    //   case "formItemDescription": {
-    //     setNewTask({
-    //       _id: newTask["_id"],
-    //       name: newTask["name"],
-    //       userID: newTask["userID"],
-    //       description: value,
-    //       category: newTask["category"],
-    //       createdAt: newTask["createdAt"],
-    //       datesUpdated: newTask["datesUpdated"],
-    //       done: newTask["done"],
-    //       deadline: newTask["deadline"],
-    //     })
-    //     break;
-    //   }
-    //   case "formItemCategory": {
-    //     setNewTask({
-    //       _id: newTask["_id"],
-    //       name: newTask["name"],
-    //       userID: newTask["userID"],
-    //       description: newTask["description"],
-    //       category: value,
-    //       createdAt: newTask["createdAt"],
-    //       datesUpdated: newTask["datesUpdated"],
-    //       done: newTask["done"],
-    //       deadline: newTask["deadline"],
-    //     })
-    //     break;
-    //   }
-
-    //   case "formItemDeadline": {
-    //     setNewTask({
-    //       _id: newTask["_id"],
-    //       name: newTask["name"],
-    //       userID: newTask["userID"],
-    //       description: newTask["description"],
-    //       category: newTask["category"],
-    //       createdAt: newTask["createdAt"],
-    //       datesUpdated: newTask["datesUpdated"],
-    //       done: newTask["done"],
-    //       deadline: value,
-    //     })
-    //     break;
-    //   }
-    //   default: {
-    //     break;
-    //   }
-    // }
   };
 
   const handleSubmit = () => {
