@@ -62,17 +62,28 @@ function NewTaskModal() {
               <Form>
                 <Form.Group className='mb-3' controlId='formItemName'>
                   <Form.Label>Item Name</Form.Label>
-                  <Form.Control type="itemName" placeholder="Enter Item Name" />
+                  <Form.Control type="name" placeholder="Enter Item Name" />
                 </Form.Group>
 
                 <Form.Group className='mb-3' controlId='formItemDescription'>
                   <Form.Label>Description</Form.Label>
-                  <Form.Control type="itemDescription" placeholder="Some more details" />
+                  <Form.Control type="description" placeholder="Some more details" />
+                </Form.Group>
+
+                <Form.Group className='mb-3' controlId='formItemDeadline'>
+                  <Form.Label>Category</Form.Label>
+                  <Form.Select>
+                    <option>Academics</option>
+                    <option>Sports</option>
+                    <option>Business</option>
+                    <option>Fun</option>
+                    <option>Add new category</option>                    
+                  </Form.Select>
                 </Form.Group>
 
                 <Form.Group className='mb-3' controlId='formItemDeadline'>
                   <Form.Label>Deadline</Form.Label>
-                  <Form.Control type="itemDeadline" placeholder="yyyy-mm-dd" />
+                  <Form.Control type="deadline" placeholder="yyyy-mm-dd" />
                 </Form.Group>
 
               </Form>

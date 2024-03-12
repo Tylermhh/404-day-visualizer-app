@@ -3,6 +3,7 @@ import { Button, Col, Row, Table, Container } from "react-bootstrap";
 import { ITask } from "./../../types/types";
 import styles from "../Page.module.css";
 import moment from "moment";
+import NewTaskModal from "../Modals/NewTaskModal";
 
 function TaskTable(params: {
   name: String;
@@ -21,7 +22,7 @@ function TaskTable(params: {
               <h2>{params.name}</h2>
             </Col>
             <Col sm={1}>
-              <Button variant="outline-primary">+</Button>
+              <NewTaskModal/>
             </Col>
           </Row>
         </div>
