@@ -20,7 +20,7 @@ Taskcraft provides various visualization methods, like hours spent per category,
 - Last Updated: 2/8/2024
 
 ## UML Class Diagrams
-- [UML Class Diagrams]()
+- [UML Class Diagrams Wiki Page](https://github.com/Tylermhh/404-day-visualizer-app/wiki/UML-Class-Diagram)
 - Late Updated: 2/22/2024
 
 ## Development Environment Set Up
