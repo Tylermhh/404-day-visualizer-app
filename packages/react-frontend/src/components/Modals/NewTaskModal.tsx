@@ -80,19 +80,17 @@ const NewTaskModal: React.FC<{
               />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formItemCategory">
-              <Form.Label>Category</Form.Label>
-              <Form.Select
-                onChange={e => {
-                  handleChange("category", e);
-                }}>
-                {input.categories.map((entry, index) => (
-                  <option value={entry.name}>{entry.name}</option>
-                ))}
-                <DropdownDivider></DropdownDivider>
-                <option>Add new category</option>
-              </Form.Select>
-            </Form.Group>
+                <Form.Group className='mb-3' controlId='formItemCategory'>
+                  <Form.Label>Category</Form.Label>
+                  <Form.Select onChange={(e) => {handleChange("category", e)}}>
+                    <option>Select a category</option> 
+                    {input.categories.map((entry, index) => (
+                      <option value={entry.name}>{entry.name}</option>
+                    ))}    
+                    <DropdownDivider></DropdownDivider>
+                    <option>Add new category</option>             
+                  </Form.Select>
+                </Form.Group>
 
             <Form.Group className="mb-3" controlId="formItemDeadline">
               <Form.Label>Deadline</Form.Label>
