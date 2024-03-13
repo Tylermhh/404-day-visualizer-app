@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import MainNav from "./Nav/MainNav";
 import { Container, Col, Form, Row, Stack } from 'react-bootstrap';
 import VisualizerNumberTasksPerCategoryPieChart from "./Chart/VisualizerNumberTasksPerCategoryPieChart"
 import VisualizerHoursSpentPerCategoryPieChart from "./Chart/VisualizerHoursSpentPerCategoryPieChart"
 import VisualizerHoursSpentPerTaskBarChart from "./Chart/VisualizerHoursSpentPerTaskBarChart";
+import { ITask } from "./../types/types"
 import {tempTasks, userCategories} from "./../TempData"
+import { getTasks } from "../api/TaskHooks";
+
 
 function GetDateString(date : Date) : string {
   let year = date.getFullYear().toString();
@@ -64,6 +67,8 @@ function VisualizerType(value : any) {
   }
 }
 
+const userID = "65eb04d403116e2e8c60f63e";
+
 function Visualizer() {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
@@ -79,6 +84,25 @@ function Visualizer() {
 
   if(startDate > endDate) {
     setEndDate(startDate)
+  }
+
+  const emptyRefresh = () => {};
+
+  let empty_list: ITask[] = [];
+  const [completeTasks, setCompleteTasks] = useState<ITask[]>(empty_list);
+  const [incompleteTasks, setIncompleteTasks] = useState<ITask[]>(empty_list);
+
+  function getSpecifiedTasks(userID : string, startDate: Date, endDate: Date) {
+    getTasks( userID, startDate, endDate )
+    .then(tasks => {
+      tasks.json().then(data => {
+        setCompleteTasks(data.done);
+        setIncompleteTasks(data.notDone);
+      });
+    })
+    .catch(err => {
+      console.error(err);
+    });
   }
 
   return (
@@ -134,7 +158,8 @@ function Visualizer() {
         </Container>
         <Container>
           <Row>
-            <VisualizerType value={visualizer}/>
+            <VisualizerType 
+              value={visualizer}/>
           </Row>
         </Container>
       </Stack>
