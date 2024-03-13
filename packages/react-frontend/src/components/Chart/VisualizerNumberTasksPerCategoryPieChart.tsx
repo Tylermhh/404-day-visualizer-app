@@ -1,6 +1,6 @@
 import React from 'react'
 import { PieChart, Pie, Cell } from 'recharts';
-import { Task, Category, CategoryProgress } from '../../types/types';
+import { ITask, Category, CategoryProgress } from '../../types/types';
 
 const RADIAN = Math.PI / 180;
 const labelNameHoursPercentage: React.FC<{cx: number , cy: number, midAngle: number, innerRadius: number, outerRadius: number, name: string, hours: number, percent : number}> 
@@ -25,7 +25,7 @@ const labelNameHoursPercentage: React.FC<{cx: number , cy: number, midAngle: num
     }
 }
 
-function calculateTotalTasks(tasks : Task[]): number {
+function calculateTotalTasks(tasks : ITask[]): number {
     let totalTasks = 0;
 
     for(let i = 0; i < tasks.length; i++) {
@@ -35,7 +35,7 @@ function calculateTotalTasks(tasks : Task[]): number {
     return totalTasks;;
 }
 
-function calculateCategoryProgress(tasks : Task[], categories : Category[]): CategoryProgress[] {
+function calculateCategoryProgress(tasks : ITask[], categories : Category[]): CategoryProgress[] {
 
     let category_progress: CategoryProgress[] = [];
 
@@ -44,29 +44,69 @@ function calculateCategoryProgress(tasks : Task[], categories : Category[]): Cat
         category_progress.push(categoryType)
     }
 
-    for(let task of tasks) {
-        for (let object of category_progress) {
-            if (object.name === task.category) {
-                object.hours += 1;
+    if(tasks.length === 0) {
+        for(let task of tasks) {
+            for (let object of category_progress) {
+                if (object.name === task.category) {
+                    object.hours += 1;
+                }
             }
+        }
+
+        let filtered_category_progress = category_progress.filter((category_progress) => category_progress.hours !== 0)
+    
+        return filtered_category_progress;
+    }
+    
+    return category_progress;
+}
+
+function noTasksComplete(category_progress : CategoryProgress[]) : Boolean {
+
+    let categoriesWithNoTasksCompelte = 0;
+
+    for (let object of category_progress) {
+        if(object.hours === 0) {
+            categoriesWithNoTasksCompelte += 1;
         }
     }
 
-    let filtered_category_progress = category_progress.filter((category_progress) => category_progress.hours !== 0)
-    
-    return filtered_category_progress;
+    if(categoriesWithNoTasksCompelte === category_progress.length) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
-const VisualizerNumberTasksPerCategoryPieChart: React.FC<{tasks : Task[], categories : Category[]}> = (input) => {
+const VisualizerNumberTasksPerCategoryPieChart: React.FC<{tasks : ITask[], categories : Category[]}> = (input) => {
     let category_progress: CategoryProgress[] = calculateCategoryProgress(input.tasks, input.categories);
 
+    if(noTasksComplete(category_progress)) {
+        category_progress.length = 0;
+        let noCompleteTasks: CategoryProgress = { name: "No Tasks Complete", hours : 1 , color: "#777777"}
+        category_progress.push(noCompleteTasks)
+
+        return (
+            <PieChart width={1250} height={600}>
+                <text x={625} y={300} textAnchor="middle" dominantBaseline="middle">
+                    {"No Tasks Complete"}
+                </text>
+                <Pie data={category_progress} cx="50%" cy="50%" labelLine={false}
+                    fill="#8884d8" dataKey="hours" innerRadius={'30%'} outerRadius={'90%'}>
+                    {category_progress.map((entry, index) => 
+                        (<Cell key={`cell-${index}`} fill={entry.color} />))}
+                </Pie>
+            </PieChart>
+        )
+    }
+
     return (
-        <PieChart width={900} height={600}>
-            <text x={450} y={300} textAnchor="middle" dominantBaseline="middle">
+        <PieChart width={1250} height={600}>
+            <text x={625} y={300} textAnchor="middle" dominantBaseline="middle">
                 {`Total Tasks: ${calculateTotalTasks(input.tasks)}`}
             </text>
             <Pie data={category_progress} cx="50%" cy="50%" labelLine={true} label={labelNameHoursPercentage}
-                fill="#8884d8" dataKey="hours" innerRadius={'25%'} outerRadius={'80%'}>
+                fill="#8884d8" dataKey="hours" innerRadius={'30%'} outerRadius={'90%'}>
                 {category_progress.map((entry, index) => 
                     (<Cell key={`cell-${index}`} fill={entry.color} />))}
             </Pie>

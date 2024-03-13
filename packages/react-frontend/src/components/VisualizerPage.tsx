@@ -7,6 +7,7 @@ import VisualizerHoursSpentPerTaskBarChart from "./Chart/VisualizerHoursSpentPer
 import { ITask } from "./../types/types"
 import {tempTasks, userCategories} from "./../TempData"
 import { getTasks } from "../api/TaskHooks";
+import { start } from "repl";
 
 
 function GetDateString(date : Date) : string {
@@ -25,7 +26,7 @@ function GetDateString(date : Date) : string {
   return year + "-" + month + "-" + day;
 }
 
-function VisualizerType(value : any) {
+function VisualizerType(value : any, allTasks : ITask[]) {
   const [category, setCategory] = useState('');
   const handleSelectCategory=(e : any)=>{
     console.log(e);
@@ -35,7 +36,7 @@ function VisualizerType(value : any) {
   if (value.value === '2') {
     return (
       <Container className="d-flex justify-content-center">
-        <VisualizerHoursSpentPerCategoryPieChart tasks={tempTasks} categories={userCategories} />
+        <VisualizerHoursSpentPerCategoryPieChart tasks={allTasks} categories={userCategories} />
       </Container>
     )
   }
@@ -61,7 +62,7 @@ function VisualizerType(value : any) {
   } else {
     return (
       <Container className="d-flex justify-content-center">
-        <VisualizerNumberTasksPerCategoryPieChart tasks={tempTasks} categories={userCategories} />
+        <VisualizerNumberTasksPerCategoryPieChart tasks={allTasks} categories={userCategories} />
       </Container>
     )
   }
@@ -79,6 +80,10 @@ function Visualizer() {
     setVisualizer(e.target.value)
   }
 
+  let empty_list: ITask[] = [];
+  const [completeTasks, setCompleteTasks] = useState<ITask[]>(empty_list);
+  const [incompleteTasks, setIncompleteTasks] = useState<ITask[]>(empty_list);
+
   let startDateString = GetDateString(startDate);
   let endDateString = GetDateString(endDate);
 
@@ -86,24 +91,21 @@ function Visualizer() {
     setEndDate(startDate)
   }
 
-  const emptyRefresh = () => {};
-
-  let empty_list: ITask[] = [];
-  const [completeTasks, setCompleteTasks] = useState<ITask[]>(empty_list);
-  const [incompleteTasks, setIncompleteTasks] = useState<ITask[]>(empty_list);
-
-  function getSpecifiedTasks(userID : string, startDate: Date, endDate: Date) {
-    getTasks( userID, startDate, endDate )
-    .then(tasks => {
-      tasks.json().then(data => {
-        setCompleteTasks(data.done);
-        setIncompleteTasks(data.notDone);
+  useEffect(() => {
+    getTasks(
+      userID,
+      startDate,
+      endDate
+    )
+      .then(tasks => {
+        tasks.json().then(data => {
+          setIncompleteTasks(data.notDone);
+        });
+      })
+      .catch(err => {
+        console.error(err);
       });
-    })
-    .catch(err => {
-      console.error(err);
-    });
-  }
+  });
 
   return (
     <div className="App">
@@ -159,9 +161,19 @@ function Visualizer() {
         <Container>
           <Row>
             <VisualizerType 
-              value={visualizer}/>
+              value={visualizer}
+              allTasks={completeTasks.concat(incompleteTasks)}/>
           </Row>
         </Container>
+        <text>
+          {`${startDateString}`}
+        </text>
+        <text>
+          {`${endDateString}`}
+        </text>
+        <text>
+          {`${JSON.stringify(completeTasks.concat(incompleteTasks))}`}
+        </text>
       </Stack>
     </div>
   );
