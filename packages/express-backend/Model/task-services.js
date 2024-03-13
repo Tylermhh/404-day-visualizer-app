@@ -29,15 +29,23 @@ export const getTasks = async (userId, startDate, endDate, category, done) => {
 
   // category specified
   if (category != undefined) {
-    promise = taskModel.find({
-      userID: userId,
-      createdAt: {
-        $gte: startOfDay(startDate),
-        $lte: endOfDay(endDate),
-      },
-      category: category,
-      done: done,
-    });
+    if (startDate === undefined || endDate === undefined) {
+      promise = taskModel.find({
+        userID: userId,
+        category: category,
+        done: done
+      })
+    } else {
+      promise = taskModel.find({
+        userID: userId,
+        createdAt: {
+          $gte: startOfDay(startDate),
+          $lte: endOfDay(endDate)
+        },
+        category: category,
+        done: done
+      })
+    }
 
     // all categories
   } else {
@@ -45,10 +53,10 @@ export const getTasks = async (userId, startDate, endDate, category, done) => {
       userID: userId,
       createdAt: {
         $gte: startOfDay(startDate),
-        $lte: endOfDay(endDate),
+        $lte: endOfDay(endDate)
       },
-      done: done,
-    });
+      done: done
+    })
   }
 
   return promise;

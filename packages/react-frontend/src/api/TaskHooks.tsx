@@ -39,6 +39,12 @@ export function getTasks(userID: string, start: Date, end: Date) {
   return promise;
 }
 
+export function getAllTasks(userID: string) {
+  console.log(`${url}/${userID}`);
+  const promise = fetch(`${url}/${userID}`);
+  return promise;
+}
+
 // hook to post Task
 export function postTask(task: ITask) {
   const promise = fetch(`${url}/task`, {
@@ -55,6 +61,8 @@ export function postTask(task: ITask) {
       createdAt: task.createdAt,
       datesUpdated: task.datesUpdated,
       done: false,
+      deadline: task.deadline,
+      priority: task.priority,
     }),
   });
   return promise;
