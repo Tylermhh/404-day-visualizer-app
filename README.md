@@ -24,3 +24,6 @@ Taskcraft provides various visualization methods, like hours spent per category,
 - Late Updated: 2/22/2024
 
 ## Development Environment Set Up
+To get started on further developing this web app, not much is needed in terms of setting up your environment or your system packages. 
+The only prerequesites are that your system is able to run npm/npx commands and supports javascript and typescript. There is an eslint dependency but that should be included in the git files and should get installed when you run npm install for the first time.
+In terms of the environment variables, these are defined either on the deployed web servers or if the server is unavailable, defined in the code itself that is published in this repository.
