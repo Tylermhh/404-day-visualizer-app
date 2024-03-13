@@ -65,6 +65,7 @@ const NewTaskModal: React.FC<{tasks : ITask[], categories : Category[], refreshP
                 <Form.Group className='mb-3' controlId='formItemCategory'>
                   <Form.Label>Category</Form.Label>
                   <Form.Select onChange={(e) => {handleChange("category", e)}}>
+                    <option>Select a category</option> 
                     {input.categories.map((entry, index) => (
                       <option value={entry.name}>{entry.name}</option>
                     ))}    
