@@ -1,12 +1,11 @@
 // import React from "react";
 "use client";
-import { getAllTasks } from "../api/TaskHooks";
+import { useEffect, useState } from "react";
 import MainNav from "./Nav/MainNav";
 import TaskTable from "./Table/TaskTable";
-import { Category, ITask } from "./../types/types";
 import styles from "./Page.module.css";
-import { useEffect, useState } from "react";
-// import { getTasks } from "../api/TaskHooks";
+import { getAllTasks } from "../api/TaskHooks";
+import { Category, ITask } from "./../types/types";
 // import userID from "./User";
 
 let tempTasks: ITask[] = [
@@ -80,21 +79,6 @@ let userCategories: Category[] = [
 ];
 
 function Task() {
-  // const [doneTasksList, setDoneTasksList] = useState([]);
-  // const [toDoTasksList, setToDoTasksList] = useState([]);
-
-  // useEffect(() => {
-  //   getTasks(userID, new Date(), new Date())
-  //     .then(res => res.json())
-  //     .then(json => {
-  //       setToDoTasksList(json.notDone);
-  //       setDoneTasksList(json.done);
-  //     })
-  //     .catch(error => {
-  //       console.log(error);
-  //     });
-  // }, []);
-
   const userID = "65eb04d403116e2e8c60f63e";
   const [incompleteTasks, setIncompleteTasks] = useState<ITask[]>(empty_list);
   const [completeTasks, setCompleteTasks] = useState<ITask[]>(empty_list);
