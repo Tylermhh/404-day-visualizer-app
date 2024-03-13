@@ -5,10 +5,8 @@ import VisualizerNumberTasksPerCategoryPieChart from "./Chart/VisualizerNumberTa
 import VisualizerHoursSpentPerCategoryPieChart from "./Chart/VisualizerHoursSpentPerCategoryPieChart"
 import VisualizerHoursSpentPerTaskBarChart from "./Chart/VisualizerHoursSpentPerTaskBarChart";
 import { ITask } from "./../types/types"
-import {tempTasks, userCategories} from "./../TempData"
+import { userCategories } from "./../TempData"
 import { getTasks } from "../api/TaskHooks";
-import { start } from "repl";
-
 
 function GetDateString(date : Date) : string {
   let year = date.getFullYear().toString();
@@ -55,7 +53,7 @@ function VisualizerType(value : any, allTasks : ITask[]) {
           <Col sm={4} />
         </Row>
         <Container className="d-flex justify-content-center">
-          <VisualizerHoursSpentPerTaskBarChart tasks={tempTasks} categories={userCategories} category={category}/>
+          <VisualizerHoursSpentPerTaskBarChart tasks={allTasks} categories={userCategories} category={category}/>
         </Container>
       </Container>
     )
@@ -99,6 +97,7 @@ function Visualizer() {
     )
       .then(tasks => {
         tasks.json().then(data => {
+          setCompleteTasks(data.done);
           setIncompleteTasks(data.notDone);
         });
       })
