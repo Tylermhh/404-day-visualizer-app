@@ -5,8 +5,7 @@ import authRoutes from "./routes/auth-routes.js";
 import cors from "cors";
 import dotenv from "dotenv";
 
-dotenv.config({ path: '../../.env' });
-
+dotenv.config({ path: "../../.env" });
 
 const port = 8000;
 const app = express();

@@ -90,8 +90,29 @@ function Task() {
   //       console.log(error);
   //     });
   // }, []);
+  const today: Date = new Date();
 
-  getTasks("65d1d1bfe907b971e50b2cca", new Date(), new Date())
+  console.log(today.getDate() + 1);
+  console.log(
+    new Date(
+      today.getFullYear().toString() +
+        "-" +
+        (today.getMonth() + 1).toString() +
+        "-" +
+        (today.getDate() + 1).toString(),
+    ),
+  );
+  getTasks(
+    "65d1d1bfe907b971e50b2cca",
+    today,
+    new Date(
+      today.getFullYear().toString() +
+        "-" +
+        (today.getMonth() + 1).toString() +
+        "-" +
+        (today.getDate() + 1).toString(),
+    ),
+  )
     .then(tasks => {
       console.log(tasks);
     })

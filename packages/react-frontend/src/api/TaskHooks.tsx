@@ -1,7 +1,7 @@
 import { ITask } from "../types/types";
 
 // const url: string = "https://404-taskcraft.azurewebsites.net/";
-const url: string = "http://localhost:8000/task";
+const url: string = "http://localhost:8000";
 
 function convertDateStringToHyphen(date: string) {
   let newDate: string = "";
@@ -21,28 +21,40 @@ export function getTasks(userID: string, start: Date, end: Date) {
     month: "2-digit",
     year: "numeric",
   });
-  const startStr = convertDateStringToHyphen(formatter.format(start));
-  const endStr = convertDateStringToHyphen(formatter.format(end));
+  let startStr = convertDateStringToHyphen(formatter.format(start));
+  let endStr = convertDateStringToHyphen(formatter.format(end));
+  // if (startStr === endStr) {
+  //   let nextDayNum: number = Number(endStr[endStr.length - 2]) + 1;
+  //   let nextDayStr = nextDayNum.toString();
+  //   if (nextDayNum < 10) {
+  //     nextDayStr = "".concat(nextDayNum.toString(), "0");
+  //   }
+  //   endStr = "".concat(endStr.substring(0, endStr.length - 2), nextDayStr);
+  //   console.log(endStr);
+  // }
+  console.log(endStr);
   const promise = fetch(
-    `${url}/${userID}/?startDate=${startStr}&endDate=${endStr}`,
+    `${url}/task/${userID}/?startDate=${startStr}&endDate=${endStr}`,
   );
   return promise;
 }
 
 // hook to post Task
 export function postTask(task: ITask) {
-  const promise = fetch(`${url}/task/`, {
+  const promise = fetch(`${url}/task`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
+      // deparameterize to ignore _id
       name: task.name,
       userID: task.userID,
       description: task.description,
       category: task.category,
       createdAt: task.createdAt,
       datesUpdated: task.datesUpdated,
+      done: false,
     }),
   });
   return promise;
