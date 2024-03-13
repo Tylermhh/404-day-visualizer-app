@@ -6,7 +6,7 @@ import TaskTable from "./Table/TaskTable";
 import { Category, ITask } from "./../types/types";
 import styles from "./Page.module.css";
 import { useEffect, useState } from "react";
-import { getTasks } from "../api/TaskHooks";
+// import { getTasks } from "../api/TaskHooks";
 // import userID from "./User";
 
 let tempTasks: ITask[] = [

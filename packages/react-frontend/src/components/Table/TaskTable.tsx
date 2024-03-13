@@ -4,7 +4,7 @@ import { Category, ITask } from "./../../types/types";
 import styles from "../Page.module.css";
 import moment from "moment";
 import NewTaskModal from "../Modals/NewTaskModal";
-import { IDateEntry } from "./../../types/types";
+// import { IDateEntry } from "./../../types/types";
 
 function TaskTable(params: {
   name: String;
