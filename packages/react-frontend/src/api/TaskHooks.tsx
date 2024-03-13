@@ -1,6 +1,6 @@
 import { ITask } from "../types/types";
 
-const url: string = "https://404-taskcraft.azurewebsites.net/";
+const url: string = "https://404-taskcraft.azurewebsites.net/task";
 // const url: string = "http://localhost:8000/task";
 
 function convertDateStringToHyphen(date: string) {
