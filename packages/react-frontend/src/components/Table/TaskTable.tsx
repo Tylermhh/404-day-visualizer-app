@@ -11,6 +11,7 @@ function TaskTable(params: {
   page: String;
   tasks: ITask[];
   categories: Category[];
+  refreshPage: () => void;
 }) {
   let tasks = params.tasks;
 
@@ -23,7 +24,7 @@ function TaskTable(params: {
               <h2>{params.name}</h2>
             </Col>
             <Col sm={1}>
-              <NewTaskModal tasks={tasks} categories={input.categories_lst}/>
+              <NewTaskModal tasks={tasks} categories={input.categories_lst} refreshPage={params.refreshPage}/>
             </Col>
           </Row>
         </div>

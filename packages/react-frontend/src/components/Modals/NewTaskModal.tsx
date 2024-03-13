@@ -5,17 +5,19 @@ import Modal from 'react-bootstrap/Modal';
 import { Category, ITask, IDateEntry } from '../../types/types';
 import { postTask } from '../../api/TaskHooks';
 
-const NewTaskModal: React.FC<{tasks : ITask[], categories : Category[]}> = (input) => {
+const NewTaskModal: React.FC<{tasks : ITask[], categories : Category[], refreshPage: () => void}> = (input) => {
+  const userID = "65eb04d403116e2e8c60f63e";
 
   const empty_IDateEntry: IDateEntry[] = [];
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [newTask, setNewTask] = useState<ITask>({
     _id: "",
     name: "",
-    userID: "",
+    userID: userID,
     description: "",
     category: "",
     createdAt: new Date(),
+    priority: "High",
     datesUpdated: empty_IDateEntry,
     done: false,
     deadline: new Date(),
@@ -29,9 +31,9 @@ const NewTaskModal: React.FC<{tasks : ITask[], categories : Category[]}> = (inpu
   };
 
   const handleSubmit = () => {
-    console.log(newTask);
-    // postTask(newTask);
+    postTask(newTask);
     toggleModal();
+    input.refreshPage();
   }
 
   const toggleModal = () => {

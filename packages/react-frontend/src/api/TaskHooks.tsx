@@ -30,6 +30,7 @@ export function getTasks(userID: string, start: Date, end: Date) {
 }
 
 export function getAllTasks(userID: string) {
+  console.log(`${url}/${userID}`);
   const promise = fetch(
     `${url}/${userID}`,
   );
@@ -38,7 +39,7 @@ export function getAllTasks(userID: string) {
 
 // hook to post Task
 export function postTask(task: ITask) {
-  const promise = fetch(`${url}/task/`, {
+  const promise = fetch(`${url}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -48,9 +49,8 @@ export function postTask(task: ITask) {
       userID: task.userID,
       description: task.description,
       category: task.category,
-      createdAt: task.createdAt,
-      datesUpdated: task.datesUpdated,
-      done: task.done,
+      deadline: task.deadline,
+      priority: task.priority
     }),
   });
   return promise;

@@ -186,6 +186,7 @@ const HomePage: React.FC<{}> = () => {
 
   //   setTasks(updated);
   // }
+  const emptyRefresh = () => {}
 
   return (
     <div>
@@ -203,6 +204,7 @@ const HomePage: React.FC<{}> = () => {
                 page="HomePage"
                 tasks={tempTasks}
                 categories={userCategories}
+                refreshPage={emptyRefresh}
               />
             </Col>
             <Col sm={3}>

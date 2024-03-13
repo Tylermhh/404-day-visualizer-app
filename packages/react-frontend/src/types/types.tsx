@@ -21,6 +21,11 @@ export interface CategoryProgress {
     color?: string;
 }
 
+export interface TaskHours {
+    hours: number;
+    amount: number;
+}
+
 export interface Category {
     name: string;
     color: string;
