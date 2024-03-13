@@ -27,26 +27,26 @@ router.post("/", async (req, res) => {
 });
 
 router.get("/:userId", async (req, res) => {
-  const id = req.params["userId"]
+  const id = req.params["userId"];
 
-  const startDate = undefined
-  const endDate = undefined
-  let category = undefined
+  let startDate = undefined;
+  let endDate = undefined;
+  let category = undefined;
 
   if (req.query["startDate"] !== undefined) {
-    startDate = new Date(req.query["startDate"])
+    startDate = new Date(req.query["startDate"]);
   }
   if (req.query["endDate"] !== undefined) {
-    endDate = new Date(req.query["endDate"])
+    endDate = new Date(req.query["endDate"]);
   }
   if (req.query["category"]) {
     category = req.query["category"];
   }
 
-  let doneResult, notDoneResult
-  
-  doneResult = await getTasks(id, startDate, endDate, category, true)
-  notDoneResult = await getTasks(id, startDate, endDate, category, false)
+  let doneResult, notDoneResult;
+
+  doneResult = await getTasks(id, startDate, endDate, category, true);
+  notDoneResult = await getTasks(id, startDate, endDate, category, false);
 
   if (
     doneResult === undefined ||

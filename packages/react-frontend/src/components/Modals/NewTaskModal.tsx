@@ -4,8 +4,13 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { Category, ITask } from "../../types/types";
 import { postTask } from "../../api/TaskHooks";
+import { IDateEntry } from "../../types/types";
 
-const NewTaskModal: React.FC<{tasks : ITask[], categories : Category[], refreshPage: () => void}> = (input) => {
+const NewTaskModal: React.FC<{
+  tasks: ITask[];
+  categories: Category[];
+  refreshPage: () => void;
+}> = input => {
   const userID = "65eb04d403116e2e8c60f63e";
 
   const empty_IDateEntry: IDateEntry[] = [];
@@ -34,7 +39,7 @@ const NewTaskModal: React.FC<{tasks : ITask[], categories : Category[], refreshP
     postTask(newTask);
     toggleModal();
     input.refreshPage();
-  }
+  };
 
   const toggleModal = () => {
     setIsModalVisible(!isModalVisible);
