@@ -17,10 +17,10 @@ Taskcraft provides various visualization methods, like hours spent per category,
 
 ## UI Prototype
 - [Figma UI Prototype](https://www.figma.com/file/ZOc6xjfhkhTE3yyKUHFoGL/404-visualizer-app?type=design&node-id=0%3A1&mode=design&t=Oi5bb2p3YFzPVBrt-1)
-- Last Updated: 2/8
+- Last Updated: 2/8/2024
 
 ## UML Class Diagrams
 - [UML Class Diagrams]()
-- Late Updated:
+- Late Updated: 2/22/2024
 
 ## Development Environment Set Up
