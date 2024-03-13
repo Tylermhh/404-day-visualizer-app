@@ -12,8 +12,9 @@ const NewTaskModal: React.FC<{
   refreshPage: () => void;
 }> = input => {
   const userID = "65eb04d403116e2e8c60f63e";
+  const initDate: IDateEntry = { date: new Date(), hours: 0 };
 
-  const empty_IDateEntry: IDateEntry[] = [];
+  const empty_IDateEntry: IDateEntry[] = [initDate];
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [newTask, setNewTask] = useState<ITask>({
     _id: "",

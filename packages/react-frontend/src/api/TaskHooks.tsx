@@ -1,7 +1,7 @@
 import { ITask } from "../types/types";
 
 // const url: string = "https://404-taskcraft.azurewebsites.net/";
-const url: string = "http://localhost:8000";
+const url: string = "http://localhost:8000/task";
 
 function convertDateStringToHyphen(date: string) {
   let newDate: string = "";
@@ -23,18 +23,8 @@ export function getTasks(userID: string, start: Date, end: Date) {
   });
   let startStr = convertDateStringToHyphen(formatter.format(start));
   let endStr = convertDateStringToHyphen(formatter.format(end));
-  // if (startStr === endStr) {
-  //   let nextDayNum: number = Number(endStr[endStr.length - 2]) + 1;
-  //   let nextDayStr = nextDayNum.toString();
-  //   if (nextDayNum < 10) {
-  //     nextDayStr = "".concat(nextDayNum.toString(), "0");
-  //   }
-  //   endStr = "".concat(endStr.substring(0, endStr.length - 2), nextDayStr);
-  //   console.log(endStr);
-  // }
-  console.log(endStr);
   const promise = fetch(
-    `${url}/task/${userID}/?startDate=${startStr}&endDate=${endStr}`,
+    `${url}/${userID}/?startDate=${startStr}&endDate=${endStr}`,
   );
   return promise;
 }
@@ -47,7 +37,7 @@ export function getAllTasks(userID: string) {
 
 // hook to post Task
 export function postTask(task: ITask) {
-  const promise = fetch(`${url}/task`, {
+  const promise = fetch(`${url}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

@@ -4,6 +4,7 @@ import { Category, ITask } from "./../../types/types";
 import styles from "../Page.module.css";
 import moment from "moment";
 import NewTaskModal from "../Modals/NewTaskModal";
+import { IDateEntry } from "./../../types/types";
 
 function TaskTable(params: {
   name: String;
@@ -15,7 +16,10 @@ function TaskTable(params: {
 }) {
   let tasks = params.tasks;
 
-  const TableTitle: React.FC<{tasks : ITask[], categories_lst : Category[]}> = (input) => {
+  const TableTitle: React.FC<{
+    tasks: ITask[];
+    categories_lst: Category[];
+  }> = input => {
     if (params.todo) {
       return (
         <div>
@@ -24,7 +28,11 @@ function TaskTable(params: {
               <h2>{params.name}</h2>
             </Col>
             <Col sm={1}>
-              <NewTaskModal tasks={tasks} categories={input.categories_lst} refreshPage={params.refreshPage}/>
+              <NewTaskModal
+                tasks={tasks}
+                categories={input.categories_lst}
+                refreshPage={params.refreshPage}
+              />
             </Col>
           </Row>
         </div>
@@ -117,7 +125,7 @@ function TaskTable(params: {
 
   return (
     <Container className={styles.tableComponent}>
-      <TableTitle tasks={tasks} categories_lst={params.categories}/>
+      <TableTitle tasks={tasks} categories_lst={params.categories} />
       <TableBody tasks={tasks} todo={params.todo} />
     </Container>
   );

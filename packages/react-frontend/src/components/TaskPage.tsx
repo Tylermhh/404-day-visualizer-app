@@ -94,35 +94,6 @@ function Task() {
   //       console.log(error);
   //     });
   // }, []);
-  const today: Date = new Date();
-
-  console.log(today.getDate() + 1);
-  console.log(
-    new Date(
-      today.getFullYear().toString() +
-        "-" +
-        (today.getMonth() + 1).toString() +
-        "-" +
-        (today.getDate() + 1).toString(),
-    ),
-  );
-  getTasks(
-    "65d1d1bfe907b971e50b2cca",
-    today,
-    new Date(
-      today.getFullYear().toString() +
-        "-" +
-        (today.getMonth() + 1).toString() +
-        "-" +
-        (today.getDate() + 1).toString(),
-    ),
-  )
-    .then(tasks => {
-      console.log(tasks);
-    })
-    .catch(err => {
-      console.error(err);
-    });
 
   const userID = "65eb04d403116e2e8c60f63e";
   const [incompleteTasks, setIncompleteTasks] = useState<ITask[]>(empty_list);
@@ -135,6 +106,9 @@ function Task() {
         setIncompleteTasks(data.notDone);
         setCompleteTasks(data.done);
         console.log(data.notDone);
+      })
+      .catch(err => {
+        console.error(err);
       });
   };
 
@@ -144,7 +118,6 @@ function Task() {
       .then(data => {
         setIncompleteTasks(data.notDone);
         setCompleteTasks(data.done);
-        console.log(data.notDone);
       });
   }, []);
 
