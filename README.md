@@ -28,6 +28,8 @@ To get started on further developing this web app, not much is needed in terms o
 The only prerequesites are that your system is able to run npm/npx commands and supports javascript and typescript. There is an eslint dependency but that should be included in the git files and should get installed when you run npm install for the first time.
 In terms of the environment variables, these are defined either on the deployed web servers or if the server is unavailable, defined in the code itself that is published in this repository.
 
+The continuous integration and deployment is already set in the github repository so no further action is needed in that regard.
+
 **Setup instructions**
 - git clone this repository
 - npm install in root directory
