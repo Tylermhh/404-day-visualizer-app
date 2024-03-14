@@ -117,12 +117,6 @@ function Visualizer() {
       <MainNav page={"Visualizer"} />
       <Stack gap={3}>
         <Container />
-        <text>
-          {startDate.toDateString()}
-        </text>
-        <text>
-          {endDate.toDateString()}
-        </text>
         <Container>
           <Row>
             <Col sm={4}>

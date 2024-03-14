@@ -10,16 +10,9 @@ const renderCustomizedLabel: React.FC<{cx: number , cy: number, midAngle: number
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
-    if(hours === 1) {
-        return (
-            <text x={x} y={y} width={10} fill="black" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
-                {`${hours} Task`}
-            </text>
-        )
-    }
     return (
         <text x={x} y={y} width={10} fill="black" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
-            {`${hours} Tasks`}
+            {`${hours}`}
         </text>
     )
 }
@@ -62,7 +55,8 @@ const HomePieChart: React.FC<{tasks : ITask[], categories : Category[]}> = (inpu
     return (
         <PieChart width={400} height={400}>
             <Pie data={filtered_category_progress} cx="50%" cy="50%" labelLine={false} label={renderCustomizedLabel}
-                fill="#8884d8" dataKey="hours" overflow='visible' isAnimationActive={true}>
+                fill="#8884d8" dataKey="hours" overflow='visible' isAnimationActive={false}
+                key={Math.random()}>
                 {filtered_category_progress.map((entry, index) => 
                     (<Cell key={`cell-${index}`} fill={entry.color} />))}    
             </Pie>

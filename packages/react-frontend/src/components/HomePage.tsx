@@ -1,5 +1,4 @@
 //import React, { useState }from 'react';
-"use client";
 import React, { useState, useEffect } from "react";
 import MainNav from "./Nav/MainNav";
 import TaskTable from "./Table/TaskTable";
@@ -15,7 +14,6 @@ const HomePage: React.FC<{}> = () => {
   const emptyRefresh = () => {};
 
   const today: Date = new Date();
-  // let empty_list: ITask[] = [];
   const [completeTasks, setCompleteTasks] = useState<ITask[]>([]);
   const [incompleteTasks, setIncompleteTasks] = useState<ITask[]>([]);
 
