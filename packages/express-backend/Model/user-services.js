@@ -22,8 +22,19 @@ export const findUserById = async id => {
 };
 
 export const addUser = async user => {
-  await connectDB();
-  const userToAdd = new userModel(user);
-  const savedUser = await userToAdd.save();
-  return savedUser;
-};
+  await connectDB()
+  const userToAdd = new userModel(user)
+  const savedUser = await userToAdd.save()
+  return savedUser
+}
+
+export const updateUserById = async (id, updated) => {
+  await connectDB()
+  let promise
+
+  promise = userModel.findByIdAndUpdate(id, updated, { new: true })
+
+  return promise
+}
+
+
