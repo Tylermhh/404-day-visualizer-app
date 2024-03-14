@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import MainNav from "./Nav/MainNav";
 import { Button, Container, Col, Row, Form, Stack } from "react-bootstrap";
 import { loginUser } from '../api/AuthHooks';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../context/AuthContext'; // This import is for login authentication purposes
 
 function LoginPage() {
   const [username, setUsername] = useState<string>('');
   const [pwd, setPassword] = useState<string>('');
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login } = useAuth();      // login is called so that the user remains authenticated while navigating different pages
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -20,9 +20,8 @@ function LoginPage() {
         console.log('Login successful', data);
         localStorage.setItem('token', data.token);
         localStorage.setItem('userID', data.userID);
-        console.log(data.userID)
-        login(data.token, data.userID); // Update your login method to optionally handle user ID
-        navigate('/home');
+        login(data.token, data.userID); // login(data.token, data.userID) puts the token and userID in local storage
+        navigate('/home');              
         // Redirect to home on successful login
       } else {
         // Use the custom error message if provided by loginUser
