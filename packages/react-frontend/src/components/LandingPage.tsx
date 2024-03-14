@@ -9,22 +9,20 @@ function Main() {
         <MainNav
             page = { "Landing" }
         />
-        <Stack gap = {3}>
+        <Stack gap = {5}>
             <Container />
-            <Container>
+            <Container />
+            <Container />
+            <Container className={styles['page-text']}>
                 <Row>
-                    <Col sm={2}>
-                    </Col>
+                    <Col sm={2} />
                     <Col sm={8}>
-                        <h1>
-                            TaskCraft
-                        </h1>
-                    </Col>
-                    <Col sm={2}>
-                    </Col>
+                            <h1>
+                                TaskCraft
+                            </h1>
+                        </Col>
+                    <Col sm={2} />
                 </Row>
-            </Container>
-            <Container>
                 <Row>
                     <Col sm={12}>
                         <h4>
@@ -32,6 +30,19 @@ function Main() {
                             TaskCraft is a time management and visualizer app that serves as a motivating to-do list. 
                             Unlike built-in “to-do lists” our product analyzes how long each item took you to visualize 
                             how you spent your time that day and motivates you to be more productive.
+                        </h4>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col sm={12}>
+                        <h4>
+                            Taskcraft is an app design to help individuals gain a better understanding of their time spending habits. 
+                            Keeping track of time can get hard, especially if you have a lot of thing going on all at once, 
+                            like having various projects or homework assignments you need to get done. The purpose of Taskcraft is to help you ke
+                            ep track of your time and help you visualize how you spend it. By having various ways to keep track of how long you 
+                            work on certain tasks or how often you work on one subset of tasks compared to another, Taskcraft provides various 
+                            visualization methods, like hours spent per category, to help you gain an understanding on how you spend most of 
+                            your time.
                         </h4>
                     </Col>
                 </Row>

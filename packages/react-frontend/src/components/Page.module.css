@@ -43,6 +43,14 @@
   font-style: bolder;
 }
 
+.page-text {
+  offset: 100;
+  border-width: 2px;
+  border-radius: 10px;
+  border-style: solid;
+  border-color: #0066C9;
+}
+
 .modal-overlay {
   z-index: 9999;
   width: 100vw;
