@@ -21,17 +21,7 @@ const HomePage: React.FC<{}> = () => {
   const [incompleteTasks, setIncompleteTasks] = useState<ITask[]>(empty_list);
 
   useEffect(() => {
-    getTasks(
-      userID,
-      today,
-      new Date(
-        today.getFullYear().toString() +
-          "-" +
-          (today.getMonth() + 1).toString() +
-          "-" +
-          (today.getDate() + 1).toString(),
-      ),
-    )
+    getTasks( userID, today, new Date( today.getFullYear().toString() + "-" + (today.getMonth() + 1).toString() + "-" + (today.getDate() + 1).toString(),),)
       .then(tasks => {
         tasks.json().then(data => {
           setCompleteTasks(data.done);
@@ -50,7 +40,7 @@ const HomePage: React.FC<{}> = () => {
         <Container />
         <Container>
           <Row>
-            <Col sm={9}>
+            <Col sm={8}>
               <TaskTable
                 name="Today's To-Do List"
                 todo={false}
@@ -60,11 +50,11 @@ const HomePage: React.FC<{}> = () => {
                 refreshPage={ emptyRefresh }
               />
             </Col>
-            <Col sm={3}>
+            <Col sm={4}>
               <Stack gap={4}>
                 <Container>
                   <HomePieChart
-                    tasks={ incompleteTasks }
+                    tasks={ completeTasks }
                     categories={ userCategories }
                   />
                 </Container>
