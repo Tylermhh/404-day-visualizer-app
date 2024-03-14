@@ -15,11 +15,9 @@ function Task() {
   const [completeTasks, setCompleteTasks] = useState<ITask[]>(empty_list);
   const [categories, setCategories] = useState<Category[]>([]);
 
-  let userID = localStorage.getItem('userID')
-
   const refreshPage = () => {
     console.log("user categories: ");
-    getAllTasks(userID as string)
+    getAllTasks(localStorage.getItem("userID") as string)
       .then(response => response.json())
       .then(data => {
         setIncompleteTasks(data.notDone);
@@ -30,11 +28,11 @@ function Task() {
       .catch(err => {
         console.error(err);
       });
-    getUser(userID as string)
+    getUser(localStorage.getItem("userID") as string)
       .then(res => {
         res.json().then(userObj => {
           setCategories(userObj.categories);
-          console.log("categories:", categories);
+          // console.log("categories:", categories);
         });
       })
       .catch(err => {
@@ -43,23 +41,22 @@ function Task() {
   };
 
   useEffect(() => {
-    getAllTasks(userID as string)
+    getAllTasks(localStorage.getItem("userID") as string)
       .then(response => response.json())
       .then(data => {
         setIncompleteTasks(data.notDone);
         setCompleteTasks(data.done);
       });
-    getUser(userID as string)
+    getUser(localStorage.getItem("userID") as string)
       .then(res => {
         res.json().then(userObj => {
           setCategories(userObj.categories);
-          console.log("categories:", categories);
         });
       })
       .catch(err => {
         console.error(err);
       });
-  });
+  }, []);
 
   return (
     <div className="App">

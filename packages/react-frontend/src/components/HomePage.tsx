@@ -7,23 +7,21 @@ import HomeProgressBar from "./ProgressBar/HomeProgressBar";
 import { Category, ITask } from "./../types/types";
 import { Container, Col, Row, Stack } from "react-bootstrap";
 import { getTasks } from "../api/TaskHooks";
-import { getUser } from "./../api/UserHooks"
+import { getUser } from "./../api/UserHooks";
 
 const HomePage: React.FC<{}> = () => {
   const emptyRefresh = () => {};
-  console.log(localStorage.getItem('userID'))
+  console.log(localStorage.getItem("userID"));
 
-  const today: Date = new Date();
   const [completeTasks, setCompleteTasks] = useState<ITask[]>([]);
   const [incompleteTasks, setIncompleteTasks] = useState<ITask[]>([]);
 
   const [categories, setCategories] = useState<Category[]>([]);
 
-  let userID = localStorage.getItem('userID')
-
-    useEffect(() => {
+  useEffect(
+    (today = new Date()) => {
       getTasks(
-        (userID as string),
+        (localStorage.getItem('userID') as string),
         today,
         new Date(
           today.getFullYear().toString() +
@@ -42,19 +40,21 @@ const HomePage: React.FC<{}> = () => {
         .catch(err => {
           console.error(err);
         });
-    });
+    },
+    [],
+  );
 
     useEffect(() => {
-      getUser((userID as string))
+      getUser((localStorage.getItem('userID') as string))
       .then(res => {
-          res.json().then(data => {
-              setCategories(data.categories)
-          });
+        res.json().then(data => {
+          setCategories(data.categories);
+        });
       })
       .catch(err => {
-          console.error(err);
+        console.error(err);
       });
-  });
+  }, []);
 
   return (
     <div>
@@ -75,14 +75,9 @@ const HomePage: React.FC<{}> = () => {
             </Col>
             <Col sm={4}>
               <Stack gap={1}>
-                <text>
-                  Number of Tasks Completed
-                </text>
+                <text>Number of Tasks Completed</text>
                 <Container>
-                  <HomePieChart
-                    tasks={completeTasks}
-                    categories={categories}
-                  />
+                  <HomePieChart tasks={completeTasks} categories={categories} />
                 </Container>
                 <Container>
                   <HomeProgressBar
