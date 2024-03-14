@@ -4,6 +4,7 @@ import { Container, Col, Form, Row, Stack } from "react-bootstrap";
 import VisualizerNumberTasksPerCategoryPieChart from "./Chart/VisualizerNumberTasksPerCategoryPieChart";
 import VisualizerHoursSpentPerCategoryPieChart from "./Chart/VisualizerHoursSpentPerCategoryPieChart";
 import VisualizerHoursSpentPerTaskBarChart from "./Chart/VisualizerHoursSpentPerTaskBarChart";
+import VisualizerCompletedNotCompletedTasksPerCategoryBarChart from "./Chart/VisualizerCompletedNotCompletedTasksPerCategoryBarChart";
 import { ITask } from "./../types/types";
 import { userCategories } from "./../TempData";
 import { getTasks } from "../api/TaskHooks";
@@ -42,6 +43,31 @@ function VisualizerType(value: string, allTasks: ITask[]) {
       </Container>
     );
   } else if (value === "3") {
+    return (
+      <Container>
+        <Row>
+          <Col sm={4} />
+          <Col sm={4}>
+            <Form>
+              <Form.Select value={category} onChange={handleSelectCategory}>
+                {userCategories.map((categories, index) => (
+                  <option value={index}>{categories.name}</option>
+                ))}
+              </Form.Select>
+            </Form>
+          </Col>
+          <Col sm={4} />
+        </Row>
+        <Container className="d-flex justify-content-center">
+          <VisualizerCompletedNotCompletedTasksPerCategoryBarChart
+            tasks={allTasks}
+            categories={userCategories}
+            category={category}
+          />
+        </Container>
+      </Container>
+    );
+  } else if (value === "4") {
     return (
       <Container>
         <Row>
@@ -124,9 +150,10 @@ function Visualizer() {
                 <Form.Select
                   value={visualizer}
                   onChange={handleSelectVisualizer}>
-                  <option value="1">Number of Tasks Per Category</option>
-                  <option value="2">Hours Spent Per Category</option>
-                  <option value="3">Average Hours Spent Per Task</option>
+                  <option value="1">Number of Tasks per Category</option>
+                  <option value="2">Hours Spent per Category</option>
+                  <option value="3">Completed and Not Completed Tasks per Category</option>
+                  <option value="4">Average Hours Spent Per Task per Category</option>
                 </Form.Select>
               </Form>
             </Col>
