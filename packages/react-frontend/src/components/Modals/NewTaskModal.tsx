@@ -5,7 +5,6 @@ import Modal from "react-bootstrap/Modal";
 import { Category, ITask } from "../../types/types";
 import { postTask } from "../../api/TaskHooks";
 import { IDateEntry } from "../../types/types";
-import { userID } from "../User";
 
 const NewTaskModal: React.FC<{
   tasks: ITask[];
@@ -19,7 +18,7 @@ const NewTaskModal: React.FC<{
   const [newTask, setNewTask] = useState<ITask>({
     _id: "",
     name: "",
-    userID: userID,
+    userID: (localStorage.getItem('userID') as string),
     description: "",
     category: "null",
     createdAt: new Date(),
