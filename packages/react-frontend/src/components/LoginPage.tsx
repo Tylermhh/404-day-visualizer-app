@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import MainNav from "./Nav/MainNav";
 import { Button, Container, Col, Row, Form, Stack } from "react-bootstrap";
 import { loginUser } from '../api/AuthHooks';
-import { AuthProvider, useAuth } from '../context/AuthContext';
+import { useAuth } from '../context/AuthContext';
 
 function LoginPage() {
   const [username, setUsername] = useState<string>('');
