@@ -16,7 +16,7 @@ function Main() {
       const response = await registerUser(username, pwd);
       if (response.ok) {
         console.log('Signup successful');
-        navigate('/home'); // Redirect to home on successful signup
+        navigate('/');
       } else {
         throw new Error('Signup failed');
       }
