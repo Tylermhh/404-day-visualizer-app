@@ -1,6 +1,6 @@
 import React from 'react'
 import { PieChart, Pie, Cell, Legend } from 'recharts';
-import { ITask, Category, CategoryProgress, DateEntry } from '../../types/types';
+import { ITask, Category, CategoryProgress } from '../../types/types';
 
 const RADIAN = Math.PI / 180;
 const renderCustomizedLabel: React.FC<{cx: number , cy: number, midAngle: number, innerRadius: number, outerRadius: number, name: string, hours: number, percent: number}> 
@@ -22,17 +22,6 @@ const renderCustomizedLabel: React.FC<{cx: number , cy: number, midAngle: number
             {`${hours} Tasks`}
         </text>
     )
-}
-
-function calculateTaskHours(taskDateEntries : DateEntry[]): number {
-
-    let taskHours = 0;
-
-    for (let object of taskDateEntries) {
-        taskHours += object.hours;
-    }
-
-    return taskHours;
 }
 
 function calculateCategoryProgress(tasks : ITask[], categories : Category[]): CategoryProgress[] {

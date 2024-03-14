@@ -12,7 +12,7 @@ import userID from "./User";
 function GetDateString(date: Date): string {
   let year = date.getFullYear().toString();
   let month = (date.getMonth() + 1).toString();
-  let day = (date.getDate() + 1).toString();
+  let day = (date.getDate()).toString();
 
   if (date.getMonth() < 10) {
     month = "0" + month;
@@ -117,12 +117,12 @@ function Visualizer() {
       <MainNav page={"Visualizer"} />
       <Stack gap={3}>
         <Container />
-        {/* <text>
+        <text>
           {startDate.toDateString()}
         </text>
         <text>
           {endDate.toDateString()}
-        </text> */}
+        </text>
         <Container>
           <Row>
             <Col sm={4}>
