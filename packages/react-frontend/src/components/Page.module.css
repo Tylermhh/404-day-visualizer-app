@@ -1,3 +1,7 @@
+.table-title {
+  padding-bottom: 10px;
+}
+
 .table-responsive {
   max-height: 550px;
   overflow-y: auto;
