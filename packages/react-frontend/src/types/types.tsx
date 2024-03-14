@@ -26,6 +26,11 @@ export interface TaskHours {
     amount: number;
 }
 
+export interface CompletedNotCompletedTasks {
+    type: string
+    amount: number;
+}
+
 export interface Category {
     name: string;
     color: string;
