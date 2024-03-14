@@ -60,7 +60,7 @@ const CompleteTaskOffcanvas: React.FC<{
                     <Form.Label>{input.prompt}</Form.Label>
                     <Form.Control
                         type="text"
-                        placeholder="Enter Item Name"
+                        placeholder="Hours spent"
                         onChange={e => {
                             handleChange(e);
                         }}
