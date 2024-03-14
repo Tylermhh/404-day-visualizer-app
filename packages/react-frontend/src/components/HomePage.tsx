@@ -13,11 +13,11 @@ import { userID } from "./User";
 const HomePage: React.FC<{}> = () => {
   const emptyRefresh = () => {};
 
-  const today: Date = new Date();
+  // const today: Date = new Date();
   const [completeTasks, setCompleteTasks] = useState<ITask[]>([]);
   const [incompleteTasks, setIncompleteTasks] = useState<ITask[]>([]);
 
-  useEffect(() => {
+  useEffect((today = new Date()) => {
     getTasks(
       userID,
       today,
@@ -38,7 +38,7 @@ const HomePage: React.FC<{}> = () => {
       .catch(err => {
         console.error(err);
       });
-  });
+  }, []);
 
   return (
     <div>

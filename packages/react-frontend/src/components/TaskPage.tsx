@@ -33,7 +33,7 @@ function Task() {
       .then(res => {
         res.json().then(userObj => {
           setCategories(userObj.categories);
-          console.log("categories:", categories);
+          // console.log("categories:", categories);
         });
       })
       .catch(err => {
@@ -52,13 +52,12 @@ function Task() {
       .then(res => {
         res.json().then(userObj => {
           setCategories(userObj.categories);
-          console.log("categories:", categories);
         });
       })
       .catch(err => {
         console.error(err);
       });
-  });
+  }, []);
 
   return (
     <div className="App">
