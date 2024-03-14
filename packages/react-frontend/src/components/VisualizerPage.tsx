@@ -90,11 +90,7 @@ function Visualizer() {
   }
 
   useEffect(() => {
-    getTasks(
-      userID,
-      startDate,
-      endDate
-    )
+    getTasks(userID, startDate, endDate)
       .then(tasks => {
         tasks.json().then(data => {
           setCompleteTasks(data.done);
@@ -105,6 +101,8 @@ function Visualizer() {
         console.error(err);
       });
   });
+
+  let allTasks = completeTasks.concat(incompleteTasks)
 
   return (
     <div className="App">
@@ -161,15 +159,9 @@ function Visualizer() {
           <Row>
             <VisualizerType 
               value={visualizer}
-              allTasks={completeTasks.concat(incompleteTasks)}/>
+              allTasks={allTasks}/>
           </Row>
         </Container>
-        <text>
-          {`${startDateString}`}
-        </text>
-        <text>
-          {`${endDateString}`}
-        </text>
         <text>
           {`${JSON.stringify(completeTasks.concat(incompleteTasks))}`}
         </text>
