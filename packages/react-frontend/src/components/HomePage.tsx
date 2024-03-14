@@ -8,7 +8,6 @@ import { ITask } from "./../types/types";
 import { Container, Col, Row, Stack } from "react-bootstrap";
 import { getTasks } from "../api/TaskHooks";
 import { userCategories } from "./../TempData";
-import { userID } from "./User";
 
 const HomePage: React.FC<{}> = () => {
   const emptyRefresh = () => {};
@@ -18,28 +17,30 @@ const HomePage: React.FC<{}> = () => {
   const [completeTasks, setCompleteTasks] = useState<ITask[]>([]);
   const [incompleteTasks, setIncompleteTasks] = useState<ITask[]>([]);
 
-  useEffect(() => {
-    getTasks(
-      userID,
-      today,
-      new Date(
-        today.getFullYear().toString() +
-          "-" +
-          (today.getMonth() + 1).toString() +
-          "-" +
-          (today.getDate() + 1).toString(),
-      ),
-    )
-      .then(tasks => {
-        tasks.json().then(data => {
-          setCompleteTasks(data.done);
-          setIncompleteTasks(data.notDone);
+  let userID = localStorage.getItem('userID')
+
+    useEffect(() => {
+      getTasks(
+        (userID as string),
+        today,
+        new Date(
+          today.getFullYear().toString() +
+            "-" +
+            (today.getMonth() + 1).toString() +
+            "-" +
+            (today.getDate() + 1).toString(),
+        ),
+      )
+        .then(tasks => {
+          tasks.json().then(data => {
+            setCompleteTasks(data.done);
+            setIncompleteTasks(data.notDone);
+          });
+        })
+        .catch(err => {
+          console.error(err);
         });
-      })
-      .catch(err => {
-        console.error(err);
-      });
-  });
+    });
 
   return (
     <div>
