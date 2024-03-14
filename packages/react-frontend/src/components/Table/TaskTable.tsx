@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Col, Row, Table, Container } from "react-bootstrap";
+import { Col, Row, Table, Container } from "react-bootstrap";
 import { Category, ITask } from "./../../types/types";
 import styles from "../Page.module.css";
 import moment from "moment";
