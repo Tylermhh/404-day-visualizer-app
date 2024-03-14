@@ -13,18 +13,16 @@ const HomePage: React.FC<{}> = () => {
   const emptyRefresh = () => {};
   console.log(localStorage.getItem("userID"));
 
-  // const today: Date = new Date();
+  const today: Date = new Date();
   const [completeTasks, setCompleteTasks] = useState<ITask[]>([]);
   const [incompleteTasks, setIncompleteTasks] = useState<ITask[]>([]);
 
   const [categories, setCategories] = useState<Category[]>([]);
 
-  let userID = localStorage.getItem("userID");
-
   useEffect(
     (today = new Date()) => {
       getTasks(
-        userID as string,
+        (localStorage.getItem('userID') as string),
         today,
         new Date(
           today.getFullYear().toString() +
@@ -47,8 +45,8 @@ const HomePage: React.FC<{}> = () => {
     [userID],
   );
 
-  useEffect(() => {
-    getUser(userID as string)
+    useEffect(() => {
+      getUser((localStorage.getItem('userID') as string))
       .then(res => {
         res.json().then(data => {
           setCategories(data.categories);
