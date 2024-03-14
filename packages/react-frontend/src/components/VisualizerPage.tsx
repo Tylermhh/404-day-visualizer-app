@@ -117,12 +117,12 @@ function Visualizer() {
       <MainNav page={"Visualizer"} />
       <Stack gap={3}>
         <Container />
-        <text>
+        {/* <text>
           {startDate.toDateString()}
         </text>
         <text>
           {endDate.toDateString()}
-        </text>
+        </text> */}
         <Container>
           <Row>
             <Col sm={4}>
@@ -167,10 +167,7 @@ function Visualizer() {
         </Container>
         <Container>
           <Row>
-            {/* <VisualizerType 
-              value={visualizer}
-              allTasks={completeTasks} /> */}
-            {VisualizerType(visualizer, completeTasks)}
+            {VisualizerType(visualizer, completeTasks.concat(incompleteTasks))}
           </Row>
         </Container>
       </Stack>
