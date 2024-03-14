@@ -12,6 +12,7 @@ import { userID } from "./User";
 
 const HomePage: React.FC<{}> = () => {
   const emptyRefresh = () => {};
+  console.log(localStorage.getItem('userID'))
 
   // const today: Date = new Date();
   const [completeTasks, setCompleteTasks] = useState<ITask[]>([]);
@@ -59,7 +60,9 @@ const HomePage: React.FC<{}> = () => {
             </Col>
             <Col sm={4}>
               <Stack gap={1}>
-                <text>Number of Tasks Completed</text>
+                <text>
+                  Number of Tasks Completed
+                </text>
                 <Container>
                   <HomePieChart
                     tasks={completeTasks}

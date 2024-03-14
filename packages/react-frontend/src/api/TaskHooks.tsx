@@ -38,9 +38,11 @@ export function getAllTasks(userID: string) {
 export function postTask(task: ITask) {
   console.log("new task");
   console.log(task);
+  const token = localStorage.getItem('token');
   const promise = fetch(`${url}`, {
     method: "POST",
     headers: {
+      'Authorization': `Bearer ${token}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
@@ -63,9 +65,11 @@ export function postTask(task: ITask) {
 export function updateTask(task: ITask) {
   console.log("updating task");
   console.log(`${url}/${task._id}`);
+  const token = localStorage.getItem('token');
   const promise = fetch(`${url}/${task._id}`, {
     method: "PUT",
     headers: {
+      'Authorization': `Bearer ${token}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify(task),

@@ -2,6 +2,7 @@ import React from 'react'
 import styles from './Nav.module.css';
 import { Button, Container, Col, Row, Nav, Navbar, Image } from 'react-bootstrap';
 import * as data from './links.json'
+import UserLogoutOffCanvas from "./../Overlays/UserLogoutOffCanvas"
 
 const linksString = JSON.stringify(data)
 const links = JSON.parse(linksString).links;
@@ -49,9 +50,18 @@ const LandingNav: React.FC<{page : String}> = (input) => {
                         </Row>
                     </div>
                     
-                    <Nav fill>
-                        <Links links = { links }/>
-                    </Nav>
+                    <div>
+                        <Row className="align-items-end">
+                            <Col>
+                                <Nav fill>
+                                    <Links links = { links }/>
+                                </Nav>
+                            </Col>
+                            <Col>
+                                <UserLogoutOffCanvas />
+                            </Col>
+                        </Row>
+                    </div>
                 </Container>
             </Navbar>
         )   
@@ -77,7 +87,7 @@ const LandingNav: React.FC<{page : String}> = (input) => {
                     </div>
                     <Row>
                         <Col sm={7}>
-                            <Button className="navButton" variant="light" href={"/signup"}>
+                            <Button className="navButton" variant="light" href={"/auth/signup"}>
                                 Sign Up
                             </Button>
                         </Col>

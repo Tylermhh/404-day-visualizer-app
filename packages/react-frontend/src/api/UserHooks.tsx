@@ -10,9 +10,13 @@ export function getUser(userID: string) {
 
 // update user object by ID
 export function updateUser(user: IUser) {
+  const token = localStorage.getItem("token");
   const promise = fetch(`${url}/${user._id}/`, {
     method: "PUT",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Authorization": `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(user),
   });
   return promise;
