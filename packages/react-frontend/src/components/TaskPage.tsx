@@ -16,8 +16,6 @@ function Task() {
   const [categories, setCategories] = useState<Category[]>([]);
 
   const refreshPage = () => {
-    let promiseTask = false;
-    let promiseCategory = false;
     console.log("user categories: ");
     getAllTasks(localStorage.getItem("userID") as string)
       .then(response => response.json())
@@ -26,7 +24,6 @@ function Task() {
         setCompleteTasks(data.done);
         console.log("refreshing and getting done data");
         console.log(data.done);
-        promiseTask = true;
       })
       .then(()=> {
         getUser(localStorage.getItem("userID") as string)

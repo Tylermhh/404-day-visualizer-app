@@ -47,7 +47,7 @@ const CompleteTaskOffcanvas: React.FC<{
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow} className="me-2">
+      <Button variant="primary" onClick={handleShow} className={styles.button}>
         {input.purpose}
       </Button>
       <Offcanvas show={show} onHide={handleClose} placement='end'>
