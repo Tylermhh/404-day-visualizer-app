@@ -16,6 +16,8 @@ function Task() {
   const [categories, setCategories] = useState<Category[]>([]);
 
   const refreshPage = () => {
+    let promiseTask = false;
+    let promiseCategory = false;
     console.log("user categories: ");
     getAllTasks(localStorage.getItem("userID") as string)
       .then(response => response.json())
@@ -24,16 +26,19 @@ function Task() {
         setCompleteTasks(data.done);
         console.log("refreshing and getting done data");
         console.log(data.done);
+        promiseTask = true;
       })
-      .catch(err => {
-        console.error(err);
-      });
-    getUser(localStorage.getItem("userID") as string)
-      .then(res => {
-        res.json().then(userObj => {
-          setCategories(userObj.categories);
-          // console.log("categories:", categories);
-        });
+      .then(()=> {
+        getUser(localStorage.getItem("userID") as string)
+        .then(res => res.json())
+        .then(data => {
+          setCategories(data.categories);
+        })
+        .catch(err => {
+          console.error(err);
+        })})
+      .then(() => {
+        window.location.reload();
       })
       .catch(err => {
         console.error(err);
