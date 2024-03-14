@@ -19,7 +19,7 @@ const TableTitle: React.FC<{}> = () => {
         </Col>
         <Col sm={1}>
           {/* button for adding new task */}
-          <NewTaskModal/>
+          {/* <NewTaskModal/> */}
         </Col>
       </Row>
     </div>

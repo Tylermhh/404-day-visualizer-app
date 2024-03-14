@@ -1,18 +1,26 @@
 import React from "react";
-import { Button, Col, Row, Table, Container } from "react-bootstrap";
-import { ITask } from "./../../types/types";
+import { Col, Row, Table, Container } from "react-bootstrap";
+import { Category, ITask } from "./../../types/types";
 import styles from "../Page.module.css";
 import moment from "moment";
+import NewTaskModal from "../Modals/NewTaskModal";
+import CompleteTaskOffcanvas from "../Overlays/CompleteTaskOffcanvas";
+// import { IDateEntry } from "./../../types/types";
 
 function TaskTable(params: {
   name: String;
   todo: Boolean;
   page: String;
   tasks: ITask[];
+  categories: Category[];
+  refreshPage: () => void;
 }) {
   let tasks = params.tasks;
 
-  const TableTitle: React.FC<{}> = () => {
+  const TableTitle: React.FC<{
+    tasks: ITask[];
+    categories_lst: Category[];
+  }> = input => {
     if (params.todo) {
       return (
         <div>
@@ -21,7 +29,11 @@ function TaskTable(params: {
               <h2>{params.name}</h2>
             </Col>
             <Col sm={1}>
-              <Button variant="outline-primary">+</Button>
+              <NewTaskModal
+                tasks={tasks}
+                categories={input.categories_lst}
+                refreshPage={params.refreshPage}
+              />
             </Col>
           </Row>
         </div>
@@ -50,10 +62,22 @@ function TaskTable(params: {
             <td>{task.description}</td>
             <td>{task.category}</td>
             <td>
-              <Button>Update</Button>
+              <CompleteTaskOffcanvas
+                purpose="Update" 
+                message={`Dont worry about not finishing it today! \nKeep up the good work! :D`}
+                done={false}
+                prompt="How many hours did you spend on the task today?"
+                passedTask={task} 
+                refreshPage={params.refreshPage}/>
             </td>
             <td>
-              <Button>Complete</Button>
+              <CompleteTaskOffcanvas 
+                purpose="Complete"
+                message="Goodjob finishing that Task!! :D" 
+                done = {true}
+                prompt="How many hours did you spend completing the task today?"
+                passedTask={task} 
+                refreshPage={params.refreshPage}/>
             </td>
           </tr>
         );
@@ -114,7 +138,7 @@ function TaskTable(params: {
 
   return (
     <Container className={styles.tableComponent}>
-      <TableTitle />
+      <TableTitle tasks={tasks} categories_lst={params.categories} />
       <TableBody tasks={tasks} todo={params.todo} />
     </Container>
   );

@@ -29,26 +29,41 @@ export const getTasks = async (userId, startDate, endDate, category, done) => {
 
   // category specified
   if (category != undefined) {
-    promise = taskModel.find({
-      userID: userId,
-      createdAt: {
-        $gte: startOfDay(startDate),
-        $lte: endOfDay(endDate)
-      },
-      category: category,
-      done: done
-    })
+    if (startDate === undefined || endDate === undefined) {
+      promise = taskModel.find({
+        userID: userId,
+        category: category,
+        done: done
+      })
+    } else {
+      promise = taskModel.find({
+        userID: userId,
+        createdAt: {
+          $gte: startOfDay(startDate),
+          $lte: endOfDay(endDate)
+        },
+        category: category,
+        done: done
+      })
+    }
 
     // all categories
   } else {
-    promise = taskModel.find({
-      userID: userId,
-      createdAt: {
-        $gte: startOfDay(startDate),
-        $lte: endOfDay(endDate)
-      },
-      done: done
-    })
+    if (startDate === undefined || endDate === undefined) {
+      promise = taskModel.find({
+        userID: userId,
+        done: done
+      })
+    } else {
+      promise = taskModel.find({
+        userID: userId,
+        createdAt: {
+          $gte: startOfDay(startDate),
+          $lte: endOfDay(endDate)
+        },
+        done: done
+      })
+    }
   }
 
   return promise
@@ -56,7 +71,11 @@ export const getTasks = async (userId, startDate, endDate, category, done) => {
 
 export const updateTaskById = async (id, updated) => {
   await connectDB()
-  return taskModel.updateOne({ id: id }, updated)
+  let promise
+
+  promise = taskModel.findByIdAndUpdate(id, updated, { new: true })
+
+  return promise
 }
 
 export const deleteTaskById = async id => {

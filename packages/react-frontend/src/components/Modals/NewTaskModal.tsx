@@ -1,96 +1,119 @@
-import { useState } from 'react';
-import { Form } from 'react-bootstrap';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-// import NewTaskForm from '../Forms/NewTaskForm';
-import { Task } from '../../types/types';
+import { useState } from "react";
+import { DropdownDivider, Form } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import { Category, ITask } from "../../types/types";
+import { postTask } from "../../api/TaskHooks";
+import { IDateEntry } from "../../types/types";
 
-function NewTaskModal() {
+const NewTaskModal: React.FC<{
+  tasks: ITask[];
+  categories: Category[];
+  refreshPage: () => void;
+}> = input => {
+  const userID = "65eb04d403116e2e8c60f63e";
+  const initDate: IDateEntry = { date: new Date(), hours: 0 };
 
+  const empty_IDateEntry: IDateEntry[] = [initDate];
   const [isModalVisible, setIsModalVisible] = useState(false);
-  // const [characters, setCharacters] = useState();
+  const [newTask, setNewTask] = useState<ITask>({
+    _id: "",
+    name: "",
+    userID: userID,
+    description: "",
+    category: "null",
+    createdAt: new Date(),
+    priority: "High",
+    datesUpdated: empty_IDateEntry,
+    done: false,
+    deadline: new Date(),
+  });
+
+  const handleChange = (field: any, event: any) => {
+    const value = event.target.value;
+    console.log(value);
+
+    setNewTask({ ...newTask, [field]: value });
+  };
+
+  const handleSubmit = () => {
+    postTask(newTask);
+    toggleModal();
+    input.refreshPage();
+  };
 
   const toggleModal = () => {
     setIsModalVisible(!isModalVisible);
-  }
+  };
 
-  // function updateList(task) {
-  //   setCharacters([...characters, task]);
-  //   // postUser(person)
-  //   // .then((res) => { 
-  //   //   if (res.status === 201) {
-  //   //     console.log("status 201!");
-  //   //     setCharacters([...characters, res.json()])}
-  //   //   })
-  //   // .catch((error) => {
-  //   //   console.log(error);
-  //   // })
-  // }
+  return (
+    <>
+      <Button variant="outline-primary" onClick={toggleModal}>
+        +
+      </Button>
 
-  interface UpdateListProps {
-    characters: Task[];
-    // setCharacters: React.Dispatch<React.SetStateAction<Task[]>>;
-  }
+      <Modal show={isModalVisible} onHide={toggleModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Add New Item</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group className="mb-3" controlId="formItemName">
+              <Form.Label>Item Name</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter Item Name"
+                onChange={e => {
+                  handleChange("name", e);
+                }}
+              />
+            </Form.Group>
 
-  // const updateList = async (newTask: Task, { characters, setCharacters }: UpdateListProps) => {
-  //   setCharacters([...characters, newTask]);
-  //   // try {
-  //   //   const res = await postUser(person);
-  
-  //   //   if (res.status === 201) {
-  //   //     const newPerson = await res.json();
-  //   //     console.log("status 201!");
-  //   //     setCharacters([...characters, newPerson]);
-  //   //   }
-  //   // } catch (error) {
-  //   //   console.log(error);
-  //   // }
-  // };
+            <Form.Group className="mb-3" controlId="formItemDescription">
+              <Form.Label>Description</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Some more details"
+                onChange={e => {
+                  handleChange("description", e);
+                }}
+              />
+            </Form.Group>
 
-    return (
-        <>
+                <Form.Group className='mb-3' controlId='formItemCategory'>
+                  <Form.Label>Category</Form.Label>
+                  <Form.Select onChange={(e) => {handleChange("category", e)}}>
+                    <option>Select a category</option> 
+                    {input.categories.map((entry, index) => (
+                      <option value={entry.name}>{entry.name}</option>
+                    ))}    
+                    <DropdownDivider></DropdownDivider>
+                    <option>Add new category</option>             
+                  </Form.Select>
+                </Form.Group>
 
-          <Button variant="outline-primary" onClick={toggleModal}>
-            +
+            <Form.Group className="mb-3" controlId="formItemDeadline">
+              <Form.Label>Deadline</Form.Label>
+              <Form.Control
+                type="date"
+                onChange={e => {
+                  handleChange("deadline", e);
+                }}
+              />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={toggleModal}>
+            Close
           </Button>
-
-          <Modal show={isModalVisible} onHide={toggleModal}>
-            <Modal.Header closeButton>
-            <Modal.Title>Add New Item</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <Form>
-                <Form.Group className='mb-3' controlId='formItemName'>
-                  <Form.Label>Item Name</Form.Label>
-                  <Form.Control type="itemName" placeholder="Enter Item Name" />
-                </Form.Group>
-
-                <Form.Group className='mb-3' controlId='formItemDescription'>
-                  <Form.Label>Description</Form.Label>
-                  <Form.Control type="itemDescription" placeholder="Some more details" />
-                </Form.Group>
-
-                <Form.Group className='mb-3' controlId='formItemDeadline'>
-                  <Form.Label>Deadline</Form.Label>
-                  <Form.Control type="itemDeadline" placeholder="yyyy-mm-dd" />
-                </Form.Group>
-
-              </Form>
-
-              {/* <NewTaskForm handleSubmit={updateList}/> */}
-
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={toggleModal}>
-                Close
-              </Button>
-              <Button variant="primary" onClick={toggleModal}>
-                Save Changes
-              </Button>
-            </Modal.Footer>
-          </Modal>
-        </>
-      );
-}
+          <Button variant="primary" onClick={handleSubmit}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
+  );
+};
 
 export default NewTaskModal;
