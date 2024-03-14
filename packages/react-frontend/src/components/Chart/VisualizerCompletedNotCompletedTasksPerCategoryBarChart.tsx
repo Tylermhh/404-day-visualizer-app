@@ -90,7 +90,7 @@ const VisualizerCompletedNotCompletedTasksPerCategoryBarChart: React.FC<{tasks :
             }}
         >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis>
+            <XAxis dataKey="type">
                 <Label value="Task Type" offset={0} position="insideBottom" />
             </XAxis>
             <YAxis>
