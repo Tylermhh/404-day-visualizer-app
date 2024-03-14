@@ -4,7 +4,6 @@ import MainNav from "./Nav/MainNav";
 import { Button, Container, Col, Row, Form, Stack } from "react-bootstrap";
 import { loginUser } from "../api/AuthHooks";
 import { useAuth } from "../context/AuthContext"; // This import is for login authentication purposes
-import styles from "./Page.module.css";
 
 function LoginPage() {
   const [username, setUsername] = useState<string>("");
