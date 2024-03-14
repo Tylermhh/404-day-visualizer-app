@@ -7,7 +7,7 @@ import TaskTable from "./Table/TaskTable";
 import { getAllTasks } from "../api/TaskHooks";
 import { Category, ITask } from "./../types/types";
 import { userID } from "./User";
-// import { getTasks } from "../api/TaskHooks";
+import { getUser } from "../api/UserHooks";
 
 let empty_list: ITask[] = [];
 
@@ -22,20 +22,7 @@ let userCategories: Category[] = [
 function Task() {
   const [incompleteTasks, setIncompleteTasks] = useState<ITask[]>(empty_list);
   const [completeTasks, setCompleteTasks] = useState<ITask[]>(empty_list);
-
-  // getUser(userID).then(res => {
-  //   console.log("user gotten:", res.json());
-  // });
-
-  // let dummyUser: IUser = {
-  //   username: "dummyName",
-  //   _id: userID,
-  //   categories: [{ name: "FakeCategory", color: "#F098FE" }],
-  //   password: "dummyPass",
-  // };
-  // updateUser(dummyUser).then(res => {
-  //   console.log("updated user:", res.json());
-  // });
+  const [categories, setCategories] = useState<Category[]>();
 
   const refreshPage = () => {
     console.log("user categories: ");
@@ -50,6 +37,17 @@ function Task() {
       .catch(err => {
         console.error(err);
       });
+    getUser(userID).then(res => {
+      res
+        .json()
+        .then(userObj => {
+          setCategories(userObj.categories);
+          console.log("categories:", categories);
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    });
   };
 
   useEffect(() => {
