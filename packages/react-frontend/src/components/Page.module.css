@@ -44,11 +44,11 @@
 }
 
 .page-text {
-  offset: 100;
   border-width: 2px;
-  border-radius: 10px;
+  border-radius: 20px;
   border-style: solid;
-  border-color: #0066C9;
+  border-color: #ffffff;
+  background-color: #d2e0ed;
 }
 
 .modal-overlay {
