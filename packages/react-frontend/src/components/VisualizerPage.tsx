@@ -107,6 +107,14 @@ function VisualizerType(value: string, allTasks: ITask[]) {
 function Visualizer() {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
+  const handleDateChange = (e:any, dateSet : React.Dispatch<React.SetStateAction<Date>>) => {
+    console.log(e)
+
+    let date = new Date(e.target.value)
+    date.setDate(date.getDate() + 1)
+
+    dateSet(date);
+  }
 
   const [visualizer, setVisualizer] = useState("");
   const handleSelectVisualizer = (e: any) => {
@@ -166,7 +174,7 @@ function Visualizer() {
                   type="date"
                   name="startDate"
                   value={startDateString}
-                  onChange={e => setStartDate(new Date(e.target.value))}
+                  onChange={e => handleDateChange(e, setStartDate)}
                 />
               </Form>
             </Col>
@@ -180,7 +188,7 @@ function Visualizer() {
                   name="endDate"
                   value={endDateString}
                   min={startDateString}
-                  onChange={e => setEndDate(new Date(e.target.value))}
+                  onChange={e => handleDateChange(e, setEndDate)}
                 />
               </Form>
             </Col>
