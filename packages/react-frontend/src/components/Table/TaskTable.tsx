@@ -1,9 +1,10 @@
 import React from "react";
-import { Button, Col, Row, Table, Container } from "react-bootstrap";
+import { Col, Row, Table, Container } from "react-bootstrap";
 import { Category, ITask } from "./../../types/types";
 import styles from "../Page.module.css";
 import moment from "moment";
 import NewTaskModal from "../Modals/NewTaskModal";
+import CompleteTaskOffcanvas from "../Overlays/CompleteTaskOffcanvas";
 // import { IDateEntry } from "./../../types/types";
 
 function TaskTable(params: {
@@ -61,10 +62,22 @@ function TaskTable(params: {
             <td>{task.description}</td>
             <td>{task.category}</td>
             <td>
-              <Button>Update</Button>
+              <CompleteTaskOffcanvas
+                purpose="Update" 
+                message={`Dont worry about not finishing it today! \nKeep up the good work! :D`}
+                done={false}
+                prompt="How many hours did you spend on the task today?"
+                passedTask={task} 
+                refreshPage={params.refreshPage}/>
             </td>
             <td>
-              <Button>Complete</Button>
+              <CompleteTaskOffcanvas 
+                purpose="Complete"
+                message="Goodjob finishing that Task!! :D" 
+                done = {true}
+                prompt="How many hours did you spend completing the task today?"
+                passedTask={task} 
+                refreshPage={params.refreshPage}/>
             </td>
           </tr>
         );
