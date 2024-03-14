@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { ICategory } from "../../types/types";
-import { userCategories } from "../User";
+import { Category } from "../../types/types";
+import { updateUser, getUser } from "../../api/UserHooks";
+import { userID } from "../User";
 
 const NewCategoryModal: React.FC<{
   refreshPage: () => void;
@@ -14,7 +15,7 @@ const NewCategoryModal: React.FC<{
     setIsModalVisible(!isModalVisible);
   };
 
-  const [newCategory, setNewCategory] = useState<ICategory>({
+  const [newCategory, setNewCategory] = useState<Category>({
     name: "",
     color: "",
   });
@@ -62,9 +63,17 @@ const NewCategoryModal: React.FC<{
   };
 
   const handleSubmit = () => {
-    userCategories.push(newCategory);
-    console.log("user categories after new: ", userCategories);
-
+    getUser(userID)
+      .then(res => {
+        res.json().then(data => {
+          data.categories.push(newCategory);
+          console.log("userObj", data);
+          updateUser(data);
+        });
+      })
+      .catch(err => {
+        console.error(err);
+      });
     toggleModal();
     input.refreshPage();
   };
