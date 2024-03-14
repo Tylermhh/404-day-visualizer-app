@@ -44,7 +44,7 @@ function calculateCategoryProgress(tasks : ITask[], categories : Category[]): Ca
         category_progress.push(categoryType)
     }
 
-    if(tasks.length === 0) {
+    if(tasks.length !== 0) {
         for(let task of tasks) {
             for (let object of category_progress) {
                 if (object.name === task.category) {
@@ -73,6 +73,7 @@ const VisualizerNumberTasksPerCategoryPieChart: React.FC<{tasks : ITask[], categ
 
         return (
             <PieChart width={1250} height={600}>
+                
                 <text x={625} y={300} textAnchor="middle" dominantBaseline="middle">
                     {"No Tasks Complete"}
                 </text>

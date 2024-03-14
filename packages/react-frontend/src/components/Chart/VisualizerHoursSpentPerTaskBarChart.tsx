@@ -17,7 +17,7 @@ function calculateCategoryTaskHours(tasks : ITask[], categories: Category[], cat
     let taskHours: TaskHours[] = [];
     let maxHours = 0;
 
-    if(tasks.length === 0) {
+    if(tasks.length !== 0) {
         let specificCategoryTasks = tasks.filter((tasks) => tasks.category === category)
 
         for (let task of specificCategoryTasks) {

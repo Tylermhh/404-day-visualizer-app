@@ -25,14 +25,14 @@ function GetDateString(date: Date): string {
   return year + "-" + month + "-" + day;
 }
 
-function VisualizerType(value: any, allTasks: ITask[]) {
+function VisualizerType(value: string, allTasks: ITask[]) {
   const [category, setCategory] = useState("");
   const handleSelectCategory = (e: any) => {
     console.log(e);
     setCategory(e.target.value);
   };
 
-  if (value.value === "2") {
+  if (value === "2") {
     return (
       <Container className="d-flex justify-content-center">
         <VisualizerHoursSpentPerCategoryPieChart
@@ -41,7 +41,7 @@ function VisualizerType(value: any, allTasks: ITask[]) {
         />
       </Container>
     );
-  } else if (value.value === "3") {
+  } else if (value === "3") {
     return (
       <Container>
         <Row>
@@ -69,9 +69,6 @@ function VisualizerType(value: any, allTasks: ITask[]) {
   } else {
     return (
       <Container className="d-flex justify-content-center">
-        <text>
-          {JSON.stringify(allTasks)}
-          </text>
         <VisualizerNumberTasksPerCategoryPieChart
           tasks={allTasks}
           categories={userCategories}
@@ -103,14 +100,14 @@ function Visualizer() {
   }
 
   useEffect(() => {
-    getTasks( userID, startDate, endDate)
-      .then(tasks => { 
-        tasks.json().then(data => {
+    getTasks(userID, startDate, endDate)
+      .then((tasks) => {
+        tasks.json().then((data) => {
           setCompleteTasks(data.done);
           setIncompleteTasks(data.notDone);
         });
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err);
       });
   });
@@ -170,17 +167,12 @@ function Visualizer() {
         </Container>
         <Container>
           <Row>
-            <VisualizerType 
-              value={visualizer} 
-              allTasks={completeTasks} />
+            {/* <VisualizerType 
+              value={visualizer}
+              allTasks={completeTasks} /> */}
+            {VisualizerType(visualizer, completeTasks)}
           </Row>
         </Container>
-        <text>
-          {`${JSON.stringify(completeTasks)}`}
-        </text>
-        <text>
-          {`${JSON.stringify(incompleteTasks)}`}
-        </text>
       </Stack>
     </div>
   );
