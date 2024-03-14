@@ -10,11 +10,19 @@ const labelNameHoursPercentage: React.FC<{cx: number , cy: number, midAngle: num
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
-    return (
-        <text x={x} y={y} fill="black" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
-            {`${name}: ${hours} Hours - ${(percent * 100).toFixed(0)}%`}
-        </text>
-    )
+    if(hours === 1) {
+        return (
+            <text x={x} y={y} fill="black" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
+                {`${name}: ${hours} Hour - ${(percent * 100).toFixed(0)}%`}
+            </text>
+        )
+    } else {
+        return (
+            <text x={x} y={y} fill="black" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
+                {`${name}: ${hours} Hours - ${(percent * 100).toFixed(0)}%`}
+            </text>
+        )
+    }
 }
 
 function calculateTaskHours(taskDateEntries : DateEntry[]): number {
@@ -48,7 +56,7 @@ function calculateCategoryProgress(tasks : ITask[], categories : Category[]): Ca
         category_progress.push(categoryType)
     }
 
-    if(tasks.length === 0) {
+    if(tasks.length !== 0) {
         for(let task of tasks) {
             for (let object of category_progress) {
                 if (object.name === task.category) {
