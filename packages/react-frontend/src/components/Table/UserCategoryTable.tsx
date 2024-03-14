@@ -1,21 +1,7 @@
 import React from 'react';
 import styles from "./Table.module.css";
-import { Col, Row, Table} from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 import { Category } from "./../../types/types";
-
-const TableTitle: React.FC<{}> = () => {
-  return (
-    <div>
-      <Row>
-        <Col sm={12}>
-          <text>
-            User Categories
-          </text>
-        </Col>
-      </Row>
-    </div>
-  )
-}
 
 const TableBody: React.FC<{categories : Category[]}> = (input) => {
   const rows = input.categories.map((row: any, index: any) => {
