@@ -3,7 +3,7 @@ const url: string = "https://404-taskcraft.azurewebsites.net/auth";
 // Function to log in a user
 export async function loginUser(username: string, password: string) {
     try {
-        const response = await fetch(`${url}/loginUser`, {
+        const response = await fetch(`${url}/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -26,7 +26,7 @@ export async function loginUser(username: string, password: string) {
 
 // Function to register a new user
 export function registerUser(username: string, password: string) {
-  const promise = fetch(`${url}/registerUser`, {
+  const promise = fetch(`${url}/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
