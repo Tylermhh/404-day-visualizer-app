@@ -10,6 +10,10 @@
   top: 0;
 }
 
+.table-responsive td {
+  text-align: center;
+}
+
 .table-responsive h1 {
   text-align: center;
 }
