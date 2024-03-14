@@ -14,9 +14,10 @@ const CompleteTaskOffcanvas: React.FC<{
     passedTask: ITask;
     refreshPage: () => void;
   }> = (input) => {
+  const originalTask = input.passedTask;
   const [show, setShow] = useState(false);
   const [inputHours, setinputHours] = useState(0);
-  const [updatedTask, setUpdatedTask] = useState<ITask>(input.passedTask);
+  const [updatedTask, setUpdatedTask] = useState<ITask>(originalTask);
 
 
   const handleClose = () => setShow(false);
@@ -29,19 +30,18 @@ const CompleteTaskOffcanvas: React.FC<{
   };
 
   const handleSubmit = () => {
-    const newEntry: IDateEntry =  {date: new Date(), hours: inputHours}
-    const newDatesUpdated = updatedTask.datesUpdated;
-    newDatesUpdated.push(newEntry);
+    const newEntry: IDateEntry =  {date: new Date(), hours: inputHours};
+    updatedTask.datesUpdated.push(newEntry);
     if (input.done){
-      console.log("done!")
-      setUpdatedTask({ ...updatedTask, ["datesUpdated"]: newDatesUpdated, ["done"]: true});
-      console.log(updatedTask)
+      console.log("done!");
+      updatedTask.done = true;
+      console.log(updatedTask);
     }
     else{
-      setUpdatedTask({ ...updatedTask, ["datesUpdated"]: newDatesUpdated});
+      setUpdatedTask({ ...updatedTask});
     }
     updateTask(updatedTask).then((res) => console.log(res.json));
-    console.log("hook to backend call returned")
+    console.log("hook to backend call returned");
     input.refreshPage();
   }
 

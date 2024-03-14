@@ -45,6 +45,7 @@ function Task() {
       .then(data => {
         setIncompleteTasks(data.notDone);
         setCompleteTasks(data.done);
+        console.log("refreshing and getting done data");
         console.log(data.done);
       })
       .catch(err => {
