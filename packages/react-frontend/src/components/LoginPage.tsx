@@ -3,20 +3,27 @@ import { useNavigate } from 'react-router-dom';
 import MainNav from "./Nav/MainNav";
 import { Button, Container, Col, Row, Form, Stack } from "react-bootstrap";
 import { loginUser } from '../api/AuthHooks';
+import { AuthProvider, useAuth } from '../context/AuthContext';
 
-function Main() {
-  const [username, setUsername] = useState('');
-  const [pwd, setPassword] = useState('');
+function LoginPage() {
+  const [username, setUsername] = useState<string>('');
+  const [pwd, setPassword] = useState<string>('');
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
+  
     try {
       const { ok, data, error } = await loginUser(username, pwd);
-      if (ok) {
-        console.log('Login successful', data); // Optionally log or use the data
-        navigate('/home'); // Redirect to home on successful login
+      if (ok && data.token) {
+        console.log('Login successful', data);
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('userID', data.userID);
+        console.log(data.userID)
+        login(data.token, data.userID); // Update your login method to optionally handle user ID
+        navigate('/home');
+        // Redirect to home on successful login
       } else {
         // Use the custom error message if provided by loginUser
         throw new Error(error || 'Login failed');
@@ -73,4 +80,4 @@ function Main() {
     );
 }
  
-export default Main;
+export default LoginPage;
