@@ -23,20 +23,6 @@ function Task() {
   const [incompleteTasks, setIncompleteTasks] = useState<ITask[]>(empty_list);
   const [completeTasks, setCompleteTasks] = useState<ITask[]>(empty_list);
 
-  // getUser(userID).then(res => {
-  //   console.log("user gotten:", res.json());
-  // });
-
-  // let dummyUser: IUser = {
-  //   username: "dummyName",
-  //   _id: userID,
-  //   categories: [{ name: "FakeCategory", color: "#F098FE" }],
-  //   password: "dummyPass",
-  // };
-  // updateUser(dummyUser).then(res => {
-  //   console.log("updated user:", res.json());
-  // });
-
   const refreshPage = () => {
     console.log("user categories: ");
     getAllTasks(userID)

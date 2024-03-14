@@ -19,7 +19,6 @@ function TaskTable(params: {
   categories: Category[];
   refreshPage: () => void;
 }) {
-
   // const [show, setShow] = useState(false);
 
   // const handleClose = () => setShow(false);
@@ -67,6 +66,20 @@ function TaskTable(params: {
     todo: Boolean;
   }> = ({ tasks, todo }) => {
     const rows = tasks.map((task: any, index: any) => {
+      if (params.page === "HomePage") {
+        return (
+          <tr>
+            <td>{task.name}</td>
+            <td>{task.description}</td>
+            <td>{task.category}</td>
+            <td>
+              {moment(
+                task.datesUpdated[task.datesUpdated.length - 1].date,
+              ).format("MM/DD/YYYY")}
+            </td>
+          </tr>
+        );
+      }
       if (todo) {
         return (
           <tr>
@@ -94,7 +107,7 @@ function TaskTable(params: {
               />
             </td>
             <td>
-              <TaskDetailsModal task={task}/>
+              <TaskDetailsModal task={task} />
             </td>
             {/* <TaskDetails task={task}/> */}
           </tr>
@@ -111,7 +124,7 @@ function TaskTable(params: {
             ).format("MM/DD/YYYY")}
           </td>
           <td>
-            <TaskDetailsModal task={task}/>
+            <TaskDetailsModal task={task} />
           </td>
         </tr>
       );
@@ -120,6 +133,21 @@ function TaskTable(params: {
     let statusName = "Completed";
     if (params.page === "HomePage") {
       statusName = "Last Updated";
+      return (
+        <div className={styles["table-responsive"]}>
+          <Table striped hover>
+            <thead>
+              <tr>
+                <th>Item Name</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Last Updated</th>
+              </tr>
+            </thead>
+            <tbody>{rows}</tbody>
+          </Table>
+        </div>
+      );
     }
 
     if (todo) {
