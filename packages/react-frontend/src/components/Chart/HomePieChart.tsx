@@ -6,13 +6,20 @@ const RADIAN = Math.PI / 180;
 const renderCustomizedLabel: React.FC<{cx: number , cy: number, midAngle: number, innerRadius: number, outerRadius: number, name: string, hours: number, percent: number}> 
     = ({cx, cy, midAngle, innerRadius, outerRadius, name, hours, percent}) => {
 
-    const radius = innerRadius + (outerRadius - innerRadius) * 0.6;
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
+    if(hours === 1) {
+        return (
+            <text x={x} y={y} width={10} fill="black" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
+                {`${hours} Task`}
+            </text>
+        )
+    }
     return (
         <text x={x} y={y} width={10} fill="black" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
-            {`${(percent * 100).toFixed(0)}%`}
+            {`${hours} Tasks`}
         </text>
     )
 }
@@ -41,7 +48,10 @@ function calculateCategoryProgress(tasks : ITask[], categories : Category[]): Ca
     for(let task of tasks) {
         for (let object of category_progress) {
             if (object.name === task.category) {
-                object.hours += calculateTaskHours(task.datesUpdated);
+                if(task.done) {
+                    object.hours += 1;
+                }
+                // object.hours += calculateTaskHours(task.datesUpdated);
             }
         }
     }

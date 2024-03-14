@@ -20,7 +20,7 @@ const ProgressMade: React.FC<{taskData : ITask[]}> = (input) => {
     
     return(
         <div>
-            <ProgressBar striped now={now} label={`${now.toFixed(2)}%`}/>
+            <ProgressBar striped now={now} label={`${now.toFixed(0)}%`}/>
         </div>
     )
 }

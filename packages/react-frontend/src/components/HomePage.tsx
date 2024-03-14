@@ -50,7 +50,10 @@ const HomePage: React.FC<{}> = () => {
               />
             </Col>
             <Col sm={4}>
-              <Stack gap={4}>
+              <Stack gap={1}>
+                <text>
+                  Number of Tasks Completed
+                </text>
                 <Container>
                   <HomePieChart
                     tasks={ completeTasks }
