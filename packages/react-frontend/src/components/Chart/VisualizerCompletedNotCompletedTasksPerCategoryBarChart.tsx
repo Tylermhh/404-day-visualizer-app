@@ -55,16 +55,25 @@ function calculateCategoryTaskHours(tasks : ITask[], categories: Category[], cat
 function calculateCategoryCompletedNotCompleted(tasks : ITask[], categories: Category[], category?: string): CompletedNotCompletedTasks[] {
 
     let completedNotCompleted: CompletedNotCompletedTasks[] = [];
+    let completed: CompletedNotCompletedTasks = { type: "Completed", amount: 0 }
+    let notCompleted: CompletedNotCompletedTasks = { type: "Not Completed", amount: 0 }
 
     if(tasks.length !== 0) {
         let specificCategoryTasks = tasks.filter((tasks) => tasks.category === category)
 
-
-
-        return [];
+        for (let task of specificCategoryTasks) {
+            if(task.done) {
+                completed.amount += 1;
+            } else {
+                notCompleted.amount += 1;
+            }
+        }
     }
+
+    completedNotCompleted.push(completed)
+    completedNotCompleted.push(notCompleted)
     
-    return [];
+    return completedNotCompleted;
 }
 
 const VisualizerCompletedNotCompletedTasksPerCategoryBarChart: React.FC<{tasks : ITask[], categories : Category[], category: string}> = (input) =>  {
