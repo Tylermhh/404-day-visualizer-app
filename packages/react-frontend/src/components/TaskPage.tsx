@@ -5,10 +5,10 @@ import MainNav from "./Nav/MainNav";
 import TaskTable from "./Table/TaskTable";
 import styles from "./Page.module.css";
 import { getAllTasks } from "../api/TaskHooks";
-import { Category, ITask } from "./../types/types";
+import { Category, ITask, IUser } from "./../types/types";
 import userID from "./User";
+import { getUser, updateUser } from "../api/UserHooks";
 // import { getTasks } from "../api/TaskHooks";
-
 
 let empty_list: ITask[] = [];
 
@@ -23,6 +23,20 @@ let userCategories: Category[] = [
 function Task() {
   const [incompleteTasks, setIncompleteTasks] = useState<ITask[]>(empty_list);
   const [completeTasks, setCompleteTasks] = useState<ITask[]>(empty_list);
+
+  // getUser(userID).then(res => {
+  //   console.log("user gotten:", res.json());
+  // });
+
+  // let dummyUser: IUser = {
+  //   username: "dummyName",
+  //   _id: userID,
+  //   categories: [{ name: "FakeCategory", color: "#F098FE" }],
+  //   password: "dummyPass",
+  // };
+  // updateUser(dummyUser).then(res => {
+  //   console.log("updated user:", res.json());
+  // });
 
   const refreshPage = () => {
     getAllTasks(userID)
@@ -46,16 +60,6 @@ function Task() {
         setCompleteTasks(data.done);
       });
   }, []);
-
-  // let completedTasks = [];
-  // let toDoTasks = [];
-  // for (let i = 0; i < tempTasks.length; i++) {
-  //   if (tempTasks[i].done) {
-  //     completedTasks.push(tempTasks[i]);
-  //   } else {
-  //     toDoTasks.push(tempTasks[i]);
-  //   }
-  // }
 
   return (
     <div className="App">
