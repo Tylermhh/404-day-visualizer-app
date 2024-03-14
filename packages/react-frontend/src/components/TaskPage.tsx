@@ -25,15 +25,17 @@ function Task() {
         console.log("refreshing and getting done data");
         console.log(data.done);
       })
-      .catch(err => {
-        console.error(err);
-      });
-    getUser(localStorage.getItem("userID") as string)
-      .then(res => {
-        res.json().then(userObj => {
-          setCategories(userObj.categories);
-          // console.log("categories:", categories);
-        });
+      .then(()=> {
+        getUser(localStorage.getItem("userID") as string)
+        .then(res => res.json())
+        .then(data => {
+          setCategories(data.categories);
+        })
+        .catch(err => {
+          console.error(err);
+        })})
+      .then(() => {
+        window.location.reload();
       })
       .catch(err => {
         console.error(err);

@@ -4,3 +4,12 @@
     flex-direction: column;
     align-items: center;
 }
+
+
+.button {
+    background-color: #3D85C8;
+}
+
+.button:hover {
+    background-color: #1a66ad;
+}
