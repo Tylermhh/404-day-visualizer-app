@@ -4,11 +4,10 @@ import MainNav from "./Nav/MainNav";
 import TaskTable from "./Table/TaskTable";
 import HomePieChart from "./Chart/HomePieChart";
 import HomeProgressBar from "./ProgressBar/HomeProgressBar";
-import { ITask } from "./../types/types";
+import { Category, ITask } from "./../types/types";
 import { Container, Col, Row, Stack } from "react-bootstrap";
 import { getTasks } from "../api/TaskHooks";
-import { userCategories } from "./../TempData";
-import { userID } from "./User";
+import { getUser } from "./../api/UserHooks"
 
 const HomePage: React.FC<{}> = () => {
   const emptyRefresh = () => {};
@@ -18,26 +17,42 @@ const HomePage: React.FC<{}> = () => {
   const [completeTasks, setCompleteTasks] = useState<ITask[]>([]);
   const [incompleteTasks, setIncompleteTasks] = useState<ITask[]>([]);
 
-  useEffect(() => {
-    getTasks(
-      userID,
-      today,
-      new Date(
-        today.getFullYear().toString() +
-          "-" +
-          (today.getMonth() + 1).toString() +
-          "-" +
-          (today.getDate() + 1).toString(),
-      ),
-    )
-      .then(tasks => {
-        tasks.json().then(data => {
-          setCompleteTasks(data.done);
-          setIncompleteTasks(data.notDone);
+  const [categories, setCategories] = useState<Category[]>([]);
+
+  let userID = localStorage.getItem('userID')
+
+    useEffect(() => {
+      getTasks(
+        (userID as string),
+        today,
+        new Date(
+          today.getFullYear().toString() +
+            "-" +
+            (today.getMonth() + 1).toString() +
+            "-" +
+            (today.getDate() + 1).toString(),
+        ),
+      )
+        .then(tasks => {
+          tasks.json().then(data => {
+            setCompleteTasks(data.done);
+            setIncompleteTasks(data.notDone);
+          });
+        })
+        .catch(err => {
+          console.error(err);
         });
+    });
+
+    useEffect(() => {
+      getUser((userID as string))
+      .then(res => {
+          res.json().then(data => {
+              setCategories(data.categories)
+          });
       })
       .catch(err => {
-        console.error(err);
+          console.error(err);
       });
   });
 
@@ -54,7 +69,7 @@ const HomePage: React.FC<{}> = () => {
                 todo={false}
                 page="HomePage"
                 tasks={incompleteTasks}
-                categories={userCategories}
+                categories={categories}
                 refreshPage={emptyRefresh}
               />
             </Col>
@@ -66,7 +81,7 @@ const HomePage: React.FC<{}> = () => {
                 <Container>
                   <HomePieChart
                     tasks={completeTasks}
-                    categories={userCategories}
+                    categories={categories}
                   />
                 </Container>
                 <Container>
