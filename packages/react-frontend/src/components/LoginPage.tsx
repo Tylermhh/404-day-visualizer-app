@@ -2,7 +2,7 @@ import React, { useState, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MainNav from "./Nav/MainNav";
 import { Button, Container, Col, Row, Form, Stack} from "react-bootstrap";
-import axios from 'axios'; 
+import { loginUser } from '../api/AuthHooks';
 
 function Main() {
   const [username, setUsername] = useState('');
@@ -13,21 +13,15 @@ function Main() {
     event.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:8000/auth/login', {
-        username,
-        pwd,
-      });
-
-      console.log('Login successful', response.data);
-      navigate('/home');
-    } catch (error: unknown) {
-        if (axios.isAxiosError(error)) {
-            console.error('Login failed', error.response?.data || error.message);
-        } else if (error instanceof Error) {
-            console.error('Login failed', error.message);
-        } else {
-            console.error('An unexpected error occurred');
-        }
+      const response = await loginUser(username, pwd);
+      if (response.ok) {
+        console.log('Login successful');
+        navigate('/home'); // Redirect to home on successful signup
+      } else {
+        throw new Error('Login failed');
+      }
+    } catch (error) {
+      console.error('Login failed', error instanceof Error ? error.message : 'An unexpected error occurred');
     }
 };
 
