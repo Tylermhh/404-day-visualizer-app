@@ -6,7 +6,7 @@ import TaskTable from "./Table/TaskTable";
 import styles from "./Page.module.css";
 import { getAllTasks } from "../api/TaskHooks";
 import { Category, ITask } from "./../types/types";
-import userID from "./User";
+import { userID } from "./User";
 // import { getTasks } from "../api/TaskHooks";
 
 let empty_list: ITask[] = [];
@@ -24,6 +24,7 @@ function Task() {
   const [completeTasks, setCompleteTasks] = useState<ITask[]>(empty_list);
 
   const refreshPage = () => {
+    console.log("user categories: ");
     getAllTasks(userID)
       .then(response => response.json())
       .then(data => {
@@ -45,16 +46,6 @@ function Task() {
         setCompleteTasks(data.done);
       });
   }, []);
-
-  // let completedTasks = [];
-  // let toDoTasks = [];
-  // for (let i = 0; i < tempTasks.length; i++) {
-  //   if (tempTasks[i].done) {
-  //     completedTasks.push(tempTasks[i]);
-  //   } else {
-  //     toDoTasks.push(tempTasks[i]);
-  //   }
-  // }
 
   return (
     <div className="App">

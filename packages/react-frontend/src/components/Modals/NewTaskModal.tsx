@@ -5,7 +5,7 @@ import Modal from "react-bootstrap/Modal";
 import { Category, ITask } from "../../types/types";
 import { postTask } from "../../api/TaskHooks";
 import { IDateEntry } from "../../types/types";
-import userID from "../User";
+import { userID } from "../User";
 
 const NewTaskModal: React.FC<{
   tasks: ITask[];

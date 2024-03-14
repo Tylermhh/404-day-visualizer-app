@@ -3,7 +3,7 @@ import { Form } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { ICategory } from "../../types/types";
-import userID from "../User";
+import { userCategories } from "../User";
 
 const NewCategoryModal: React.FC<{
   refreshPage: () => void;
@@ -20,13 +20,51 @@ const NewCategoryModal: React.FC<{
   });
 
   const handleChange = (field: any, event: any) => {
-    const value = event.target.value;
+    let value = event.target.value;
     console.log(value);
+    if (field === "color") {
+      switch (value) {
+        case "Blue": {
+          value = "#3480eb";
+          break;
+        }
+        case "Purple": {
+          value = "#9b34eb";
+          break;
+        }
+        case "Green": {
+          value = "#14b339";
+          break;
+        }
+        case "Light Green": {
+          value = "#89d63c";
+          break;
+        }
+        case "Yellow": {
+          value = "#ede326";
+          break;
+        }
+        case "Orange": {
+          value = "#fab623";
+          break;
+        }
+        case "Red": {
+          value = "#fa583c";
+          break;
+        }
+        case "Pink": {
+          value = "#f08bc1";
+          break;
+        }
+      }
+    }
     setNewCategory({ ...newCategory, [field]: value });
   };
 
   const handleSubmit = () => {
-    // postCategory(newCategory);
+    userCategories.push(newCategory);
+    console.log("user categories after new: ", userCategories);
+
     toggleModal();
     input.refreshPage();
   };
@@ -54,16 +92,19 @@ const NewCategoryModal: React.FC<{
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formCategoryolor">
-              <Form.Select>
+              <Form.Select
+                onChange={e => {
+                  handleChange("color", e);
+                }}>
                 <option>Choose Color</option>
-                <option value="blue">Blue</option>
-                <option value="purple">Purple</option>
-                <option value="green">Green</option>
-                <option value="light green">Light Green</option>
-                <option value="yellow">Yellow</option>
-                <option value="orange">Orange</option>
-                <option value="red">Red</option>
-                <option value="pink">Pink</option>
+                <option value="Blue">Blue</option>
+                <option value="Purple">Purple</option>
+                <option value="Green">Green</option>
+                <option value="Light Green">Light Green</option>
+                <option value="Yellow">Yellow</option>
+                <option value="Orange">Orange</option>
+                <option value="Red">Red</option>
+                <option value="Pink">Pink</option>
               </Form.Select>
             </Form.Group>
           </Form>
