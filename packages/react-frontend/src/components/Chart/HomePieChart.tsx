@@ -6,7 +6,7 @@ const RADIAN = Math.PI / 180;
 const renderCustomizedLabel: React.FC<{cx: number , cy: number, midAngle: number, innerRadius: number, outerRadius: number, name: string, hours: number, percent: number}> 
     = ({cx, cy, midAngle, innerRadius, outerRadius, name, hours, percent}) => {
 
-    const radius = innerRadius + (outerRadius - innerRadius) * 0.7;
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.6;
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
@@ -33,7 +33,7 @@ function calculateCategoryProgress(tasks : ITask[], categories : Category[]): Ca
     let category_progress: CategoryProgress[] = [];
 
     for (let i = 0; i < categories.length; i++) {
-        let categoryType: CategoryProgress = { name: categories.at(i)?.name, hours : 1, color: categories.at(i)?.color}
+        let categoryType: CategoryProgress = { name: categories.at(i)?.name, hours : 0, color: categories.at(i)?.color}
 
         category_progress.push(categoryType)
     }

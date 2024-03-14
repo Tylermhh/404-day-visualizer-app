@@ -11,18 +11,17 @@ import { getTasks } from "../api/TaskHooks";
 import { userCategories } from "./../TempData"
 import userID from "./User";
 
-
 const HomePage: React.FC<{}> = () => {
   const emptyRefresh = () => {};
 
   const today: Date = new Date();
-  let empty_list: ITask[] = [];
-  const [completeTasks, setCompleteTasks] = useState<ITask[]>(empty_list);
-  const [incompleteTasks, setIncompleteTasks] = useState<ITask[]>(empty_list);
+  // let empty_list: ITask[] = [];
+  const [completeTasks, setCompleteTasks] = useState<ITask[]>([]);
+  const [incompleteTasks, setIncompleteTasks] = useState<ITask[]>([]);
 
   useEffect(() => {
     getTasks( userID, today, new Date( today.getFullYear().toString() + "-" + (today.getMonth() + 1).toString() + "-" + (today.getDate() + 1).toString(),),)
-      .then(tasks => {
+      .then(tasks => { 
         tasks.json().then(data => {
           setCompleteTasks(data.done);
           setIncompleteTasks(data.notDone);
