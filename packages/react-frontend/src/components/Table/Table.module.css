@@ -68,24 +68,20 @@
 }
 
 .color-box span {
-    border: 1px solid rgb(204, 204, 204);
-    padding: 2px;
-    padding-left: 25px;
+    padding-right: 20px;
+    padding-left: 30px;
     margin: 0px;
-    margin-right: 10px;
     border-radius: 3px;
+    text-align: center;
+    align-content: center;
+    align-self: center;
 }
 
 .color-box {
-    border: 1px #aaa solid;
     padding: 6px;
     padding-right: 100px;
-    border-radius: 3px;
-    -moz-box-shadow: inset 0 0 2px 0 #888;
-    -webkit-box-shadow: inset 0 0 2px 0 #888;
-    box-shadow: inset 0 0 1px 0 #888;
 }
 
-.blue-box {
-    background-color: #0088cc;
+.color-#3480eb {
+    background-color: #3480eb;
 }

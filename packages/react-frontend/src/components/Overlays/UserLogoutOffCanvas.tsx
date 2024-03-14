@@ -8,6 +8,7 @@ import UserCategoryTable from "./../Table/UserCategoryTable";
 const UserLogoutOffCanvas: React.FC<{}> = (input) => {    
     const [show, setShow] = useState(false);
 
+    const [username, setUsername] = useState("");
     const [categories, setCategories] = useState<Category[]>([]);
 
     const handleClose = () => setShow(false);
@@ -17,6 +18,7 @@ const UserLogoutOffCanvas: React.FC<{}> = (input) => {
         getUser(userID)
         .then(res => {
             res.json().then(data => {
+                setUsername(data.username)
                 setCategories(data.categories)
             });
         })
@@ -39,6 +41,9 @@ const UserLogoutOffCanvas: React.FC<{}> = (input) => {
                 </Offcanvas.Header>
                 <Offcanvas.Body>
                     <Stack gap={2}>
+                        <text>
+                            Username: {username}
+                        </text>
                         <UserCategoryTable categories={categories}/>
                         <Button variant="primary">
                             Logout

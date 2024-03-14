@@ -22,13 +22,16 @@ const TableBody: React.FC<{categories : Category[]}> = (input) => {
       return (
         <tr>
             <td>{row.name}</td>
-            <div className = {styles['color-box']}>
+            {/* <div className = {styles['color-box']}>
                 <td>
-                    <div className = {styles['blue-box']}>
+                    <div className = {styles["color-" + row.color]}>
                         <span> </span> 
+                        <text>
+                            {row.color}
+                        </text>
                     </div>
                 </td>
-            </div>
+            </div> */}
         </tr>
       );
   });
@@ -39,7 +42,7 @@ const TableBody: React.FC<{categories : Category[]}> = (input) => {
         <thead>
           <tr>
             <th>Category</th>
-            <th>Color</th>
+            {/* <th>Color</th> */}
           </tr>
         </thead>
         <tbody>
@@ -53,7 +56,6 @@ const TableBody: React.FC<{categories : Category[]}> = (input) => {
 const UserCategoryTable: React.FC<{categories : Category[]}> = (input) => {
   return (
     <div>
-      <TableTitle />
       <TableBody
         categories = {input.categories}
       />
