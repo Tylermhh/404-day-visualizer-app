@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import MainNav from "./Nav/MainNav";
 import TaskTable from "./Table/TaskTable";
-import styles from "./Page.module.css";
+// import styles from "./Page.module.css";
 import { getAllTasks } from "../api/TaskHooks";
 import { Category, ITask } from "./../types/types";
 import userID from "./User";
