@@ -63,3 +63,9 @@
   padding: 1rem;
   border-radius: 1rem;
 }
+
+.loginMessage {
+  display: "flex";
+  align-items: "center";
+  justify-content: "center";
+}
