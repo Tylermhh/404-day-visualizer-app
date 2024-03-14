@@ -49,38 +49,22 @@ function calculateCategoryProgress(tasks : ITask[], categories : Category[]): Ca
     return category_progress;
 }
 
-function noTasksComplete(category_progress : CategoryProgress[]) : Boolean {
-
-    let categoriesWithNoTasksCompelte = 0;
-
-    for (let object of category_progress) {
-        if(object.hours === 0) {
-            categoriesWithNoTasksCompelte += 1;
-        }
-    }
-
-    if(categoriesWithNoTasksCompelte === category_progress.length) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
 const HomePieChart: React.FC<{tasks : ITask[], categories : Category[]}> = (input) => {
     
     let category_progress: CategoryProgress[] = calculateCategoryProgress(input.tasks, input.categories);
 
-    if(noTasksComplete(category_progress)) {
-        category_progress.length = 0;
+    let filtered_category_progress = category_progress.filter((category) => category.hours !== 0); 
+
+    if(filtered_category_progress.length === 0) {
         let noCompleteTasks: CategoryProgress = { name: "No Tasks Complete", hours : 1 , color: "#777777"}
-        category_progress.push(noCompleteTasks)
+        filtered_category_progress.push(noCompleteTasks)
     }
 
     return (
         <PieChart width={400} height={400}>
-            <Pie data={category_progress} cx="50%" cy="50%" labelLine={false} label={renderCustomizedLabel}
+            <Pie data={filtered_category_progress} cx="50%" cy="50%" labelLine={false} label={renderCustomizedLabel}
                 fill="#8884d8" dataKey="hours" overflow='visible' isAnimationActive={true}>
-                {category_progress.map((entry, index) => 
+                {filtered_category_progress.map((entry, index) => 
                     (<Cell key={`cell-${index}`} fill={entry.color} />))}    
             </Pie>
             <Legend layout="horizontal" verticalAlign="bottom" align="center" />

@@ -61,39 +61,24 @@ function calculateCategoryProgress(tasks : ITask[], categories : Category[]): Ca
     return category_progress;
 }
 
-function noTasksComplete(category_progress : CategoryProgress[]) : Boolean {
-
-    let categoriesWithNoTasksCompelte = 0;
-
-    for (let object of category_progress) {
-        if(object.hours === 0) {
-            categoriesWithNoTasksCompelte += 1;
-        }
-    }
-
-    if(categoriesWithNoTasksCompelte === category_progress.length) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
 const VisualizerNumberTasksPerCategoryPieChart: React.FC<{tasks : ITask[], categories : Category[]}> = (input) => {
     let category_progress: CategoryProgress[] = calculateCategoryProgress(input.tasks, input.categories);
 
-    if(noTasksComplete(category_progress)) {
+    let filtered_category_progress = category_progress.filter((category) => category.hours !== 0); 
+
+    if(filtered_category_progress.length === 0) {
         category_progress.length = 0;
         let noCompleteTasks: CategoryProgress = { name: "No Tasks Complete", hours : 1 , color: "#777777"}
-        category_progress.push(noCompleteTasks)
+        filtered_category_progress.push(noCompleteTasks)
 
         return (
             <PieChart width={1250} height={600}>
                 <text x={625} y={300} textAnchor="middle" dominantBaseline="middle">
                     {"No Tasks Complete"}
                 </text>
-                <Pie data={category_progress} cx="50%" cy="50%" labelLine={false}
+                <Pie data={filtered_category_progress} cx="50%" cy="50%" labelLine={false}
                     fill="#8884d8" dataKey="hours" innerRadius={'30%'} outerRadius={'90%'}>
-                    {category_progress.map((entry, index) => 
+                    {filtered_category_progress.map((entry, index) => 
                         (<Cell key={`cell-${index}`} fill={entry.color} />))}
                 </Pie>
             </PieChart>
@@ -105,9 +90,9 @@ const VisualizerNumberTasksPerCategoryPieChart: React.FC<{tasks : ITask[], categ
             <text x={625} y={300} textAnchor="middle" dominantBaseline="middle">
                 {`Total Tasks: ${calculateTotalTasks(input.tasks)}`}
             </text>
-            <Pie data={category_progress} cx="50%" cy="50%" labelLine={true} label={labelNameHoursPercentage}
+            <Pie data={filtered_category_progress} cx="50%" cy="50%" labelLine={true} label={labelNameHoursPercentage}
                 fill="#8884d8" dataKey="hours" innerRadius={'30%'} outerRadius={'90%'}>
-                {category_progress.map((entry, index) => 
+                {filtered_category_progress.map((entry, index) => 
                     (<Cell key={`cell-${index}`} fill={entry.color} />))}
             </Pie>
         </PieChart>

@@ -12,7 +12,7 @@ import userID from "./User";
 function GetDateString(date: Date): string {
   let year = date.getFullYear().toString();
   let month = (date.getMonth() + 1).toString();
-  let day = date.getDate().toString();
+  let day = (date.getDate() + 1).toString();
 
   if (date.getMonth() < 10) {
     month = "0" + month;
@@ -69,6 +69,9 @@ function VisualizerType(value: any, allTasks: ITask[]) {
   } else {
     return (
       <Container className="d-flex justify-content-center">
+        <text>
+          {JSON.stringify(allTasks)}
+          </text>
         <VisualizerNumberTasksPerCategoryPieChart
           tasks={allTasks}
           categories={userCategories}
@@ -100,11 +103,11 @@ function Visualizer() {
   }
 
   useEffect(() => {
-    getTasks(userID, startDate, endDate)
-      .then(tasks => {
+    getTasks( userID, startDate, endDate)
+      .then(tasks => { 
         tasks.json().then(data => {
-          // setCompleteTasks(data.done);
-          // setIncompleteTasks(data.notDone);
+          setCompleteTasks(data.done);
+          setIncompleteTasks(data.notDone);
         });
       })
       .catch(err => {
@@ -112,13 +115,17 @@ function Visualizer() {
       });
   });
 
-  let allTasks = completeTasks.concat(incompleteTasks);
-
   return (
     <div className="App">
       <MainNav page={"Visualizer"} />
       <Stack gap={3}>
         <Container />
+        <text>
+          {startDate.toDateString()}
+        </text>
+        <text>
+          {endDate.toDateString()}
+        </text>
         <Container>
           <Row>
             <Col sm={4}>
@@ -163,11 +170,16 @@ function Visualizer() {
         </Container>
         <Container>
           <Row>
-            <VisualizerType value={visualizer} allTasks={allTasks} />
+            <VisualizerType 
+              value={visualizer} 
+              allTasks={completeTasks} />
           </Row>
         </Container>
         <text>
-          {`${JSON.stringify(completeTasks.concat(incompleteTasks))}`}
+          {`${JSON.stringify(completeTasks)}`}
+        </text>
+        <text>
+          {`${JSON.stringify(incompleteTasks)}`}
         </text>
       </Stack>
     </div>
