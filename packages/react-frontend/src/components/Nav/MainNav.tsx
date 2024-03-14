@@ -87,7 +87,7 @@ const LandingNav: React.FC<{page : String}> = (input) => {
                     </div>
                     <Row>
                         <Col sm={7}>
-                            <Button className="navButton" variant="light" href={"/signup"}>
+                            <Button className="navButton" variant="light" href={"/auth/signup"}>
                                 Sign Up
                             </Button>
                         </Col>
