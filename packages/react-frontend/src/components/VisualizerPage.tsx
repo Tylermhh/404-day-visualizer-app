@@ -8,7 +8,6 @@ import VisualizerCompletedNotCompletedTasksPerCategoryBarChart from "./Chart/Vis
 import { ITask } from "./../types/types";
 import { userCategories } from "./../TempData";
 import { getTasks } from "../api/TaskHooks";
-import { userID } from "./User";
 
 function GetDateString(date: Date): string {
   let year = date.getFullYear().toString();
@@ -134,7 +133,7 @@ function Visualizer() {
   }
 
   useEffect(() => {
-    getTasks(userID, startDate, endDate)
+    getTasks((localStorage.getItem('userID') as string), startDate, endDate)
       .then(tasks => {
         tasks.json().then(data => {
           setCompleteTasks(data.done);

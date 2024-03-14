@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {Button, Stack, Offcanvas} from 'react-bootstrap';
 import { getUser } from "./../../api/UserHooks";
-import { userID } from "./../User";
 import { Category } from "./../../types/types"
 import UserCategoryTable from "./../Table/UserCategoryTable";
 
@@ -15,7 +14,7 @@ const UserLogoutOffCanvas: React.FC<{}> = (input) => {
     const handleShow = () => setShow(true);
 
     useEffect(() => {
-        getUser(userID)
+        getUser((localStorage.getItem('userID') as string))
         .then(res => {
             res.json().then(data => {
                 setUsername(data.username)
