@@ -6,7 +6,9 @@ import TaskTable from "./Table/TaskTable";
 import styles from "./Page.module.css";
 import { getAllTasks } from "../api/TaskHooks";
 import { Category, ITask } from "./../types/types";
-// import userID from "./User";
+import userID from "./User";
+// import { getTasks } from "../api/TaskHooks";
+
 
 let tempTasks: ITask[] = [
   {
@@ -79,7 +81,6 @@ let userCategories: Category[] = [
 ];
 
 function Task() {
-  const userID = "65eb04d403116e2e8c60f63e";
   const [incompleteTasks, setIncompleteTasks] = useState<ITask[]>(empty_list);
   const [completeTasks, setCompleteTasks] = useState<ITask[]>(empty_list);
 
@@ -123,7 +124,6 @@ function Task() {
         name="Tasks To Do"
         todo={true}
         page="TaskPage"
-        // tasks={toDoTasksList}
         tasks={incompleteTasks}
         categories={userCategories}
         refreshPage={refreshPage}
@@ -132,7 +132,6 @@ function Task() {
         name="Tasks Completed"
         todo={false}
         page="TaskPage"
-        // tasks={doneTasksList}
         tasks={completeTasks}
         categories={userCategories}
         refreshPage={refreshPage}

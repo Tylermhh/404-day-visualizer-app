@@ -9,8 +9,8 @@ import { ITask } from "./../types/types";
 import { Container, Col, Row, Stack } from "react-bootstrap";
 import { getTasks } from "../api/TaskHooks";
 import { userCategories } from "./../TempData"
+import userID from "./User";
 
-const userID = "65eb04d403116e2e8c60f63e";
 
 const HomePage: React.FC<{}> = () => {
   const emptyRefresh = () => {};
@@ -52,8 +52,8 @@ const HomePage: React.FC<{}> = () => {
           <Row>
             <Col sm={9}>
               <TaskTable
-                name="To-Do List"
-                todo={ false } 
+                name="Today's To-Do List"
+                todo={false}
                 page="HomePage"
                 tasks={ incompleteTasks }
                 categories={ userCategories }
