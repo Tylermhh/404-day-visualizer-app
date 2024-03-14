@@ -34,9 +34,9 @@ function Task() {
         .catch(err => {
           console.error(err);
         })})
-      .then(() => {
-        window.location.reload();
-      })
+      // .then(() => {
+      //   window.location.reload();
+      // })
       .catch(err => {
         console.error(err);
       });
