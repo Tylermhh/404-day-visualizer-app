@@ -13,6 +13,7 @@ import { getUser } from "../api/UserHooks";
 const HomePage: React.FC<{}> = () => {
   const emptyRefresh = () => {};
 
+  
   const today: Date = new Date();
   const [completeTasks, setCompleteTasks] = useState<ITask[]>([]);
   const [incompleteTasks, setIncompleteTasks] = useState<ITask[]>([]);
