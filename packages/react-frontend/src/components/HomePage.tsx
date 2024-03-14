@@ -13,7 +13,6 @@ const HomePage: React.FC<{}> = () => {
   const emptyRefresh = () => {};
   console.log(localStorage.getItem("userID"));
 
-  const today: Date = new Date();
   const [completeTasks, setCompleteTasks] = useState<ITask[]>([]);
   const [incompleteTasks, setIncompleteTasks] = useState<ITask[]>([]);
 
@@ -42,7 +41,7 @@ const HomePage: React.FC<{}> = () => {
           console.error(err);
         });
     },
-    [userID],
+    [],
   );
 
     useEffect(() => {
@@ -55,7 +54,7 @@ const HomePage: React.FC<{}> = () => {
       .catch(err => {
         console.error(err);
       });
-  }, [userID]);
+  }, []);
 
   return (
     <div>

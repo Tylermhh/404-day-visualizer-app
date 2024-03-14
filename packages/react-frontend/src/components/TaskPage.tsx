@@ -17,7 +17,7 @@ function Task() {
 
   const refreshPage = () => {
     console.log("user categories: ");
-    getAllTasks(localStorage.getItem('userID') as string)
+    getAllTasks(localStorage.getItem("userID") as string)
       .then(response => response.json())
       .then(data => {
         setIncompleteTasks(data.notDone);
@@ -28,7 +28,7 @@ function Task() {
       .catch(err => {
         console.error(err);
       });
-    getUser(localStorage.getItem('userID') as string)
+    getUser(localStorage.getItem("userID") as string)
       .then(res => {
         res.json().then(userObj => {
           setCategories(userObj.categories);
@@ -41,13 +41,13 @@ function Task() {
   };
 
   useEffect(() => {
-    getAllTasks(localStorage.getItem('userID') as string)
+    getAllTasks(localStorage.getItem("userID") as string)
       .then(response => response.json())
       .then(data => {
         setIncompleteTasks(data.notDone);
         setCompleteTasks(data.done);
       });
-    getUser(localStorage.getItem('userID') as string)
+    getUser(localStorage.getItem("userID") as string)
       .then(res => {
         res.json().then(userObj => {
           setCategories(userObj.categories);
@@ -56,7 +56,7 @@ function Task() {
       .catch(err => {
         console.error(err);
       });
-  }, [userID]);
+  }, []);
 
   return (
     <div className="App">
