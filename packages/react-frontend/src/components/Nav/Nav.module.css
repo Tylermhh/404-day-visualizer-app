@@ -1,11 +1,20 @@
 .navbar {
     width: 100%;
     height: 70px;
-    background: #5F6E96;
+    background: #0066C9;
     /* border-bottom: 1px solid #555; */
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.nav-link {
+    background: #DFDFDF;
+    color: #DFDFDF;
+}
+
+.align-items-end {
+    align-items: flex-end;
 }
 
 .logo-container span {
@@ -19,8 +28,15 @@
 .logo-container a {
     font-weight: 500;
     font-size: x-large;
-    color: black;
+    position:"absolute";
+    bottom:"0px";
+    color: #FFFFFF;
     cursor: pointer;
+}
+
+.logo-container myImg {
+    height: 70px;
+    max-width: 70px;
 }
 
 .links-container {
@@ -31,11 +47,11 @@
 
 .links a {
     text-decoration: none;
-    color: black;
+    color: white;
 }
 
 .links a:hover {
     text-decoration: none;
     /*color:rgba(121, 119, 188, 0.5);*/
-    color: white;
+    color: black;
 }
