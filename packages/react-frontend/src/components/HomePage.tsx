@@ -19,7 +19,8 @@ const HomePage: React.FC<{}> = () => {
 
   const [categories, setCategories] = useState<Category[]>([]);
 
-  let userID = localStorage.getItem('userID')
+  let userID = localStorage.getItem('userID');
+  let today = new Date();
 
     useEffect(() => {
       getTasks(
