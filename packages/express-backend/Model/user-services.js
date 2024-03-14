@@ -27,3 +27,12 @@ export const addUser = async user => {
   const savedUser = await userToAdd.save()
   return savedUser
 }
+
+export const updateUserById = async (id, updated) => {
+  await connectDB()
+  let promise
+
+  promise = userModel.findByIdAndUpdate(id, updated, { new: true })
+
+  return promise
+}
