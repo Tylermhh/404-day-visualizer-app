@@ -26,6 +26,11 @@ export interface TaskHours {
   amount: number;
 }
 
+export interface CompletedNotCompletedTasks {
+    type: string
+    amount: number;
+}
+
 export interface Category {
   name: string;
   color: string;
@@ -67,7 +72,9 @@ export type IDateEntry = {
   hours: number;
 };
 
-export type ICategory = {
-  name: string;
-  color: string;
+export type IUser = {
+  _id: string;
+  username: string;
+  password: string;
+  categories: Category[];
 };

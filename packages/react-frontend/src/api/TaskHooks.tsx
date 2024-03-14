@@ -13,7 +13,7 @@ function convertDateStringToHyphen(date: string) {
   return newDate;
 }
 
-// hook to get Tasks
+// hook to get Tasks in date range
 export function getTasks(userID: string, start: Date, end: Date) {
   const formatter = new Intl.DateTimeFormat("en-US", {
     day: "2-digit",
@@ -28,6 +28,7 @@ export function getTasks(userID: string, start: Date, end: Date) {
   return promise;
 }
 
+// hook to get all Tasks
 export function getAllTasks(userID: string) {
   const promise = fetch(`${url}/${userID}`);
   return promise;
@@ -35,8 +36,8 @@ export function getAllTasks(userID: string) {
 
 // hook to post Task
 export function postTask(task: ITask) {
-  console.log("new task")
-  console.log(task)
+  console.log("new task");
+  console.log(task);
   const promise = fetch(`${url}`, {
     method: "POST",
     headers: {
@@ -60,24 +61,13 @@ export function postTask(task: ITask) {
 
 // hook to update Task list
 export function updateTask(task: ITask) {
-  console.log("updating task")
+  console.log("updating task");
   console.log(`${url}/${task._id}`);
   const promise = fetch(`${url}/${task._id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
-    // body: JSON.stringify({
-    //   name: task.name,
-    //   userID: task.userID,
-    //   description: task.description,
-    //   category: task.category,
-    //   createdAt: task.createdAt,
-    //   datesUpdated: task.datesUpdated,
-    //   done: false,
-    //   deadline: task.deadline,
-    //   priority: task.priority
-    // }),
     body: JSON.stringify(task),
   });
   return promise;

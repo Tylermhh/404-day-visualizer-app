@@ -1,5 +1,10 @@
-import express from 'express';
-import { addUser, getUsers, findUserById, updateUserById } from "../Model/user-services.js"
+import express from "express";
+import {
+  addUser,
+  getUsers,
+  findUserById,
+  updateUserById,
+} from "../Model/user-services.js";
 
 const router = express.Router();
 
@@ -20,10 +25,10 @@ router.post("/", async (req, res) => {
 });
 
 router.get("/", async (req, res) => {
-  const { name, job } = req.query;
+  const { name } = req.query;
 
   try {
-    const users = await getUsers(name, job);
+    const users = await getUsers(name);
     res.status(200).send(users);
   } catch (error) {
     console.error(error);
@@ -46,17 +51,17 @@ router.get("/:id", async (req, res) => {
     console.error(error);
     res.status(500).send("Error fetching user with id.");
   }
-})
+});
 
 router.put("/:userId", async (req, res) => {
-  const userId = req.params["userId"]
-  const updatedUser = req.body
+  const userId = req.params["userId"];
+  const updatedUser = req.body;
 
-  const mongoUpdated = await updateUserById(userId, updatedUser)
+  const mongoUpdated = await updateUserById(userId, updatedUser);
   if (!mongoUpdated) {
-    return res.status(400).send()
+    return res.status(400).send();
   }
-  res.status(200).send(mongoUpdated)
-})
+  res.status(200).send(mongoUpdated);
+});
 
-  export default router;
+export default router;

@@ -1,7 +1,7 @@
 import React, { useState, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MainNav from "./Nav/MainNav";
-import { Button, Container, Col, Row, Form, Stack} from "react-bootstrap";
+import { Button, Container, Col, Row, Form, Stack } from "react-bootstrap";
 import { loginUser } from '../api/AuthHooks';
 
 function Main() {
@@ -13,17 +13,20 @@ function Main() {
     event.preventDefault();
 
     try {
-      const response = await loginUser(username, pwd);
-      if (response.ok) {
-        console.log('Login successful');
-        navigate('/home'); // Redirect to home on successful signup
+      const { ok, data, error } = await loginUser(username, pwd);
+      if (ok) {
+        console.log('Login successful', data); // Optionally log or use the data
+        navigate('/home'); // Redirect to home on successful login
       } else {
-        throw new Error('Login failed');
+        // Use the custom error message if provided by loginUser
+        throw new Error(error || 'Login failed');
       }
     } catch (error) {
+      // Log the error message, falling back to a generic message if necessary
       console.error('Login failed', error instanceof Error ? error.message : 'An unexpected error occurred');
     }
-};
+  };
+
 
     return (
       <div className="App">
