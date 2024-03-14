@@ -5,7 +5,6 @@ import { Button, Container, Col, Row, Form, Stack} from "react-bootstrap";
 import axios from 'axios'; 
 
 function Main() {
-  // State for the username and password inputs
   const [username, setUsername] = useState('');
   const [pwd, setPassword] = useState('');
   const navigate = useNavigate();
@@ -23,13 +22,10 @@ function Main() {
       navigate('/home');
     } catch (error: unknown) {
         if (axios.isAxiosError(error)) {
-            // Now TypeScript knows this is an AxiosError, you can access error.response safely
             console.error('Login failed', error.response?.data || error.message);
         } else if (error instanceof Error) {
-            // This is a generic JavaScript Error
             console.error('Login failed', error.message);
         } else {
-            // For other types, you might not be sure what the structure is
             console.error('An unexpected error occurred');
         }
     }
@@ -39,7 +35,7 @@ function Main() {
       <div className="App">
         <MainNav page="Login" />
         <Stack gap={5}>
-          <Container /> {/* This empty Container might be for spacing. Consider removing if unnecessary. */}
+          <Container /> 
           <Container>
             <Row className="justify-content-md-center">
               <Col sm={12} md={6}>
@@ -53,7 +49,7 @@ function Main() {
                       placeholder="Username"
                       autoFocus
                       value={username}
-                      onChange={e => setUsername(e.target.value)} // Update state when the input changes
+                      onChange={e => setUsername(e.target.value)} 
                     />
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="login-password">
@@ -62,12 +58,11 @@ function Main() {
                       type="password"
                       placeholder="Password"
                       value={pwd}
-                      onChange={e => setPassword(e.target.value)} // Update state when the input changes
+                      onChange={e => setPassword(e.target.value)} 
                     />
                   </Form.Group>
                   <div className="d-flex justify-content-center">
                     {" "}
-                    {/* Center the button */}
                     <Button variant="primary" size="lg" type="submit">
                       Login
                     </Button>
