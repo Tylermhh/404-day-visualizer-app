@@ -1,30 +1,37 @@
 import { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Offcanvas from 'react-bootstrap/Offcanvas';
+import {Button, Stack, Offcanvas} from 'react-bootstrap';
 
-function Example() {
-  const [show, setShow] = useState(false);
+const UserLogoutOffCanvas: React.FC<{}> = (input) => {    
+    const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
-        Launch
+      <Button variant="light" onClick={handleShow}>
+        User
       </Button>
 
-      <Offcanvas show={show} onHide={handleClose}>
+      <Offcanvas show={show} onHide={handleClose} placement='end'>
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+            <Offcanvas.Title>
+                User Profile
+            </Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          Some text as placeholder. In real life you can have the elements you
-          have chosen. Like, text, images, lists, etc.
+            <Stack gap={2}>
+                <text>
+                    user stuff
+                </text>
+                <Button variant="primary">
+                    Logout
+                </Button>
+            </Stack>
         </Offcanvas.Body>
       </Offcanvas>
     </>
   );
 }
 
-export default Example;
+export default UserLogoutOffCanvas;

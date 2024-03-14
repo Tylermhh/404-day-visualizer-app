@@ -2,6 +2,7 @@ import React from 'react'
 import styles from './Nav.module.css';
 import { Button, Container, Col, Row, Nav, Navbar, Image } from 'react-bootstrap';
 import * as data from './links.json'
+import UserLogoutOffCanvas from "./../Overlays/UserLogoutOffCanvas"
 
 const linksString = JSON.stringify(data)
 const links = JSON.parse(linksString).links;
@@ -57,9 +58,7 @@ const LandingNav: React.FC<{page : String}> = (input) => {
                                 </Nav>
                             </Col>
                             <Col>
-                                <Button className="navButton" variant="light">
-                                    User
-                                </Button>
+                                <UserLogoutOffCanvas />
                             </Col>
                         </Row>
                     </div>
