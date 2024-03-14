@@ -5,9 +5,9 @@ import VisualizerNumberTasksPerCategoryPieChart from "./Chart/VisualizerNumberTa
 import VisualizerHoursSpentPerCategoryPieChart from "./Chart/VisualizerHoursSpentPerCategoryPieChart";
 import VisualizerHoursSpentPerTaskBarChart from "./Chart/VisualizerHoursSpentPerTaskBarChart";
 import VisualizerCompletedNotCompletedTasksPerCategoryBarChart from "./Chart/VisualizerCompletedNotCompletedTasksPerCategoryBarChart";
-import { ITask } from "./../types/types";
-import { userCategories } from "./../TempData";
+import { Category, ITask } from "./../types/types";
 import { getTasks } from "../api/TaskHooks";
+import { getUser } from "./../api/UserHooks"
 
 function GetDateString(date: Date): string {
   let year = date.getFullYear().toString();
@@ -25,7 +25,7 @@ function GetDateString(date: Date): string {
   return year + "-" + month + "-" + day;
 }
 
-function VisualizerType(value: string, allTasks: ITask[]) {
+function VisualizerType(value: string, allTasks: ITask[], categories : Category[]) {
   const [category, setCategory] = useState("");
   const handleSelectCategory = (e: any) => {
     console.log(e);
@@ -37,7 +37,7 @@ function VisualizerType(value: string, allTasks: ITask[]) {
       <Container className="d-flex justify-content-center">
         <VisualizerHoursSpentPerCategoryPieChart
           tasks={allTasks}
-          categories={userCategories}
+          categories={categories}
         />
       </Container>
     );
@@ -49,8 +49,8 @@ function VisualizerType(value: string, allTasks: ITask[]) {
           <Col sm={4}>
             <Form>
               <Form.Select value={category} onChange={handleSelectCategory}>
-                {userCategories.map((categories, index) => (
-                  <option value={index}>{categories.name}</option>
+                {categories.map((category, index) => (
+                  <option value={index}>{category.name}</option>
                 ))}
               </Form.Select>
             </Form>
@@ -60,7 +60,7 @@ function VisualizerType(value: string, allTasks: ITask[]) {
         <Container className="d-flex justify-content-center">
           <VisualizerCompletedNotCompletedTasksPerCategoryBarChart
             tasks={allTasks}
-            categories={userCategories}
+            categories={categories}
             category={category}
           />
         </Container>
@@ -74,8 +74,8 @@ function VisualizerType(value: string, allTasks: ITask[]) {
           <Col sm={4}>
             <Form>
               <Form.Select value={category} onChange={handleSelectCategory}>
-                {userCategories.map((categories, index) => (
-                  <option value={index}>{categories.name}</option>
+                {categories.map((category, index) => (
+                  <option value={index}>{category.name}</option>
                 ))}
               </Form.Select>
             </Form>
@@ -85,7 +85,7 @@ function VisualizerType(value: string, allTasks: ITask[]) {
         <Container className="d-flex justify-content-center">
           <VisualizerHoursSpentPerTaskBarChart
             tasks={allTasks}
-            categories={userCategories}
+            categories={categories}
             category={category}
           />
         </Container>
@@ -96,7 +96,7 @@ function VisualizerType(value: string, allTasks: ITask[]) {
       <Container className="d-flex justify-content-center">
         <VisualizerNumberTasksPerCategoryPieChart
           tasks={allTasks}
-          categories={userCategories}
+          categories={categories}
         />
       </Container>
     );
@@ -125,6 +125,8 @@ function Visualizer() {
   const [completeTasks, setCompleteTasks] = useState<ITask[]>(empty_list);
   const [incompleteTasks, setIncompleteTasks] = useState<ITask[]>(empty_list);
 
+  const [categories, setCategories] = useState<Category[]>([]);
+
   let startDateString = GetDateString(startDate);
   let endDateString = GetDateString(endDate);
 
@@ -144,6 +146,18 @@ function Visualizer() {
         console.error(err);
       });
   });
+
+  useEffect(() => {
+    getUser((localStorage.getItem('userID') as string))
+    .then(res => {
+        res.json().then(data => {
+            setCategories(data.categories)
+        });
+    })
+    .catch(err => {
+        console.error(err);
+    });
+});
 
   return (
     <div className="App">
@@ -195,7 +209,7 @@ function Visualizer() {
         </Container>
         <Container>
           <Row>
-            {VisualizerType(visualizer, completeTasks.concat(incompleteTasks))}
+            {VisualizerType(visualizer, completeTasks.concat(incompleteTasks), categories)}
           </Row>
         </Container>
       </Stack>
