@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Landing from "./components/LandingPage";
-import Auth from "./components/AuthenticationPage";
-import SignUp from "./components/SignUpPage";
+import Login from "./components/LoginPage"
+import SignUp from "./components/SignUpPage"
 import Home from "./components/HomePage";
 import Task from "./components/TaskPage";
 import Viz from "./components/VisualizerPage";
@@ -12,11 +12,11 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/auth" element={<Auth />} />
-        <Route path="/signup" element={<SignUp />} />
+        <Route path="/auth/login" element={<Login />} /> 
+        <Route path="/auth/signup" element={<SignUp />} /> 
         <Route path="/home" element={<Home />} />
         <Route path="/task" element={<Task />} />
-        <Route path="/visualize" element={<Viz />} />
+        <Route path="/visualize" element={<Viz />} /> 
       </Routes>
     </Router>
   );
