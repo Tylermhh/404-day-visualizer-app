@@ -12,7 +12,7 @@ import userID from "./User";
 function GetDateString(date: Date): string {
   let year = date.getFullYear().toString();
   let month = (date.getMonth() + 1).toString();
-  let day = (date.getDate() + 1).toString();
+  let day = (date.getDate()).toString();
 
   if (date.getMonth() < 10) {
     month = "0" + month;
@@ -25,14 +25,14 @@ function GetDateString(date: Date): string {
   return year + "-" + month + "-" + day;
 }
 
-function VisualizerType(value: any, allTasks: ITask[]) {
+function VisualizerType(value: string, allTasks: ITask[]) {
   const [category, setCategory] = useState("");
   const handleSelectCategory = (e: any) => {
     console.log(e);
     setCategory(e.target.value);
   };
 
-  if (value.value === "2") {
+  if (value === "2") {
     return (
       <Container className="d-flex justify-content-center">
         <VisualizerHoursSpentPerCategoryPieChart
@@ -41,7 +41,7 @@ function VisualizerType(value: any, allTasks: ITask[]) {
         />
       </Container>
     );
-  } else if (value.value === "3") {
+  } else if (value === "3") {
     return (
       <Container>
         <Row>
@@ -101,18 +101,16 @@ function Visualizer() {
 
   useEffect(() => {
     getTasks(userID, startDate, endDate)
-      .then(tasks => {
-        tasks.json().then(data => {
+      .then((tasks) => {
+        tasks.json().then((data) => {
           setCompleteTasks(data.done);
           setIncompleteTasks(data.notDone);
         });
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err);
       });
   });
-
-  let allTasks = completeTasks.concat(incompleteTasks);
 
   return (
     <div className="App">
@@ -163,12 +161,9 @@ function Visualizer() {
         </Container>
         <Container>
           <Row>
-            <VisualizerType value={visualizer} allTasks={allTasks} />
+            {VisualizerType(visualizer, completeTasks.concat(incompleteTasks))}
           </Row>
         </Container>
-        <text>
-          {`${JSON.stringify(completeTasks.concat(incompleteTasks))}`}
-        </text>
       </Stack>
     </div>
   );
