@@ -1,5 +1,5 @@
 import React from 'react'
-import { Task, TaskHours, Category, DateEntry } from '../../types/types';
+import { ITask, TaskHours, Category, DateEntry } from '../../types/types';
 import { BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 
 function calculateTaskHours(taskDateEntries : DateEntry[]): number {
@@ -12,47 +12,51 @@ function calculateTaskHours(taskDateEntries : DateEntry[]): number {
     return taskHours;
 }
 
-function calculateCategoryTaskHours(tasks : Task[], categories: Category[], category?: string): TaskHours[] {
-    let specificCategoryTasks = tasks.filter((tasks) => tasks.category === category)
+function calculateCategoryTaskHours(tasks : ITask[], categories: Category[], category?: string): TaskHours[] {
 
     let taskHours: TaskHours[] = [];
-
     let maxHours = 0;
 
-    for (let task of specificCategoryTasks) {
-        let hoursSpent = calculateTaskHours(task.datesUpdated);
+    if(tasks.length === 0) {
+        let specificCategoryTasks = tasks.filter((tasks) => tasks.category === category)
 
-        if(maxHours < hoursSpent) {
-            maxHours = hoursSpent;
-        }
-    }
+        for (let task of specificCategoryTasks) {
+            let hoursSpent = calculateTaskHours(task.datesUpdated);
 
-    for (let i = 0; i <= maxHours; i++) {
-        let specificHour: TaskHours = { hours: i, amount: 0}
-        taskHours.push(specificHour)
-    }
-
-    for (let task of specificCategoryTasks) {
-        let hoursSpent = calculateTaskHours(task.datesUpdated);
-
-        for (let object of taskHours) {
-            if (object.hours === hoursSpent) {
-                object.amount += 1;
+            if(maxHours < hoursSpent) {
+                maxHours = hoursSpent;
             }
         }
+
+        for (let i = 0; i <= maxHours; i++) {
+            let specificHour: TaskHours = { hours: i, amount: 0}
+            taskHours.push(specificHour)
+        }
+        
+        for (let task of specificCategoryTasks) {
+            let hoursSpent = calculateTaskHours(task.datesUpdated);
+    
+            for (let object of taskHours) {
+                if (object.hours === hoursSpent) {
+                    object.amount += 1;
+                }
+            }
+        }
+
+        return taskHours;
     }
 
+    let specificHour: TaskHours = { hours: 0, amount: 0}
+    taskHours.push(specificHour)
+    
     return taskHours;
 }
 
-const VisualizerHoursSpentPerTaskBarChart: React.FC<{tasks : Task[], categories : Category[], category: string}> = (input) =>  {
+const VisualizerHoursSpentPerTaskBarChart: React.FC<{tasks : ITask[], categories : Category[], category: string}> = (input) =>  {
 
     let taskHours: TaskHours[] = calculateCategoryTaskHours(input.tasks, input.categories, input.categories.at(Number(input.category))?.name);
 
     return (
-        // <text>
-        //     {JSON.stringify(taskHours)}
-        // </text>
         <BarChart width={1000} height={600} data={taskHours} 
             margin={{
                 top: 5,

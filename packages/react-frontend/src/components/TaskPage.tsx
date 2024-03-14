@@ -6,6 +6,7 @@ import TaskTable from "./Table/TaskTable";
 import { Category, ITask } from "./../types/types";
 import styles from "./Page.module.css";
 import { useEffect, useState } from "react";
+import userID from "./User";
 // import { getTasks } from "../api/TaskHooks";
 // import userID from "./User";
 
@@ -20,22 +21,6 @@ let userCategories: Category[] = [
 ];
 
 function Task() {
-  // const [doneTasksList, setDoneTasksList] = useState([]);
-  // const [toDoTasksList, setToDoTasksList] = useState([]);
-
-  // useEffect(() => {
-  //   getTasks(userID, new Date(), new Date())
-  //     .then(res => res.json())
-  //     .then(json => {
-  //       setToDoTasksList(json.notDone);
-  //       setDoneTasksList(json.done);
-  //     })
-  //     .catch(error => {
-  //       console.log(error);
-  //     });
-  // }, []);
-
-  const userID = "65eb04d403116e2e8c60f63e";
   const [incompleteTasks, setIncompleteTasks] = useState<ITask[]>(empty_list);
   const [completeTasks, setCompleteTasks] = useState<ITask[]>(empty_list);
 
@@ -80,7 +65,6 @@ function Task() {
         name="Tasks To Do"
         todo={true}
         page="TaskPage"
-        // tasks={toDoTasksList}
         tasks={incompleteTasks}
         categories={userCategories}
         refreshPage={refreshPage}
@@ -89,7 +73,6 @@ function Task() {
         name="Tasks Completed"
         todo={false}
         page="TaskPage"
-        // tasks={doneTasksList}
         tasks={completeTasks}
         categories={userCategories}
         refreshPage={refreshPage}
