@@ -15,7 +15,7 @@ function Task() {
   const [completeTasks, setCompleteTasks] = useState<ITask[]>(empty_list);
   const [categories, setCategories] = useState<Category[]>([]);
 
-  let userID = localStorage.getItem('userID')
+  let userID = localStorage.getItem("userID");
 
   const refreshPage = () => {
     console.log("user categories: ");
@@ -58,7 +58,7 @@ function Task() {
       .catch(err => {
         console.error(err);
       });
-  }, []);
+  }, [userID]);
 
   return (
     <div className="App">
