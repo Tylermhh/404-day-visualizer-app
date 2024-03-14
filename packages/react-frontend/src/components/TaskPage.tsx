@@ -7,35 +7,14 @@ import TaskTable from "./Table/TaskTable";
 import { getAllTasks } from "../api/TaskHooks";
 import { Category, ITask } from "./../types/types";
 import { userID } from "./User";
-// import { getTasks } from "../api/TaskHooks";
+import { getUser } from "../api/UserHooks";
 
 let empty_list: ITask[] = [];
-
-let userCategories: Category[] = [
-  { name: "Frontend", color: "#0088FE" },
-  { name: "Backend", color: "#F098FE" },
-  { name: "Other", color: "#FFBB28" },
-  { name: "CSC 430", color: "#2BA428" },
-  { name: "Physics", color: "#123456" },
-];
 
 function Task() {
   const [incompleteTasks, setIncompleteTasks] = useState<ITask[]>(empty_list);
   const [completeTasks, setCompleteTasks] = useState<ITask[]>(empty_list);
-
-  // getUser(userID).then(res => {
-  //   console.log("user gotten:", res.json());
-  // });
-
-  // let dummyUser: IUser = {
-  //   username: "dummyName",
-  //   _id: userID,
-  //   categories: [{ name: "FakeCategory", color: "#F098FE" }],
-  //   password: "dummyPass",
-  // };
-  // updateUser(dummyUser).then(res => {
-  //   console.log("updated user:", res.json());
-  // });
+  const [categories, setCategories] = useState<Category[]>([]);
 
   const refreshPage = () => {
     console.log("user categories: ");
@@ -50,6 +29,16 @@ function Task() {
       .catch(err => {
         console.error(err);
       });
+    getUser(userID)
+      .then(res => {
+        res.json().then(userObj => {
+          setCategories(userObj.categories);
+          console.log("categories:", categories);
+        });
+      })
+      .catch(err => {
+        console.error(err);
+      });
   };
 
   useEffect(() => {
@@ -59,18 +48,27 @@ function Task() {
         setIncompleteTasks(data.notDone);
         setCompleteTasks(data.done);
       });
-  }, []);
+    getUser(userID)
+      .then(res => {
+        res.json().then(userObj => {
+          setCategories(userObj.categories);
+          console.log("categories:", categories);
+        });
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  });
 
   return (
     <div className="App">
       <MainNav page={"Task"} />
-      {/* <header className={styles.pageTitle}>Task Page</header> */}
       <TaskTable
         name="Tasks To Do"
         todo={true}
         page="TaskPage"
         tasks={incompleteTasks}
-        categories={userCategories}
+        categories={categories}
         refreshPage={refreshPage}
       />
       <TaskTable
@@ -78,7 +76,7 @@ function Task() {
         todo={false}
         page="TaskPage"
         tasks={completeTasks}
-        categories={userCategories}
+        categories={categories}
         refreshPage={refreshPage}
       />
     </div>

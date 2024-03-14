@@ -12,6 +12,7 @@ import { userID } from "./User";
 
 const HomePage: React.FC<{}> = () => {
   const emptyRefresh = () => {};
+  console.log(localStorage.getItem('userID'))
 
   const today: Date = new Date();
   const [completeTasks, setCompleteTasks] = useState<ITask[]>([]);

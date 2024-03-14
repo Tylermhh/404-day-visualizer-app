@@ -91,7 +91,6 @@ const NewTaskModal: React.FC<{
                   <option value={entry.name}>{entry.name}</option>
                 ))}
                 <DropdownDivider></DropdownDivider>
-                <option>Add new category</option>
               </Form.Select>
             </Form.Group>
 

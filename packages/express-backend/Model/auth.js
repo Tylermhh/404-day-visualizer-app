@@ -1,15 +1,15 @@
-import bcrypt from "bcrypt"
-import jwt from "jsonwebtoken"
-import dotenv from "dotenv"
-import connectDB from "../db.js"
-import userModel from "./user.js"
-dotenv.config()
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+import connectDB from "../db.js";
+import userModel from "./user.js";
 
+dotenv.config();
 
-const generateAccessToken = (username) => {
+const generateAccessToken = (username, userId) => {
   return new Promise((resolve, reject) => {
     jwt.sign(
-      { username },
+      { username, id: userId },
       process.env.TOKEN_SECRET,
       { expiresIn: '1d' },
       (err, token) => {
@@ -40,14 +40,53 @@ export const registerUser = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(pwd, salt);
     const newUser = new userModel({ username, password: hashedPassword });
-    await newUser.save();
+    const savedUser = await newUser.save();
 
-    const token = await generateAccessToken(username);
+    const token = await generateAccessToken(username, savedUser._id);
     console.log("Registration successful. Token:", token);
-    res.status(201).json({ token });
+    res.status(201).json({ 
+      token, 
+      username: savedUser.username,
+      userID: savedUser._id
+    });
   } catch (err) {
     console.error("Error during user registration:", err);
     res.status(500).send("Server error during registration.");
+  }
+};
+
+export const loginUser = async (req, res) => {
+  const { username, pwd } = req.body;
+
+  if (!username || !pwd) {
+    return res.status(400).send("Bad request: Both username and password are required.");
+  }
+
+  try {
+    const retrievedUser = await userModel.findOne({ username });
+    if (!retrievedUser) {
+      return res.status(401).send("Unauthorized: User not found.");
+    }
+
+    const matched = await bcrypt.compare(pwd, retrievedUser.password);
+    if (matched) {
+      const token = jwt.sign(
+        { username: retrievedUser.username, id: retrievedUser._id },
+        process.env.TOKEN_SECRET,
+        { expiresIn: '1h' }
+      );
+
+      res.status(200).json({ 
+        token, 
+        username: retrievedUser.username,
+        userID: retrievedUser._id 
+      });
+    } else {
+      res.status(401).send("Unauthorized: Password does not match.");
+    }
+  } catch (error) {
+    console.error("Error during user login:", error);
+    res.status(500).send("Server error during login.");
   }
 };
 
@@ -69,36 +108,3 @@ export function authenticateUser(req, res, next) {
     });
   }
 }
-
-
-export const loginUser = async (req, res) => {
-  const { username, pwd } = req.body;
-
-  if (!username || !pwd) {
-    return res.status(400).send("Bad request: Both username and password are required.");
-  }
-
-  try {
-    const retrievedUser = await userModel.findOne({ username });
-    if (!retrievedUser) {
-      return res.status(401).send("Unauthorized: User not found.");
-    }
-
-    const matched = await bcrypt.compare(pwd, retrievedUser.password);
-    if (matched) {
-      // console.log("Token secret:", process.env.TOKEN_SECRET); // Debug log
-      const token = jwt.sign(
-        { username: retrievedUser.username, id: retrievedUser._id },
-        process.env.TOKEN_SECRET,
-        { expiresIn: '1h' }
-      );
-
-      res.status(200).json({ token: token, username: retrievedUser.username });
-    } else {
-      res.status(401).send("Unauthorized: Password does not match.");
-    }
-  } catch (error) {
-    console.error("Error during user login:", error);
-    res.status(500).send("Server error during login.");
-  }
-};

@@ -25,6 +25,10 @@ const NewCategoryModal: React.FC<{
     console.log(value);
     if (field === "color") {
       switch (value) {
+        case "Choose Color": {
+          value = "3480eb";
+          break;
+        }
         case "Blue": {
           value = "#3480eb";
           break;
