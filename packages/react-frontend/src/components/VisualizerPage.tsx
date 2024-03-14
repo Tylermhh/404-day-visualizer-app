@@ -8,12 +8,12 @@ import VisualizerCompletedNotCompletedTasksPerCategoryBarChart from "./Chart/Vis
 import { ITask } from "./../types/types";
 import { userCategories } from "./../TempData";
 import { getTasks } from "../api/TaskHooks";
-import userID from "./User";
+import { userID } from "./User";
 
 function GetDateString(date: Date): string {
   let year = date.getFullYear().toString();
   let month = (date.getMonth() + 1).toString();
-  let day = (date.getDate()).toString();
+  let day = date.getDate().toString();
 
   if (date.getMonth() < 10) {
     month = "0" + month;
@@ -135,13 +135,13 @@ function Visualizer() {
 
   useEffect(() => {
     getTasks(userID, startDate, endDate)
-      .then((tasks) => {
-        tasks.json().then((data) => {
+      .then(tasks => {
+        tasks.json().then(data => {
           setCompleteTasks(data.done);
           setIncompleteTasks(data.notDone);
         });
       })
-      .catch((err) => {
+      .catch(err => {
         console.error(err);
       });
   });

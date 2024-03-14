@@ -6,7 +6,7 @@ import TaskTable from "./Table/TaskTable";
 // import styles from "./Page.module.css";
 import { getAllTasks } from "../api/TaskHooks";
 import { Category, ITask } from "./../types/types";
-import userID from "./User";
+import { userID } from "./User";
 // import { getTasks } from "../api/TaskHooks";
 
 let empty_list: ITask[] = [];
@@ -38,6 +38,7 @@ function Task() {
   // });
 
   const refreshPage = () => {
+    console.log("user categories: ");
     getAllTasks(userID)
       .then(response => response.json())
       .then(data => {

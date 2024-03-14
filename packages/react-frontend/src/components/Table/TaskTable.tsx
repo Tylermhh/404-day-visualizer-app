@@ -4,6 +4,7 @@ import { Category, ITask } from "./../../types/types";
 import styles from "../Page.module.css";
 import moment from "moment";
 import NewTaskModal from "../Modals/NewTaskModal";
+import NewCategoryModal from "../Modals/NewCategoryModal";
 import CompleteTaskOffcanvas from "../Overlays/CompleteTaskOffcanvas";
 import TaskDetailsModal from "../Modals/TaskDetailsModal";
 // import Button from 'react-bootstrap/Button';
@@ -33,8 +34,11 @@ function TaskTable(params: {
       return (
         <div className={styles["table-title"]}>
           <Row>
-            <Col sm={11}>
+            <Col sm={8}>
               <h2>{params.name}</h2>
+            </Col>
+            <Col sm={3}>
+              <NewCategoryModal refreshPage={params.refreshPage} />
             </Col>
             <Col sm={1}>
               <NewTaskModal
@@ -71,21 +75,23 @@ function TaskTable(params: {
             <td>{task.category}</td>
             <td>
               <CompleteTaskOffcanvas
-                purpose="Update" 
+                purpose="Update"
                 message={`Dont worry about not finishing it today! \nKeep up the good work! :D`}
                 done={false}
                 prompt="How many hours did you spend on the task today?"
-                passedTask={task} 
-                refreshPage={params.refreshPage}/>
+                passedTask={task}
+                refreshPage={params.refreshPage}
+              />
             </td>
             <td>
-              <CompleteTaskOffcanvas 
+              <CompleteTaskOffcanvas
                 purpose="Complete"
-                message="Goodjob finishing that Task!! :D" 
-                done = {true}
+                message="Goodjob finishing that Task!! :D"
+                done={true}
                 prompt="How many hours did you spend completing the task today?"
-                passedTask={task} 
-                refreshPage={params.refreshPage}/>
+                passedTask={task}
+                refreshPage={params.refreshPage}
+              />
             </td>
             <td>
               <TaskDetailsModal task={task}/>

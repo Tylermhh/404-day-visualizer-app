@@ -7,7 +7,6 @@ import {
 } from "../Model/user-services.js";
 
 const router = express.Router();
-const app = express();
 
 router.post("/", async (req, res) => {
   try {
