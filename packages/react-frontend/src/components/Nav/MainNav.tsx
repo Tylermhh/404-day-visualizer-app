@@ -49,9 +49,20 @@ const LandingNav: React.FC<{page : String}> = (input) => {
                         </Row>
                     </div>
                     
-                    <Nav fill>
-                        <Links links = { links }/>
-                    </Nav>
+                    <div>
+                        <Row className="align-items-end">
+                            <Col>
+                                <Nav fill>
+                                    <Links links = { links }/>
+                                </Nav>
+                            </Col>
+                            <Col>
+                                <Button className="navButton" variant="light" href={"/signup"}>
+                                    Sign Up
+                                </Button>
+                            </Col>
+                        </Row>
+                    </div>
                 </Container>
             </Navbar>
         )   
