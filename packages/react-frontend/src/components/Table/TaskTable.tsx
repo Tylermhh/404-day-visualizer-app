@@ -4,6 +4,7 @@ import { Category, ITask } from "./../../types/types";
 import styles from "../Page.module.css";
 import moment from "moment";
 import NewTaskModal from "../Modals/NewTaskModal";
+import NewCategoryModal from "../Modals/NewCategoryModal";
 // import { IDateEntry } from "./../../types/types";
 
 function TaskTable(params: {
@@ -24,8 +25,11 @@ function TaskTable(params: {
       return (
         <div>
           <Row>
-            <Col sm={11}>
+            <Col sm={8}>
               <h2>{params.name}</h2>
+            </Col>
+            <Col sm={3}>
+              <NewCategoryModal refreshPage={params.refreshPage} />
             </Col>
             <Col sm={1}>
               <NewTaskModal
