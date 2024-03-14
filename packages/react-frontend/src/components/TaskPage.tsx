@@ -11,14 +11,6 @@ import { getUser } from "../api/UserHooks";
 
 let empty_list: ITask[] = [];
 
-let userCategories: Category[] = [
-  { name: "Frontend", color: "#0088FE" },
-  { name: "Backend", color: "#F098FE" },
-  { name: "Other", color: "#FFBB28" },
-  { name: "CSC 430", color: "#2BA428" },
-  { name: "Physics", color: "#123456" },
-];
-
 function Task() {
   const [incompleteTasks, setIncompleteTasks] = useState<ITask[]>(empty_list);
   const [completeTasks, setCompleteTasks] = useState<ITask[]>(empty_list);
@@ -33,6 +25,16 @@ function Task() {
         setCompleteTasks(data.done);
         console.log("refreshing and getting done data");
         console.log(data.done);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+    getUser(userID)
+      .then(res => {
+        res.json().then(userObj => {
+          setCategories(userObj.categories);
+          console.log("categories:", categories);
+        });
       })
       .catch(err => {
         console.error(err);
@@ -61,7 +63,6 @@ function Task() {
   return (
     <div className="App">
       <MainNav page={"Task"} />
-      {/* <header className={styles.pageTitle}>Task Page</header> */}
       <TaskTable
         name="Tasks To Do"
         todo={true}
