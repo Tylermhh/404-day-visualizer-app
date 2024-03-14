@@ -3,20 +3,26 @@ import { useNavigate } from 'react-router-dom';
 import MainNav from "./Nav/MainNav";
 import { Button, Container, Col, Row, Form, Stack } from "react-bootstrap";
 import { loginUser } from '../api/AuthHooks';
+import { useAuth } from '../context/AuthContext'; // This import is for login authentication purposes
 
-function Main() {
-  const [username, setUsername] = useState('');
-  const [pwd, setPassword] = useState('');
+function LoginPage() {
+  const [username, setUsername] = useState<string>('');
+  const [pwd, setPassword] = useState<string>('');
   const navigate = useNavigate();
+  const { login } = useAuth();      // login is called so that the user remains authenticated while navigating different pages
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
+  
     try {
       const { ok, data, error } = await loginUser(username, pwd);
-      if (ok) {
-        console.log('Login successful', data); // Optionally log or use the data
-        navigate('/home'); // Redirect to home on successful login
+      if (ok && data.token) {
+        console.log('Login successful', data);
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('userID', data.userID);
+        login(data.token, data.userID); // login(data.token, data.userID) puts the token and userID in local storage
+        navigate('/home');              
+        // Redirect to home on successful login
       } else {
         // Use the custom error message if provided by loginUser
         throw new Error(error || 'Login failed');
@@ -73,4 +79,4 @@ function Main() {
     );
 }
  
-export default Main;
+export default LoginPage;

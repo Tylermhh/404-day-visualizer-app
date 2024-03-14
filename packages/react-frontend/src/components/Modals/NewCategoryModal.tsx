@@ -4,7 +4,6 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { Category } from "../../types/types";
 import { updateUser, getUser } from "../../api/UserHooks";
-import { userID } from "../User";
 
 const NewCategoryModal: React.FC<{
   refreshPage: () => void;
@@ -67,7 +66,7 @@ const NewCategoryModal: React.FC<{
   };
 
   const handleSubmit = () => {
-    getUser(userID)
+    getUser((localStorage.getItem('userID') as string))
       .then(res => {
         res.json().then(data => {
           data.categories.push(newCategory);

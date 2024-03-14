@@ -6,7 +6,6 @@ import TaskTable from "./Table/TaskTable";
 // import styles from "./Page.module.css";
 import { getAllTasks } from "../api/TaskHooks";
 import { Category, ITask } from "./../types/types";
-import { userID } from "./User";
 import { getUser } from "../api/UserHooks";
 
 let empty_list: ITask[] = [];
@@ -16,9 +15,11 @@ function Task() {
   const [completeTasks, setCompleteTasks] = useState<ITask[]>(empty_list);
   const [categories, setCategories] = useState<Category[]>([]);
 
+  let userID = localStorage.getItem('userID')
+
   const refreshPage = () => {
     console.log("user categories: ");
-    getAllTasks(userID)
+    getAllTasks(userID as string)
       .then(response => response.json())
       .then(data => {
         setIncompleteTasks(data.notDone);
@@ -29,7 +30,7 @@ function Task() {
       .catch(err => {
         console.error(err);
       });
-    getUser(userID)
+    getUser(userID as string)
       .then(res => {
         res.json().then(userObj => {
           setCategories(userObj.categories);
@@ -42,13 +43,13 @@ function Task() {
   };
 
   useEffect(() => {
-    getAllTasks(userID)
+    getAllTasks(userID as string)
       .then(response => response.json())
       .then(data => {
         setIncompleteTasks(data.notDone);
         setCompleteTasks(data.done);
       });
-    getUser(userID)
+    getUser(userID as string)
       .then(res => {
         res.json().then(userObj => {
           setCategories(userObj.categories);
