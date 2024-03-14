@@ -22,7 +22,7 @@ let userCategories: Category[] = [
 function Task() {
   const [incompleteTasks, setIncompleteTasks] = useState<ITask[]>(empty_list);
   const [completeTasks, setCompleteTasks] = useState<ITask[]>(empty_list);
-  const [categories, setCategories] = useState<Category[]>();
+  const [categories, setCategories] = useState<Category[]>([]);
 
   const refreshPage = () => {
     console.log("user categories: ");
@@ -37,17 +37,6 @@ function Task() {
       .catch(err => {
         console.error(err);
       });
-    getUser(userID).then(res => {
-      res
-        .json()
-        .then(userObj => {
-          setCategories(userObj.categories);
-          console.log("categories:", categories);
-        })
-        .catch(err => {
-          console.error(err);
-        });
-    });
   };
 
   useEffect(() => {
@@ -56,6 +45,16 @@ function Task() {
       .then(data => {
         setIncompleteTasks(data.notDone);
         setCompleteTasks(data.done);
+      });
+    getUser(userID)
+      .then(res => {
+        res.json().then(userObj => {
+          setCategories(userObj.categories);
+          console.log("categories:", categories);
+        });
+      })
+      .catch(err => {
+        console.error(err);
       });
   }, []);
 
@@ -68,7 +67,7 @@ function Task() {
         todo={true}
         page="TaskPage"
         tasks={incompleteTasks}
-        categories={userCategories}
+        categories={categories}
         refreshPage={refreshPage}
       />
       <TaskTable
@@ -76,7 +75,7 @@ function Task() {
         todo={false}
         page="TaskPage"
         tasks={completeTasks}
-        categories={userCategories}
+        categories={categories}
         refreshPage={refreshPage}
       />
     </div>
