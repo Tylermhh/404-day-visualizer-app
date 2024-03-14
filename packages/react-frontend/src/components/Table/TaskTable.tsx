@@ -31,7 +31,7 @@ function TaskTable(params: {
   }> = input => {
     if (params.todo) {
       return (
-        <div>
+        <div className={styles["table-title"]}>
           <Row>
             <Col sm={11}>
               <h2>{params.name}</h2>
@@ -48,7 +48,7 @@ function TaskTable(params: {
       );
     }
     return (
-      <div>
+      <div className={styles["table-title"]}>
         <Row>
           <Col sm={11}>
             <h2>{params.name}</h2>
