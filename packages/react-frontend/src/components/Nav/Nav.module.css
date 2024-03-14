@@ -34,6 +34,15 @@
     cursor: pointer;
 }
 
+.logo-container p {
+    font-weight: 500;
+    font-size: medium;
+    align-items: center;
+    bottom:"0px";
+    color: #FFFFFF;
+    text-align: right;
+}
+
 .logo-container myImg {
     height: 70px;
     max-width: 70px;
