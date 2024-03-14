@@ -71,7 +71,11 @@ export const getTasks = async (userId, startDate, endDate, category, done) => {
 
 export const updateTaskById = async (id, updated) => {
   await connectDB()
-  return taskModel.updateOne({ id: id }, updated)
+  let promise
+
+  promise = taskModel.findByIdAndUpdate(id, updated, { new: true })
+
+  return promise
 }
 
 export const deleteTaskById = async id => {

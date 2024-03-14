@@ -1,15 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import MainNav from "./Nav/MainNav";
 import { Container, Col, Form, Row, Stack } from "react-bootstrap";
 import VisualizerNumberTasksPerCategoryPieChart from "./Chart/VisualizerNumberTasksPerCategoryPieChart";
 import VisualizerHoursSpentPerCategoryPieChart from "./Chart/VisualizerHoursSpentPerCategoryPieChart";
 import VisualizerHoursSpentPerTaskBarChart from "./Chart/VisualizerHoursSpentPerTaskBarChart";
-import { tempTasks, userCategories } from "./../TempData";
+import { ITask } from "./../types/types";
+import { userCategories } from "./../TempData";
+import { getTasks } from "../api/TaskHooks";
+import userID from "./User";
 
 function GetDateString(date: Date): string {
   let year = date.getFullYear().toString();
   let month = (date.getMonth() + 1).toString();
-  let day = (date.getDate() + 1).toString();
+  let day = (date.getDate()).toString();
 
   if (date.getMonth() < 10) {
     month = "0" + month;
@@ -22,23 +25,23 @@ function GetDateString(date: Date): string {
   return year + "-" + month + "-" + day;
 }
 
-function VisualizerType(value: any) {
+function VisualizerType(value: string, allTasks: ITask[]) {
   const [category, setCategory] = useState("");
   const handleSelectCategory = (e: any) => {
     console.log(e);
     setCategory(e.target.value);
   };
 
-  if (value.value === "2") {
+  if (value === "2") {
     return (
       <Container className="d-flex justify-content-center">
         <VisualizerHoursSpentPerCategoryPieChart
-          tasks={tempTasks}
+          tasks={allTasks}
           categories={userCategories}
         />
       </Container>
     );
-  } else if (value.value === "3") {
+  } else if (value === "3") {
     return (
       <Container>
         <Row>
@@ -56,7 +59,7 @@ function VisualizerType(value: any) {
         </Row>
         <Container className="d-flex justify-content-center">
           <VisualizerHoursSpentPerTaskBarChart
-            tasks={tempTasks}
+            tasks={allTasks}
             categories={userCategories}
             category={category}
           />
@@ -67,7 +70,7 @@ function VisualizerType(value: any) {
     return (
       <Container className="d-flex justify-content-center">
         <VisualizerNumberTasksPerCategoryPieChart
-          tasks={tempTasks}
+          tasks={allTasks}
           categories={userCategories}
         />
       </Container>
@@ -85,12 +88,29 @@ function Visualizer() {
     setVisualizer(e.target.value);
   };
 
+  let empty_list: ITask[] = [];
+  const [completeTasks, setCompleteTasks] = useState<ITask[]>(empty_list);
+  const [incompleteTasks, setIncompleteTasks] = useState<ITask[]>(empty_list);
+
   let startDateString = GetDateString(startDate);
   let endDateString = GetDateString(endDate);
 
   if (startDate > endDate) {
     setEndDate(startDate);
   }
+
+  useEffect(() => {
+    getTasks(userID, startDate, endDate)
+      .then((tasks) => {
+        tasks.json().then((data) => {
+          setCompleteTasks(data.done);
+          setIncompleteTasks(data.notDone);
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  });
 
   return (
     <div className="App">
@@ -141,7 +161,7 @@ function Visualizer() {
         </Container>
         <Container>
           <Row>
-            <VisualizerType value={visualizer} />
+            {VisualizerType(visualizer, completeTasks.concat(incompleteTasks))}
           </Row>
         </Container>
       </Stack>

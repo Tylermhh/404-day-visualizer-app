@@ -1,12 +1,13 @@
 // import React from "react";
 "use client";
-import { getAllTasks } from "../api/TaskHooks";
+import { useEffect, useState } from "react";
 import MainNav from "./Nav/MainNav";
 import TaskTable from "./Table/TaskTable";
-import { Category, ITask } from "./../types/types";
 import styles from "./Page.module.css";
-import { useEffect, useState } from "react";
+import { getAllTasks } from "../api/TaskHooks";
+import { Category, ITask } from "./../types/types";
 import userID from "./User";
+// import { getTasks } from "../api/TaskHooks";
 
 let empty_list: ITask[] = [];
 
@@ -28,7 +29,8 @@ function Task() {
       .then(data => {
         setIncompleteTasks(data.notDone);
         setCompleteTasks(data.done);
-        console.log(data.notDone);
+        console.log("refreshing and getting done data");
+        console.log(data.done);
       })
       .catch(err => {
         console.error(err);
@@ -43,6 +45,16 @@ function Task() {
         setCompleteTasks(data.done);
       });
   }, []);
+
+  // let completedTasks = [];
+  // let toDoTasks = [];
+  // for (let i = 0; i < tempTasks.length; i++) {
+  //   if (tempTasks[i].done) {
+  //     completedTasks.push(tempTasks[i]);
+  //   } else {
+  //     toDoTasks.push(tempTasks[i]);
+  //   }
+  // }
 
   return (
     <div className="App">

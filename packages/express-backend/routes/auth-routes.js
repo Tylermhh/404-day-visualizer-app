@@ -3,7 +3,7 @@ import { registerUser, loginUser } from "../Model/auth.js"
 
 const router = express.Router()
 
-router.post("/registerUser", registerUser)
-router.post("/loginUser", loginUser)
+router.post("/signup", registerUser)
+router.post("/login", loginUser)
 
 export default router

@@ -1,5 +1,5 @@
-import express from "express";
-import { addUser, getUsers, findUserById } from "../Model/user-services.js";
+import express from 'express';
+import { addUser, getUsers, findUserById, updateUserById } from "../Model/user-services.js"
 
 const router = express.Router();
 
@@ -46,6 +46,17 @@ router.get("/:id", async (req, res) => {
     console.error(error);
     res.status(500).send("Error fetching user with id.");
   }
-});
+})
 
-export default router;
+router.put("/:userId", async (req, res) => {
+  const userId = req.params["userId"]
+  const updatedUser = req.body
+
+  const mongoUpdated = await updateUserById(userId, updatedUser)
+  if (!mongoUpdated) {
+    return res.status(400).send()
+  }
+  res.status(200).send(mongoUpdated)
+})
+
+  export default router;

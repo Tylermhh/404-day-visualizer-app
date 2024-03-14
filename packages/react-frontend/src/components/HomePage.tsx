@@ -1,46 +1,27 @@
 //import React, { useState }from 'react';
-"use client";
 import React, { useState, useEffect } from "react";
+import MainNav from "./Nav/MainNav";
+import TaskTable from "./Table/TaskTable";
 import HomePieChart from "./Chart/HomePieChart";
 import HomeProgressBar from "./ProgressBar/HomeProgressBar";
-import { ITask, Category } from "./../types/types";
+import { ITask } from "./../types/types";
 import { Container, Col, Row, Stack } from "react-bootstrap";
-import TaskTable from "./Table/TaskTable";
-import MainNav from "./Nav/MainNav";
 import { getTasks } from "../api/TaskHooks";
+import { userCategories } from "./../TempData"
 import userID from "./User";
-
-let userCategories: Category[] = [
-  { name: "Frontend", color: "#0088FE" },
-  { name: "Backend", color: "#F098FE" },
-  { name: "Other", color: "#FFBB28" },
-  { name: "CSC 430", color: "#2BA428" },
-  { name: "Physics", color: "#123456" },
-  { name: "Business", color: "#234324" },
-  { name: "Academic", color: "#f3e2r1" },
-];
 
 const HomePage: React.FC<{}> = () => {
   const emptyRefresh = () => {};
 
   const today: Date = new Date();
-  let empty_list: ITask[] = [];
-  const [incompleteTasks, setIncompleteTasks] = useState<ITask[]>(empty_list);
+  const [completeTasks, setCompleteTasks] = useState<ITask[]>([]);
+  const [incompleteTasks, setIncompleteTasks] = useState<ITask[]>([]);
 
   useEffect(() => {
-    getTasks(
-      userID,
-      today,
-      new Date(
-        today.getFullYear().toString() +
-          "-" +
-          (today.getMonth() + 1).toString() +
-          "-" +
-          (today.getDate() + 1).toString(),
-      ),
-    )
-      .then(tasks => {
+    getTasks( userID, today, new Date( today.getFullYear().toString() + "-" + (today.getMonth() + 1).toString() + "-" + (today.getDate() + 1).toString(),),)
+      .then(tasks => { 
         tasks.json().then(data => {
+          setCompleteTasks(data.done);
           setIncompleteTasks(data.notDone);
         });
       })
@@ -51,31 +32,34 @@ const HomePage: React.FC<{}> = () => {
 
   return (
     <div>
-      <MainNav page={"Home"} />
+      <MainNav page={ "Home" } />
       <Stack gap={4}>
         <Container />
         <Container>
           <Row>
-            <Col sm={9}>
+            <Col sm={8}>
               <TaskTable
                 name="Today's To-Do List"
                 todo={false}
                 page="HomePage"
-                tasks={incompleteTasks}
-                categories={userCategories}
-                refreshPage={emptyRefresh}
+                tasks={ incompleteTasks }
+                categories={ userCategories }
+                refreshPage={ emptyRefresh }
               />
             </Col>
-            <Col sm={3}>
-              <Stack gap={4}>
+            <Col sm={4}>
+              <Stack gap={1}>
+                <text>
+                  Number of Tasks Completed
+                </text>
                 <Container>
                   <HomePieChart
-                    tasks={incompleteTasks}
-                    categories={userCategories}
+                    tasks={ completeTasks }
+                    categories={ userCategories }
                   />
                 </Container>
                 <Container>
-                  <HomeProgressBar taskData={incompleteTasks} />
+                  <HomeProgressBar taskData={completeTasks.concat(incompleteTasks)} />
                 </Container>
               </Stack>
             </Col>
