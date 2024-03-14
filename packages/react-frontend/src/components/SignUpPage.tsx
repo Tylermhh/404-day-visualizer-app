@@ -16,7 +16,7 @@ function Main() {
       const response = await registerUser(username, pwd);
       if (response.ok) {
         console.log('Signup successful');
-        navigate('/');
+        navigate('/auth/login');
       } else {
         throw new Error('Signup failed');
       }
