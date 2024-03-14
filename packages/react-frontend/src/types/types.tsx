@@ -1,52 +1,57 @@
 export interface Task {
-    _id: string;
-    name: string;
-    userID: string;
-    description?: string;
-    category: string;
-    priority?: string;
-    datesUpdated: DateEntry[];
-    done: boolean;
-    deadline?: Date;
+  _id: string;
+  name: string;
+  userID: string;
+  description?: string;
+  category: string;
+  priority?: string;
+  datesUpdated: DateEntry[];
+  done: boolean;
+  deadline?: Date;
 }
 
 export interface DateEntry {
-    date: Date;
-    hours: number;
-};
+  date: Date;
+  hours: number;
+}
 
 export interface CategoryProgress {
-    name?: string;
-    hours: number;
-    color?: string;
+  name?: string;
+  hours: number;
+  color?: string;
 }
 
 export interface TaskHours {
-    hours: number;
+  hours: number;
+  amount: number;
+}
+
+export interface CompletedNotCompletedTasks {
+    type: string
     amount: number;
 }
 
 export interface Category {
-    name: string;
-    color: string;
+  name: string;
+  color: string;
 }
 
 export interface TaskDetails {
-    item_name: string;
-    description: string;
-    priority: string;
-    category: string;
-    completed: boolean;
-    deadline: Date;
+  item_name: string;
+  description: string;
+  priority: string;
+  category: string;
+  completed: boolean;
+  deadline: Date;
 }
 
 export interface CompletedTasks {
-    item_name: string;
-    description: string;
-    start_date: Date;
-    complete_date: Date;
-    category: string;
-    time_spent: string;
+  item_name: string;
+  description: string;
+  start_date: Date;
+  complete_date: Date;
+  category: string;
+  time_spent: string;
 }
 
 export type ITask = {
@@ -65,4 +70,11 @@ export type ITask = {
 export type IDateEntry = {
   date: Date;
   hours: number;
+};
+
+export type IUser = {
+  _id: string;
+  username: string;
+  password: string;
+  categories: Category[];
 };

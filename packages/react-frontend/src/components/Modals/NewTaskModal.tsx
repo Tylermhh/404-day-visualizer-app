@@ -5,13 +5,13 @@ import Modal from "react-bootstrap/Modal";
 import { Category, ITask } from "../../types/types";
 import { postTask } from "../../api/TaskHooks";
 import { IDateEntry } from "../../types/types";
+import { userID } from "../User";
 
 const NewTaskModal: React.FC<{
   tasks: ITask[];
   categories: Category[];
   refreshPage: () => void;
 }> = input => {
-  const userID = "65eb04d403116e2e8c60f63e";
   const initDate: IDateEntry = { date: new Date(), hours: 0 };
 
   const empty_IDateEntry: IDateEntry[] = [initDate];
@@ -80,17 +80,20 @@ const NewTaskModal: React.FC<{
               />
             </Form.Group>
 
-                <Form.Group className='mb-3' controlId='formItemCategory'>
-                  <Form.Label>Category</Form.Label>
-                  <Form.Select onChange={(e) => {handleChange("category", e)}}>
-                    <option>Select a category</option> 
-                    {input.categories.map((entry, index) => (
-                      <option value={entry.name}>{entry.name}</option>
-                    ))}    
-                    <DropdownDivider></DropdownDivider>
-                    <option>Add new category</option>             
-                  </Form.Select>
-                </Form.Group>
+            <Form.Group className="mb-3" controlId="formItemCategory">
+              <Form.Label>Category</Form.Label>
+              <Form.Select
+                onChange={e => {
+                  handleChange("category", e);
+                }}>
+                <option>Select a category</option>
+                {input.categories.map((entry, index) => (
+                  <option value={entry.name}>{entry.name}</option>
+                ))}
+                <DropdownDivider></DropdownDivider>
+                <option>Add new category</option>
+              </Form.Select>
+            </Form.Group>
 
             <Form.Group className="mb-3" controlId="formItemDeadline">
               <Form.Label>Deadline</Form.Label>

@@ -7,8 +7,8 @@ import HomeProgressBar from "./ProgressBar/HomeProgressBar";
 import { ITask } from "./../types/types";
 import { Container, Col, Row, Stack } from "react-bootstrap";
 import { getTasks } from "../api/TaskHooks";
-import { userCategories } from "./../TempData"
-import userID from "./User";
+import { userCategories } from "./../TempData";
+import { userID } from "./User";
 
 const HomePage: React.FC<{}> = () => {
   const emptyRefresh = () => {};
@@ -18,8 +18,18 @@ const HomePage: React.FC<{}> = () => {
   const [incompleteTasks, setIncompleteTasks] = useState<ITask[]>([]);
 
   useEffect(() => {
-    getTasks( userID, today, new Date( today.getFullYear().toString() + "-" + (today.getMonth() + 1).toString() + "-" + (today.getDate() + 1).toString(),),)
-      .then(tasks => { 
+    getTasks(
+      userID,
+      today,
+      new Date(
+        today.getFullYear().toString() +
+          "-" +
+          (today.getMonth() + 1).toString() +
+          "-" +
+          (today.getDate() + 1).toString(),
+      ),
+    )
+      .then(tasks => {
         tasks.json().then(data => {
           setCompleteTasks(data.done);
           setIncompleteTasks(data.notDone);
@@ -32,7 +42,7 @@ const HomePage: React.FC<{}> = () => {
 
   return (
     <div>
-      <MainNav page={ "Home" } />
+      <MainNav page={"Home"} />
       <Stack gap={4}>
         <Container />
         <Container>
@@ -42,24 +52,24 @@ const HomePage: React.FC<{}> = () => {
                 name="Today's To-Do List"
                 todo={false}
                 page="HomePage"
-                tasks={ incompleteTasks }
-                categories={ userCategories }
-                refreshPage={ emptyRefresh }
+                tasks={incompleteTasks}
+                categories={userCategories}
+                refreshPage={emptyRefresh}
               />
             </Col>
             <Col sm={4}>
               <Stack gap={1}>
-                <text>
-                  Number of Tasks Completed
-                </text>
+                <text>Number of Tasks Completed</text>
                 <Container>
                   <HomePieChart
-                    tasks={ completeTasks }
-                    categories={ userCategories }
+                    tasks={completeTasks}
+                    categories={userCategories}
                   />
                 </Container>
                 <Container>
-                  <HomeProgressBar taskData={completeTasks.concat(incompleteTasks)} />
+                  <HomeProgressBar
+                    taskData={completeTasks.concat(incompleteTasks)}
+                  />
                 </Container>
               </Stack>
             </Col>

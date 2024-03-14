@@ -82,7 +82,7 @@ const LandingNav: React.FC<{page : String}> = (input) => {
                             </Button>
                         </Col>
                         <Col sm={5}>
-                            <Button className="navButton" variant="light" href={"/auth"}>
+                            <Button className="navButton" variant="light" href={"/auth/login"}>
                                 Login
                             </Button>
                         </Col>
@@ -92,7 +92,7 @@ const LandingNav: React.FC<{page : String}> = (input) => {
         )
     }
 
-    if((input.page === "SignUp") || (input.page === "Auth")) {
+    if((input.page === "SignUp") || (input.page === "Login")) {
         return (
             <Navbar expand="lg" className = {styles.navbar}>
                 <Container>
